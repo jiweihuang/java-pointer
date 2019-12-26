@@ -378,7 +378,7 @@ public class BooleanArray {
      */
     @Override
     public String toString() {
-        return "BooleanDataArea{" +
+        return "BooleanArray{" +
                 "capacity=" + capacity +
                 ", values=" + Arrays.toString(values) +
                 '}';

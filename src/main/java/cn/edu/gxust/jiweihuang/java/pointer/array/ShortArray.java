@@ -43,31 +43,36 @@ import java.util.Arrays;
 import java.util.Objects;
 
 /**
- * 类 {@code ShortDataArea} 用于表征一块 {@code short} 型数据区域。
+ * 类{@code ShortArray}用于表征{@code short}型数组。
  * <p>
- * Development status: Release    # Developing <p>
- * Completion date: 20191020 <p>
- * Test status: Missing    # None, Finished <p>
- * Doc status: Finished    # Missing <p>
+ * Development status：Finished     # Developing, Finished  <p>
+ * Javadoc status: Finished         # Missing, Developing, Finished  <p>
+ * Test status: None                # None, Missing, Developing, Finished  <p>
+ * Last revision date: 2019-12-25 <p>
  *
  * @author JiweiHuang
- * @since 20191020
+ * @since 20191205
  */
-public class ShortArray{
-    //数据区域的容量
+public class ShortArray {
+    /**
+     * 数组的容量。
+     */
     private final int capacity;
 
-    //数据区域的存储
+    /**
+     * 数组的存储。
+     */
     private final short[] values;
 
     /**
-     * 主构造函数，通过指定数据区域的容量创建数据区域对象，
-     * 并将数据区域内所有元素的值设置为 {@code 0}。
+     * 类{@code ShortArray}的主构造函数。<p>
+     * 通过指定数组的容量创建数组对象，
+     * 并将数组内所有元素的值设置为 {@code false}。
      * <p>
-     * 注意：参数 {@code capacity}必须大于等于{@code 0}，否则，抛出
-     * {@code java.lang.NegativeArraySizeException} 异常。
+     * 注意：参数 {@code capacity}必须大于等于{@code 0}，
+     * 否则，抛出{@code java.lang.NegativeArraySizeException} 异常。
      *
-     * @param capacity 数据区域的容量
+     * @param capacity 数组的容量。
      */
     public ShortArray(final int capacity) {
         this.capacity = capacity; //必须大于等于0
@@ -75,14 +80,15 @@ public class ShortArray{
     }
 
     /**
-     * 次级构造函数，通过指定数据区域的容量创建数据区域对象，
-     * 并将数据区域内所有元素的值设置为 {@code value}。
+     * 类{@code ShortArray}次级构造函数。<p>
+     * 首先，通过指定数组的容量创建数组对象，
+     * 然后，将数组内所有元素的值设置为参数{@code value}的值。
      * <p>
-     * 注意：参数 {@code capacity}必须大于等于{@code 0}，否则，抛出
-     * {@code java.lang.NegativeArraySizeException} 异常。
+     * 注意：参数 {@code capacity}必须大于等于{@code 0}，
+     * 否则，抛出{@code java.lang.NegativeArraySizeException} 异常。
      *
-     * @param capacity 数据区域的容量。
-     * @param value    初始化的数据区域的值。
+     * @param capacity 数组的容量。
+     * @param value    用于初始化数组的值。
      */
     public ShortArray(final int capacity, short value) {
         this(capacity);
@@ -92,13 +98,14 @@ public class ShortArray{
     }
 
     /**
-     * 次级构造函数，通过指定数据区域的容量创建数据区域对象，
-     * 并利用基于索引的函数指针初始化数据区域内元素的值。
+     * 类{@code ShortArray}次级构造函数，
+     * 首先，通过指定数组的容量创建数组对象，
+     * 然后，并利用基于索引的函数指针初始化数组内元素的值。
      *
-     * @param capacity     数据区域的容量。
-     * @param initFunction 用于初始化数据区域内元素值的函数指针。
+     * @param capacity     数组的容量。
+     * @param initFunction 用于初始化数组内元素值的函数指针。
      */
-    public ShortArray(final int capacity, IShortDataInitFunction initFunction) {
+    public ShortArray(final int capacity, IShortArrayInitFunction initFunction) {
         this(capacity);
         for (int i = 0; i < capacity; i++) {
             this.values[i] = initFunction.call(i);
@@ -111,7 +118,7 @@ public class ShortArray{
      * 函数的参数 {@code index} 表示数据区域的索引，
      * 函数返回值为数据区域内相应索引的初始化值。
      */
-    public interface IShortDataInitFunction extends IFunctionPointer {
+    public interface IShortArrayInitFunction extends IFunctionPointer {
         /**
          * 用于初始化数据区域内元素值的函数。
          *
@@ -121,12 +128,20 @@ public class ShortArray{
         short call(int index);
     }
 
-    @Override
+    /**
+     * 获取数组的容量。
+     *
+     * @return 数组的容量。
+     */
     public int getCapacity() {
         return capacity;
     }
 
-    @Override
+    /**
+     * 重置数组的值至其缺省值。
+     *
+     * @return 元素值重置后的数组。
+     */
     public ShortArray reset() {
         for (int i = 0; i < capacity; i++) {
             this.values[i] = 0;
@@ -135,10 +150,10 @@ public class ShortArray{
     }
 
     /**
-     * 将数据区域的值均重置为参数 {@code value}。
+     * 将数组元素的值均重置为参数{@code value}。
      *
-     * @param value 用于重置数据区域的值。
-     * @return 值被重置后的数据区域对象
+     * @param value 用于重置数组的值。
+     * @return 值被重置后的数组对象。
      */
     public ShortArray reset(short value) {
         for (int i = 0; i < capacity; i++) {
@@ -153,30 +168,72 @@ public class ShortArray{
      * @param initFunction 用于重置数据区域值的函数指针。
      * @return 值被重置后的数据区域对象
      */
-    public ShortArray reset(IShortDataInitFunction initFunction) {
+    public ShortArray reset(IShortArrayInitFunction initFunction) {
         for (int i = 0; i < capacity; i++) {
             this.values[i] = initFunction.call(i);
         }
         return this;
     }
 
-    @Override
+    /**
+     * 通过拷贝创建一个新的数组对象。<p>
+     * 注意：参数from和to应在{@code [0, getCapacity()]}范围内，
+     * 且必须满足 {@code to >= from}，如果 {@code to == from}，
+     * 将会得到一个容量为0的数组。
+     *
+     * @param from 所需要拷贝数组的起始索引，（包含该点）。
+     * @param to   所需要拷贝数组的终点索引，（不包含该点）。
+     * @return 一个新的数组对象。
+     */
     public ShortArray copy(int from, int to) {
         return shortDataOf(Arrays.copyOfRange(this.values, from, to));
     }
 
-    @Override
-    public IShortPointer createPointer() {
-        return new ShortDataPointer();
+    /**
+     * 通过拷贝创建一个新的数组对象。
+     *
+     * @param from 所需要拷贝数组对象的起始索引，（包含该点）。
+     * @return 一个新的数组对象。
+     */
+    public ShortArray copy(int from) {
+        return copy(from, getCapacity());
     }
 
     /**
-     * 通过指定值的方式创建数据区域，该方法可能并不高效，因为先创建了对象，
-     * 接着创建了对象的指针，最后利用该指针初始化了该对象内的值。但考虑到
-     * 数据封装的原则，牺牲了性能。
+     * 通过拷贝创建一个新的数组对象。
      *
-     * @param values 用于创建数据区域的值组。
-     * @return 一个新的数据区域。
+     * @return 一个新的数组对象。
+     */
+    public ShortArray copy() {
+        return copy(0, getCapacity());
+    }
+
+    /**
+     * 创建一个指向该数组的指针。
+     *
+     * @return 一个指向该数据区域的指针。
+     */
+    public IShortPointer createPointer() {
+        return new ShortPointer();
+    }
+
+    /**
+     * 创建一个指向该数组的指针，并使指针指向 {@code offset}。
+     *
+     * @param offset 指针指向的移动量。
+     * @return 一个指向数组的指针。
+     */
+    public IShortPointer createPointer(int offset) {
+        return createPointer().move(offset);
+    }
+
+    /**
+     * 通过指定值组的方式创建数组对象，该方法可能并不高效，因为先创建了数组对象，
+     * 接着创建了该数组对象的指针，最后利用该指针初始化了数组对象内元素的值，
+     * 但考虑到数据封装的原则，牺牲了性能。
+     *
+     * @param values 用于创建数组的值。
+     * @return 一个新的数组对象。
      */
     public static ShortArray shortDataOf(short... values) {
         Objects.requireNonNull(values, "Expected the parameter {values != null}.");
@@ -190,10 +247,12 @@ public class ShortArray{
     }
 
     /**
-     * 类 {@code ShortDataPointer} 是 {@code IShortPointer}的实现，
-     * 用于表征一个指向 {@code short} 型数据区域的指针。
+     * 类{@code ShortPointer}是{@code IShortPointer}的实现，
+     * 用于表征一个指向{@code boolean}型数组的指针。<p>
+     * 因为是私有类，所以此类的外部无法访问该类，
+     * 因为是内部类，故其拥有对其外部类数据的引用。
      */
-    private class ShortDataPointer implements IShortPointer {
+    private class ShortPointer implements IShortPointer {
 
         //指向
         private int point;
@@ -203,7 +262,7 @@ public class ShortArray{
          * 该构造器将指针的指向设置为0，
          * 构造器是私有的，意味着该类不能被外部初始化。
          */
-        private ShortDataPointer() {
+        private ShortPointer() {
             this.point = 0;
         }
 
@@ -257,7 +316,7 @@ public class ShortArray{
          * {@inheritDoc}
          */
         @Override
-        public ShortDataPointer move(int offset) {
+        public ShortPointer move(int offset) {
             this.point = this.point + offset;
             return this;
         }
@@ -266,15 +325,15 @@ public class ShortArray{
          * {@inheritDoc}
          */
         @Override
-        public ShortDataPointer copy() {
-            return new ShortDataPointer().move(getPoint());
+        public ShortPointer copy() {
+            return new ShortPointer().move(getPoint());
         }
 
         /**
          * {@inheritDoc}
          */
         @Override
-        public ShortDataPointer reset() {
+        public ShortPointer reset() {
             this.point = 0;
             return this;
         }
@@ -315,7 +374,7 @@ public class ShortArray{
      */
     @Override
     public String toString() {
-        return "ShortDataArea{" +
+        return "ShortArray{" +
                 "capacity=" + capacity +
                 ", values=" + Arrays.toString(values) +
                 '}';
