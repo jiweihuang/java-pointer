@@ -1,2 +1,2 @@
-# textiles-math
-The unit projects for textile science and technology.
+# java-pointer
+The pointer of c/cpp be mimed by java language.

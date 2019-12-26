@@ -1,1 +1,5 @@
+# 使github将此项目识别为Java项目
+*.py linguist-language=java
+*.js linguist-language=java
+*.css linguist-language=java
 *.html linguist-language=java
