@@ -36,7 +36,6 @@
  */
 package cn.edu.gxust.jiweihuang.java.pointer.array;
 
-import cn.edu.gxust.jiweihuang.java.pointer.IArray;
 import cn.edu.gxust.jiweihuang.java.pointer.primitive.ICharPointer;
 import cn.edu.gxust.jiweihuang.java.pointer.IFunctionPointer;
 
@@ -54,7 +53,7 @@ import java.util.Objects;
  * @author JiweiHuang
  * @since 20191020
  */
-public class CharArray implements IArray {
+public class CharArray{
 
 
     //数据区域的容量

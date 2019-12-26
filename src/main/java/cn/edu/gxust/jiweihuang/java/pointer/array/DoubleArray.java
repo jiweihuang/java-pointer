@@ -36,7 +36,6 @@
  */
 package cn.edu.gxust.jiweihuang.java.pointer.array;
 
-import cn.edu.gxust.jiweihuang.java.pointer.IArray;
 import cn.edu.gxust.jiweihuang.java.pointer.primitive.IDoublePointer;
 import cn.edu.gxust.jiweihuang.java.pointer.IFunctionPointer;
 
@@ -54,7 +53,7 @@ import java.util.Objects;
  * @author JiweiHuang
  * @since 20191020
  */
-public class DoubleArray implements IArray {
+public class DoubleArray{
 
     //数据区域的容量
     private final int capacity;
