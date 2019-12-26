@@ -38,19 +38,18 @@ package cn.edu.gxust.jiweihuang.java.pointer;
 
 /**
  * 接口 {@code IFunctionPointer} 是一个标记接口 (marker interface)，
- * 用于表征一个指向可调用函数的指针。按照约定，
- * 该接口的子接口或实现类应具有一个名为 {@code call} 的方法。
+ * 用于表征一个指向可调用函数的指针。<p>
+ * 按照约定，该接口的子接口或实现类应具有一个名为 {@code call} 的方法。
  * <p>
- * Development status：Finished  # Developing, Finished  <p>
- * Javadoc status: Finished  # Missing, Developing, Finished  <p>
- * Test status: None  # None, Missing, Developing, Finished  <p>
- * Last revision date: 2019-11-30  <p>
+ * Development status：Finished     # Developing, Finished  <p>
+ * Javadoc status: Finished         # Missing, Developing, Finished  <p>
+ * Test status: None                # None, Missing, Developing, Finished  <p>
+ * Last revision date: 2019-12-25 <p>
  *
  * @author JiweiHuang
- * @see IPointer
- * @since 20191130
+ * @since 20191205
  */
 public interface IFunctionPointer extends IPointer {
-    //表征一个函数指针的标记接口，函数指针所指向的函数必须被命名为call，
+    // 表征一个函数指针的标记接口，函数指针所指向的函数必须被命名为call，
     // 即该指针的子接口或实现类中必须包含一个名为call的方法。
 }

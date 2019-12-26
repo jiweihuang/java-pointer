@@ -37,30 +37,28 @@
 package cn.edu.gxust.jiweihuang.java.pointer;
 
 /**
- * 接口 {@code IObjectPointer} 是一个标记接口 (marker interface)，用于表征'对象指针'。
- * 这里"对象指针"的实质就是实现了该空接口(empty interface)的Java类对象。
- * 使Java类实现该空接口的目的是统一类型，这样做的好处是可以指定{@code IPointer}
- * 作为一个函数的参数类型或返回值类型，而{@code IPointer}是任意指针类型的父类，
- * 包括Java中任意实现了此接口的对象。
+ * 接口 {@code IObjectPointer} 是一个标记接口 (marker interface)，
+ * 用于表征'对象指针'。<p>
+ * 这里"对象指针"的实质就是实现了此空接口(empty interface)的Java类对象。<p>
+ * 使Java类实现该空接口的目的是可将所有Java类纳入到统一类型系统，
+ * 这样做的好处是可以指定{@code IPointer}作为一个函数的参数类型或返回值类型。
  * <p>
- * Development status：Finished  # Developing, Finished  <p>
- * Javadoc status: Finished  # Missing, Developing, Finished  <p>
- * Test status: None  # None, Missing, Developing, Finished  <p>
- * Last revision date: 2019-11-30  <p>
+ * Development status：Finished     # Developing, Finished  <p>
+ * Javadoc status: Finished         # Missing, Developing, Finished  <p>
+ * Test status: None                # None, Missing, Developing, Finished  <p>
+ * Last revision date: 2019-12-25 <p>
  *
  * @author JiweiHuang
- * @see IPointer
- * @since 20191130
+ * @since 20191205
  */
 public interface IObjectPointer extends IPointer {
-    //用于表征'对象指针'。
+    //用于表征'对象指针'的空接口。
     /*
      * 对象指针的目的是将Java类对象归入至指针类型的体系中。
      *
      * 用法举例： IPointer doSomeThing(IPointer ...pointerArgs);
      *
-     * 如上函数的参数为IPointer类型，意味着可以传入 IObjectPointer、IDataPointer或IFunctionPointer。
+     * 如上函数的参数为IPointer类型，意味着可以传入IObjectPointer、IArrayPointer或IFunctionPointer。
      * 同理，也可以返回任意指针类型。
-     *
      */
 }

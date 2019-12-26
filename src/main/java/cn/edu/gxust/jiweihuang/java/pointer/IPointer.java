@@ -36,23 +36,21 @@
  */
 package cn.edu.gxust.jiweihuang.java.pointer;
 
-import cn.edu.gxust.jiweihuang.java.pointer.primitive.IDataPointer;
-
 /**
- * 接口{@code IPointer}是一个标记接口(marker interface)，用于表征c/cpp语言中的 '指针'。
- * 该接口有三个子接口，分别是用于表征数据指针的{@code IDataPointer}、
- * 用于表征函数指针的{@code IFunctionPointer}和用于表征对象指针的{@code IObjectPointer}。
+ * 接口{@code IPointer}是一个标记接口(marker interface)，
+ * 用于表征c/cpp语言中的 '指针'。<p>
+ * 此接口有三个子接口，分别是：<p>
+ * （1）用于表征数组指针的{@code IArrayPointer}；<p>
+ * （2）用于表征函数指针的{@code IFunctionPointer}；<p>
+ * （3）用于表征对象指针的{@code IObjectPointer}。
  * <p>
- * Development status：Finished  # Developing, Finished  <p>
- * Javadoc status: Finished  # Missing, Developing, Finished  <p>
- * Test status: None  # None, Missing, Developing, Finished  <p>
- * Last revision date: 2019-11-30  <p>
+ * Development status：Finished     # Developing, Finished  <p>
+ * Javadoc status: Finished         # Missing, Developing, Finished  <p>
+ * Test status: None                # None, Missing, Developing, Finished  <p>
+ * Last revision date: 2019-12-25 <p>
  *
  * @author JiweiHuang
- * @see IDataPointer
- * @see IFunctionPointer
- * @see IObjectPointer
- * @since 20191130
+ * @since 20191205
  */
 public interface IPointer {
     //这是一个表征指针的标记接口。

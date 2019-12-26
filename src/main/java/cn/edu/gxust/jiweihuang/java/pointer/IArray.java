@@ -36,8 +36,6 @@
  */
 package cn.edu.gxust.jiweihuang.java.pointer;
 
-import cn.edu.gxust.jiweihuang.java.pointer.primitive.IDataPointer;
-
 /**
  * 接口 {@code IDataArea} 是用于表征一块数据区域的基接口。
  * <p>
@@ -105,7 +103,7 @@ public interface IArray {
      * @param <T> 通过泛型参数指定返回具体类型的数据指针。
      * @return 一个指向该数据区域的指针。
      */
-    <T extends IDataPointer> T createPointer();
+    <T extends IArrayPointer> T createPointer();
 
     /**
      * 创建一个指向该数据区域的指针，并使指针指向 {@code offset}。
@@ -114,7 +112,7 @@ public interface IArray {
      * @param <T>    通过泛型参数指定返回具体类型的数据指针。
      * @return 一个指向该数据区域的指针。
      */
-    default <T extends IDataPointer> T createPointer(int offset) {
+    default <T extends IArrayPointer> T createPointer(int offset) {
         return createPointer().move(offset);
     }
 }

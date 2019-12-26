@@ -36,6 +36,8 @@
  */
 package cn.edu.gxust.jiweihuang.java.pointer.primitive;
 
+import cn.edu.gxust.jiweihuang.java.pointer.IArrayPointer;
+
 /**
  * 接口 {@code ICharPointer} 用于表征一个指向 {@code char} 数据区域的指针。
  * <p>
@@ -45,10 +47,10 @@ package cn.edu.gxust.jiweihuang.java.pointer.primitive;
  * Doc status: Finished    # Missing <p>
  *
  * @author JiweiHuang
- * @see IDataPointer
+ * @see IArrayPointer
  * @since 20191020
  */
-public interface ICharPointer extends IDataPointer {
+public interface ICharPointer extends IArrayPointer {
     /**
      * 获取指定索引处的数据。
      *
