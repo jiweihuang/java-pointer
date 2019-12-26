@@ -188,7 +188,7 @@ public class ByteArray {
      * @return 一个新的数组对象。
      */
     public ByteArray copy(int from, int to) {
-        return byteDataOf(Arrays.copyOfRange(this.values, from, to));
+        return of(Arrays.copyOfRange(this.values, from, to));
     }
 
     /**
@@ -237,7 +237,7 @@ public class ByteArray {
      * @param values 用于创建数组的值。
      * @return 一个新的数组对象。
      */
-    public static ByteArray byteDataOf(byte... values) {
+    public static ByteArray of(byte... values) {
         Objects.requireNonNull(values, "Expected the parameter {values != null}.");
         int len = values.length;
         ByteArray data = new ByteArray(len);

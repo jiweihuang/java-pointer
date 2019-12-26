@@ -113,17 +113,17 @@ public class FloatArray {
     }
 
     /**
-     * 一个函数指针，用于初始化数据区域内元素值。
+     * 一个函数指针，用于初始化数组内元素值。
      * 根据预定，函数指针所指向的函数名为 {@code call},
-     * 函数的参数 {@code index} 表示数据区域的索引，
-     * 函数返回值为数据区域内相应索引的初始化值。
+     * 函数的参数 {@code index} 表示数组的索引，
+     * 函数返回值为数组内相应索引的初始化值。
      */
     public interface IFloatArrayInitFunction extends IFunctionPointer {
         /**
-         * 用于初始化数据区域内元素值的函数。
+         * 用于初始化数组内元素值的函数。
          *
-         * @param index 数据区域的索引
-         * @return 数据区域的初始化值
+         * @param index 数组的索引。
+         * @return 数组的初始化值。
          */
         float call(int index);
     }
@@ -144,7 +144,7 @@ public class FloatArray {
      */
     public FloatArray reset() {
         for (int i = 0; i < capacity; i++) {
-            this.values[i] = 0;
+            this.values[i] = 0.f;
         }
         return this;
     }
@@ -186,7 +186,7 @@ public class FloatArray {
      * @return 一个新的数组对象。
      */
     public FloatArray copy(int from, int to) {
-        return floatDataOf(Arrays.copyOfRange(this.values, from, to));
+        return of(Arrays.copyOfRange(this.values, from, to));
     }
     /**
      * 通过拷贝创建一个新的数组对象。
@@ -232,7 +232,7 @@ public class FloatArray {
      * @param values 用于创建数组的值。
      * @return 一个新的数组对象。
      */
-    public static FloatArray floatDataOf(float... values) {
+    public static FloatArray of(float... values) {
         Objects.requireNonNull(values, "Expected the parameter {values != null}.");
         int len = values.length;
         FloatArray data = new FloatArray(len);
@@ -245,12 +245,15 @@ public class FloatArray {
 
     /**
      * 类{@code FloatPointer}是{@code IFloatPointer}的实现，
-     * 用于表征一个指向{@code boolean}型数组的指针。<p>
+     * 用于表征一个指向{@code float}型数组的指针。<p>
      * 因为是私有类，所以此类的外部无法访问该类，
      * 因为是内部类，故其拥有对其外部类数据的引用。
      */
     private class FloatPointer implements IFloatPointer {
-        //指向
+
+        /**
+         * 指针的指向。
+         */
         private int point;
 
         /**

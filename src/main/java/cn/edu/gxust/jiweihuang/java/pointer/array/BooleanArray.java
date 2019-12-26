@@ -188,7 +188,7 @@ public class BooleanArray {
      * @return 一个新的数组对象。
      */
     public BooleanArray copy(int from, int to) {
-        return doubleDataOf(Arrays.copyOfRange(this.values, from, to));
+        return of(Arrays.copyOfRange(this.values, from, to));
     }
 
     /**
@@ -237,7 +237,7 @@ public class BooleanArray {
      * @param values 用于创建数组的值。
      * @return 一个新的数组对象。
      */
-    public static BooleanArray doubleDataOf(boolean... values) {
+    public static BooleanArray of(boolean... values) {
         Objects.requireNonNull(values, "Expected the parameter {values != null}.");
         int len = values.length;
         BooleanArray data = new BooleanArray(len);

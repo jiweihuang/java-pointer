@@ -68,7 +68,7 @@ public class IntArray {
     /**
      * 类{@code IntArray}的主构造函数。<p>
      * 通过指定数组的容量创建数组对象，
-     * 并将数组内所有元素的值设置为 {@code false}。
+     * 并将数组内所有元素的值设置为 {@code 0}。
      * <p>
      * 注意：参数 {@code capacity}必须大于等于{@code 0}，
      * 否则，抛出{@code java.lang.NegativeArraySizeException} 异常。
@@ -187,7 +187,7 @@ public class IntArray {
      * @return 一个新的数组对象。
      */
     public IntArray copy(int from, int to) {
-        return intDataOf(Arrays.copyOfRange(this.values, from, to));
+        return of(Arrays.copyOfRange(this.values, from, to));
     }
 
     /**
@@ -236,7 +236,7 @@ public class IntArray {
      * @param values 用于创建数组的值。
      * @return 一个新的数组对象。
      */
-    public static IntArray intDataOf(int... values) {
+    public static IntArray of(int... values) {
         Objects.requireNonNull(values, "Expected the parameter {values != null}.");
         int len = values.length;
         IntArray data = new IntArray(len);
@@ -249,13 +249,15 @@ public class IntArray {
 
     /**
      * 类{@code IntPointer}是{@code IIntPointer}的实现，
-     * 用于表征一个指向{@code boolean}型数组的指针。<p>
+     * 用于表征一个指向{@code int}型数组的指针。<p>
      * 因为是私有类，所以此类的外部无法访问该类，
      * 因为是内部类，故其拥有对其外部类数据的引用。
      */
     private class IntPointer implements IIntPointer {
 
-        //指向
+        /**
+         * 指针的指向。
+         */
         private int point;
 
         /**

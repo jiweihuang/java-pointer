@@ -188,7 +188,7 @@ public class CharArray {
      * @return 一个新的数组对象。
      */
     public CharArray copy(int from, int to) {
-        return charDataOf(Arrays.copyOfRange(this.values, from, to));
+        return of(Arrays.copyOfRange(this.values, from, to));
     }
 
     /**
@@ -237,7 +237,7 @@ public class CharArray {
      * @param values 用于创建数组的值。
      * @return 一个新的数组对象。
      */
-    public static CharArray charDataOf(char... values) {
+    public static CharArray of(char... values) {
         Objects.requireNonNull(values, "Expected the parameter {values != null}.");
         int len = values.length;
         CharArray data = new CharArray(len);

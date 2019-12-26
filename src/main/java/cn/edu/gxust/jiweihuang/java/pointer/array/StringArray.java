@@ -68,7 +68,7 @@ public class StringArray {
     /**
      * 类{@code StringArray}的主构造函数。<p>
      * 通过指定数组的容量创建数组对象，
-     * 并将数组内所有元素的值设置为 {@code false}。
+     * 并将数组内所有元素的值设置为 {@code null}。
      * <p>
      * 注意：参数 {@code capacity}必须大于等于{@code 0}，
      * 否则，抛出{@code java.lang.NegativeArraySizeException} 异常。
@@ -76,7 +76,8 @@ public class StringArray {
      * @param capacity 数组的容量。
      */
     public StringArray(final int capacity) {
-        this.capacity = capacity; //必须大于等于0
+        //必须大于等于0
+        this.capacity = capacity;
         this.values = new String[capacity];
     }
 
@@ -114,17 +115,18 @@ public class StringArray {
     }
 
     /**
-     * 一个函数指针，用于初始化数据区域内元素值。
+     * 接口{@code IStringArrayInitFunction}是一个函数指针，
+     * 用于初始化数组内元素的值。
      * 根据预定，函数指针所指向的函数名为 {@code call},
-     * 函数的参数 {@code index} 表示数据区域的索引，
-     * 函数返回值为数据区域内相应索引的初始化值。
+     * 函数的参数 {@code index}表示数组的索引，
+     * 函数返回值为数组内相应索引的初始化值。
      */
     public interface IStringArrayInitFunction extends IFunctionPointer {
         /**
-         * 用于初始化数据区域内元素值的函数。
+         * 用于初始化数组内元素值的函数。
          *
-         * @param index 数据区域的索引
-         * @return 数据区域的初始化值
+         * @param index 数组的索引
+         * @return 数组的初始化值
          */
         String call(int index);
     }
@@ -164,10 +166,10 @@ public class StringArray {
     }
 
     /**
-     * 用一个函数指针重置数据区域的值。
+     * 用一个函数指针重置数组的值。
      *
-     * @param initFunction 用于重置数据区域值的函数指针。
-     * @return 值被重置后的数据区域对象
+     * @param initFunction 用于重置数组值的函数指针。
+     * @return 值被重置后的数组对象
      */
     public StringArray reset(IStringArrayInitFunction initFunction) {
         for (int i = 0; i < capacity; i++) {
@@ -187,7 +189,7 @@ public class StringArray {
      * @return 一个新的数组对象。
      */
     public StringArray copy(int from, int to) {
-        return stringDataOf(Arrays.copyOfRange(this.values, from, to));
+        return of(Arrays.copyOfRange(this.values, from, to));
     }
 
     /**
@@ -236,30 +238,32 @@ public class StringArray {
      * @param values 用于创建数组的值。
      * @return 一个新的数组对象。
      */
-    public static StringArray stringDataOf(String... values) {
+    public static StringArray of(String... values) {
         Objects.requireNonNull(values, "Expected the parameter {values != null}.");
         int len = values.length;
-        StringArray data = new StringArray(len);
-        IStringPointer pointer = data.createPointer();
+        StringArray array = new StringArray(len);
+        IStringPointer pointer = array.createPointer();
         for (int i = 0; i < len; i++) {
             pointer.set(i, values[i]);
         }
-        return data;
+        return array;
     }
 
     /**
      * 类{@code StringPointer}是{@code IStringPointer}的实现，
-     * 用于表征一个指向{@code boolean}型数组的指针。<p>
-     * 因为是私有类，所以此类的外部无法访问该类，
+     * 用于表征一个指向{@code String}型数组的指针。<p>
+     * 因为是私有类，所以此类的外部无法访问，
      * 因为是内部类，故其拥有对其外部类数据的引用。
      */
     private class StringPointer implements IStringPointer {
 
-        //指向
+        /**
+         * 指针的指向。
+         */
         private int point;
 
         /**
-         * 主构造器，也是唯一的构造器。
+         * 类{@code StringPointer}的主构造器，也是唯一的构造器。
          * 该构造器将指针的指向设置为0，
          * 构造器是私有的，意味着该类不能被外部初始化。
          */
@@ -277,7 +281,7 @@ public class StringArray {
                 return values[i];
             } else {
                 throw new ArrayIndexOutOfBoundsException(String.format(
-                        "Expected parameters {%d <= index < %d}", -getPoint(),
+                        "Expected parameters {%d <= index < %d}.", -getPoint(),
                         getCapacity() - getPoint()));
             }
         }
@@ -292,7 +296,7 @@ public class StringArray {
                 values[i] = value;
             } else {
                 throw new ArrayIndexOutOfBoundsException(String.format(
-                        "Expected parameters {%d <= index < %d}", -getPoint(),
+                        "Expected parameters {%d <= index < %d}.", -getPoint(),
                         getCapacity() - getPoint()));
             }
         }

@@ -2,8 +2,122 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8f2a6236-5f9b-4785-a868-1556f3908bef" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/IArrayPointer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/IArrayPointer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/array/BooleanArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/array/BooleanArray.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/array/ByteArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/array/ByteArray.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/array/CharArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/array/CharArray.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/array/DoubleArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/array/DoubleArray.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/array/FloatArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/array/FloatArray.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/array/IntArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/array/IntArray.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/array/LongArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/array/LongArray.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/array/ShortArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/array/ShortArray.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/array/StringArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/array/StringArray.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/allclasses-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/allclasses-index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/allclasses.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/allclasses.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/allpackages-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/allpackages-index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/IArrayPointer.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/IArrayPointer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/IFunctionPointer.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/IFunctionPointer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/IObjectPointer.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/IObjectPointer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/IPointer.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/IPointer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/BooleanArray.IBooleanArrayInitFunction.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/BooleanArray.IBooleanArrayInitFunction.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/BooleanArray.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/BooleanArray.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/ByteArray.IByteArrayInitFunction.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/ByteArray.IByteArrayInitFunction.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/ByteArray.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/ByteArray.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/CharArray.ICharArrayInitFunction.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/CharArray.ICharArrayInitFunction.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/CharArray.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/CharArray.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/DoubleArray.IDoubleArrayInitFunction.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/DoubleArray.IDoubleArrayInitFunction.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/DoubleArray.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/DoubleArray.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/FloatArray.IFloatArrayInitFunction.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/FloatArray.IFloatArrayInitFunction.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/FloatArray.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/FloatArray.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/IntArray.IIntArrayInitFunction.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/IntArray.IIntArrayInitFunction.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/IntArray.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/IntArray.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/LongArray.ILongArrayInitFunction.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/LongArray.ILongArrayInitFunction.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/LongArray.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/LongArray.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/ShortArray.IShortArrayInitFunction.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/ShortArray.IShortArrayInitFunction.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/ShortArray.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/ShortArray.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/StringArray.IStringArrayInitFunction.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/StringArray.IStringArrayInitFunction.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/StringArray.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/StringArray.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/class-use/BooleanArray.IBooleanArrayInitFunction.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/class-use/BooleanArray.IBooleanArrayInitFunction.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/class-use/BooleanArray.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/class-use/BooleanArray.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/class-use/ByteArray.IByteArrayInitFunction.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/class-use/ByteArray.IByteArrayInitFunction.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/class-use/ByteArray.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/class-use/ByteArray.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/class-use/CharArray.ICharArrayInitFunction.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/class-use/CharArray.ICharArrayInitFunction.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/class-use/CharArray.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/class-use/CharArray.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/class-use/DoubleArray.IDoubleArrayInitFunction.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/class-use/DoubleArray.IDoubleArrayInitFunction.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/class-use/DoubleArray.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/class-use/DoubleArray.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/class-use/FloatArray.IFloatArrayInitFunction.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/class-use/FloatArray.IFloatArrayInitFunction.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/class-use/FloatArray.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/class-use/FloatArray.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/class-use/IntArray.IIntArrayInitFunction.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/class-use/IntArray.IIntArrayInitFunction.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/class-use/IntArray.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/class-use/IntArray.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/class-use/LongArray.ILongArrayInitFunction.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/class-use/LongArray.ILongArrayInitFunction.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/class-use/LongArray.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/class-use/LongArray.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/class-use/ShortArray.IShortArrayInitFunction.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/class-use/ShortArray.IShortArrayInitFunction.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/class-use/ShortArray.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/class-use/ShortArray.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/class-use/StringArray.IStringArrayInitFunction.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/class-use/StringArray.IStringArrayInitFunction.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/class-use/StringArray.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/class-use/StringArray.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/package-use.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/array/package-use.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/class-use/IArrayPointer.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/class-use/IArrayPointer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/class-use/IFunctionPointer.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/class-use/IFunctionPointer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/class-use/IObjectPointer.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/class-use/IObjectPointer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/class-use/IPointer.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/class-use/IPointer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/cminpack/JavaMinpack.IFunctionDerMNPointer.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/cminpack/JavaMinpack.IFunctionDerMNPointer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/cminpack/JavaMinpack.IFunctionDerNNPointer.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/cminpack/JavaMinpack.IFunctionDerNNPointer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/cminpack/JavaMinpack.IFunctionDerStrMNPointer.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/cminpack/JavaMinpack.IFunctionDerStrMNPointer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/cminpack/JavaMinpack.IFunctionMNPointer.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/cminpack/JavaMinpack.IFunctionMNPointer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/cminpack/JavaMinpack.IFunctionNNPointer.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/cminpack/JavaMinpack.IFunctionNNPointer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/cminpack/JavaMinpack.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/cminpack/JavaMinpack.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/cminpack/class-use/JavaMinpack.IFunctionDerMNPointer.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/cminpack/class-use/JavaMinpack.IFunctionDerMNPointer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/cminpack/class-use/JavaMinpack.IFunctionDerNNPointer.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/cminpack/class-use/JavaMinpack.IFunctionDerNNPointer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/cminpack/class-use/JavaMinpack.IFunctionDerStrMNPointer.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/cminpack/class-use/JavaMinpack.IFunctionDerStrMNPointer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/cminpack/class-use/JavaMinpack.IFunctionMNPointer.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/cminpack/class-use/JavaMinpack.IFunctionMNPointer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/cminpack/class-use/JavaMinpack.IFunctionNNPointer.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/cminpack/class-use/JavaMinpack.IFunctionNNPointer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/cminpack/class-use/JavaMinpack.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/cminpack/class-use/JavaMinpack.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/cminpack/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/cminpack/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/cminpack/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/cminpack/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/cminpack/package-use.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/cminpack/package-use.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/package-use.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/package-use.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/primitive/IBooleanPointer.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/primitive/IBooleanPointer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/primitive/IBytePointer.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/primitive/IBytePointer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/primitive/ICharPointer.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/primitive/ICharPointer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/primitive/IDoublePointer.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/primitive/IDoublePointer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/primitive/IFloatPointer.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/primitive/IFloatPointer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/primitive/IIntPointer.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/primitive/IIntPointer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/primitive/ILongPointer.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/primitive/ILongPointer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/primitive/IShortPointer.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/primitive/IShortPointer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/primitive/IStringPointer.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/primitive/IStringPointer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/primitive/class-use/IBooleanPointer.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/primitive/class-use/IBooleanPointer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/primitive/class-use/IBytePointer.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/primitive/class-use/IBytePointer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/primitive/class-use/ICharPointer.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/primitive/class-use/ICharPointer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/primitive/class-use/IDoublePointer.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/primitive/class-use/IDoublePointer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/primitive/class-use/IFloatPointer.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/primitive/class-use/IFloatPointer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/primitive/class-use/IIntPointer.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/primitive/class-use/IIntPointer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/primitive/class-use/ILongPointer.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/primitive/class-use/ILongPointer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/primitive/class-use/IShortPointer.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/primitive/class-use/IShortPointer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/primitive/class-use/IStringPointer.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/primitive/class-use/IStringPointer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/primitive/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/primitive/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/primitive/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/primitive/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/primitive/package-use.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/cn/edu/gxust/jiweihuang/java/pointer/primitive/package-use.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/constant-values.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/constant-values.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/deprecated-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/deprecated-list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/help-doc.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/help-doc.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/index-all.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/index-all.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/member-search-index.zip" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/member-search-index.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/overview-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/overview-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/overview-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/overview-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/package-search-index.zip" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/package-search-index.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/apidocs/type-search-index.zip" beforeDir="false" afterPath="$PROJECT_DIR$/target/apidocs/type-search-index.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/java-pointer-0.0.1-20191215-javadoc.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/java-pointer-0.1.0-20191225-javadoc.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/java-pointer-0.0.1-20191215-sources.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/java-pointer-0.1.0-20191225-sources.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/java-pointer-0.0.1-20191215.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/java-pointer-0.1.0-20191225.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/spotbugsXml.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,10 +158,11 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../textiles" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="Errors" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -91,7 +206,8 @@
       <workItem from="1576418966332" duration="77000" />
       <workItem from="1577080587649" duration="249000" />
       <workItem from="1577321951905" duration="8870000" />
-      <workItem from="1577341398565" duration="3411000" />
+      <workItem from="1577341398565" duration="3766000" />
+      <workItem from="1577365393607" duration="1792000" />
     </task>
     <task id="LOCAL-00001" summary="Create Projects 2019-12-05">
       <created>1575636461895</created>
@@ -191,7 +307,14 @@
       <option name="project" value="LOCAL" />
       <updated>1577349657025</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="update projects 2019-12-25">
+      <created>1577350074519</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1577350074519</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -221,10 +344,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="436" y="101" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1577325713923" />
-    <state x="228" y="0" key="CommitChangelistDialog2" timestamp="1577349655430">
+    <state x="228" y="0" key="CommitChangelistDialog2" timestamp="1577350072086">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="228" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1577349655430" />
+    <state x="228" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1577350072086" />
     <state x="499" y="85" key="FileChooserDialogImpl" timestamp="1577322142883">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -237,33 +360,37 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="421" y="41" key="Github.UntrackedFilesDialog/0.0.1536.824@0.0.1536.824" timestamp="1575636426346" />
-    <state width="1483" height="197" key="GridCell.Tab.0.bottom" timestamp="1577350054541">
+    <state width="1483" height="197" key="GridCell.Tab.0.bottom" timestamp="1577350240614">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1483" height="197" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1577350054541" />
-    <state width="1483" height="197" key="GridCell.Tab.0.center" timestamp="1577350054540">
+    <state width="1483" height="197" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1577350240614" />
+    <state width="1483" height="197" key="GridCell.Tab.0.center" timestamp="1577350240614">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1483" height="197" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1577350054540" />
-    <state width="1483" height="197" key="GridCell.Tab.0.left" timestamp="1577350054540">
+    <state width="1483" height="197" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1577350240614" />
+    <state width="1483" height="197" key="GridCell.Tab.0.left" timestamp="1577350240614">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1483" height="197" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1577350054540" />
-    <state width="1483" height="197" key="GridCell.Tab.0.right" timestamp="1577350054540">
+    <state width="1483" height="197" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1577350240614" />
+    <state width="1483" height="197" key="GridCell.Tab.0.right" timestamp="1577350240614">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1483" height="197" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1577350054540" />
-    <state x="261" y="73" key="Vcs.Push.Dialog.v2" timestamp="1577349661880">
+    <state width="1483" height="197" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1577350240614" />
+    <state x="154" y="0" key="SettingsEditor" timestamp="1577366430584">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="261" y="73" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1577349661880" />
+    <state x="154" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1577366430584" />
+    <state x="261" y="73" key="Vcs.Push.Dialog.v2" timestamp="1577350079751">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="261" y="73" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1577350079751" />
     <state x="0" y="47" key="new project wizard" timestamp="1575636127737">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="0" y="47" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1575636127737" />
-    <state x="341" y="183" width="840" height="1034" key="run.anything.popup" timestamp="1577349941180">
+    <state x="341" y="183" width="840" height="1034" key="run.anything.popup" timestamp="1577350133894">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="341" y="183" width="840" height="1034" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1577349941180" />
+    <state x="341" y="183" width="840" height="1034" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1577350133894" />
   </component>
 </project>

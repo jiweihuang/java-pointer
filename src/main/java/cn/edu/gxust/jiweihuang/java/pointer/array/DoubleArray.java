@@ -187,7 +187,7 @@ public class DoubleArray{
      * @return 一个新的数组对象。
      */
     public DoubleArray copy(int from, int to) {
-        return doubleDataOf(Arrays.copyOfRange(this.values, from, to));
+        return of(Arrays.copyOfRange(this.values, from, to));
     }
     /**
      * 通过拷贝创建一个新的数组对象。
@@ -233,7 +233,7 @@ public class DoubleArray{
      * @param values 用于创建数组的值。
      * @return 一个新的数组对象。
      */
-    public static DoubleArray doubleDataOf(double... values) {
+    public static DoubleArray of(double... values) {
         Objects.requireNonNull(values, "Expected the parameter {values != null}.");
         int len = values.length;
         DoubleArray data = new DoubleArray(len);
@@ -246,12 +246,15 @@ public class DoubleArray{
 
     /**
      * 类{@code DoublePointer}是{@code IDoublePointer}的实现，
-     * 用于表征一个指向{@code boolean}型数组的指针。<p>
+     * 用于表征一个指向{@code double}型数组的指针。<p>
      * 因为是私有类，所以此类的外部无法访问该类，
      * 因为是内部类，故其拥有对其外部类数据的引用。
      */
     private class DoublePointer implements IDoublePointer {
-        //指向
+
+        /**
+         * 指针的指向。
+         */
         private int point;
 
         /**

@@ -39,6 +39,7 @@ package cn.edu.gxust.jiweihuang.java.pointer.array;
 import cn.edu.gxust.jiweihuang.java.pointer.IFunctionPointer;
 import cn.edu.gxust.jiweihuang.java.pointer.primitive.IShortPointer;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -53,7 +54,12 @@ import java.util.Objects;
  * @author JiweiHuang
  * @since 20191205
  */
-public class ShortArray {
+public class ShortArray implements Serializable {
+    /**
+     * 序列化版本号。
+     */
+    private static final long serialVersionUID = -513248543108148724L;
+
     /**
      * 数组的容量。
      */
@@ -67,7 +73,7 @@ public class ShortArray {
     /**
      * 类{@code ShortArray}的主构造函数。<p>
      * 通过指定数组的容量创建数组对象，
-     * 并将数组内所有元素的值设置为 {@code false}。
+     * 并将数组内所有元素的值设置为 {@code 0}。
      * <p>
      * 注意：参数 {@code capacity}必须大于等于{@code 0}，
      * 否则，抛出{@code java.lang.NegativeArraySizeException} 异常。
@@ -113,17 +119,17 @@ public class ShortArray {
     }
 
     /**
-     * 一个函数指针，用于初始化数据区域内元素值。
+     * 接口{@code IShortArrayInitFunction}是一个函数指针，用于初始化数组内元素值。
      * 根据预定，函数指针所指向的函数名为 {@code call},
-     * 函数的参数 {@code index} 表示数据区域的索引，
-     * 函数返回值为数据区域内相应索引的初始化值。
+     * 函数的参数{@code index}表示数组的索引，
+     * 函数返回值为数组内相应索引的初始化值。
      */
     public interface IShortArrayInitFunction extends IFunctionPointer {
         /**
-         * 用于初始化数据区域内元素值的函数。
+         * 用于初始化数组内元素值的函数。
          *
-         * @param index 数据区域的索引
-         * @return 数据区域的初始化值
+         * @param index 数组的索引。
+         * @return 数组的初始化值。
          */
         short call(int index);
     }
@@ -186,7 +192,7 @@ public class ShortArray {
      * @return 一个新的数组对象。
      */
     public ShortArray copy(int from, int to) {
-        return shortDataOf(Arrays.copyOfRange(this.values, from, to));
+        return of(Arrays.copyOfRange(this.values, from, to));
     }
 
     /**
@@ -235,7 +241,7 @@ public class ShortArray {
      * @param values 用于创建数组的值。
      * @return 一个新的数组对象。
      */
-    public static ShortArray shortDataOf(short... values) {
+    public static ShortArray of(short... values) {
         Objects.requireNonNull(values, "Expected the parameter {values != null}.");
         int len = values.length;
         ShortArray data = new ShortArray(len);
@@ -248,13 +254,15 @@ public class ShortArray {
 
     /**
      * 类{@code ShortPointer}是{@code IShortPointer}的实现，
-     * 用于表征一个指向{@code boolean}型数组的指针。<p>
+     * 用于表征一个指向{@code short}型数组的指针。<p>
      * 因为是私有类，所以此类的外部无法访问该类，
      * 因为是内部类，故其拥有对其外部类数据的引用。
      */
     private class ShortPointer implements IShortPointer {
 
-        //指向
+        /**
+         * 指针的指向。
+         */
         private int point;
 
         /**
