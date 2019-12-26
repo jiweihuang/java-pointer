@@ -353,7 +353,7 @@ public class StringArray {
         }
         IStringPointer thatPointer = that.createPointer();
         for (int i = 0; i < getCapacity(); i++) {
-            if (values[i] != thatPointer.get(i)) {
+            if (!Objects.equals(values[i], thatPointer.get(i))) {
                 return false;
             }
         }

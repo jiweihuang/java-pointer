@@ -37,7 +37,7 @@
 package cn.edu.gxust.jiweihuang.java.pointer;
 
 /**
- * 接口 {@code IArrayPointer}用于表征“指向一维数组的指针”。<p>
+ * 接口 {@code IArrayPointer}用于表征“指向一维数组的指针”。
  * <p>
  * Development status：Finished     # Developing, Finished  <p>
  * Javadoc status: Finished         # Missing, Developing, Finished  <p>
