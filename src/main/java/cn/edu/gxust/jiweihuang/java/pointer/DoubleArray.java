@@ -3,7 +3,8 @@
  *
  * Copyright (c) 2019-2020, Jiwei Huang. All Rights Reserved.
  *
- * This file is a part of projects for textiles (https://github.com/jiweihuang/textiles)
+ * This file is a part of projects for java-pointer
+ *  (https://github.com/jiweihuang/java-pointer)
  *
  *  -------------------------Contact Author--------------------------------
  *  Author: Jiwei Huang
@@ -39,22 +40,23 @@ import java.util.Arrays;
 import java.util.Objects;
 
 /**
- * 类 {@code ShortDataArea} 用于表征一块 {@code short} 型数据区域。
+ * 类 {@code DoubleDataArea} 用于表征一块 {@code double} 型数据区域。
  * <p>
  * Development status: Release    # Developing <p>
  * Completion date: 20191020 <p>
- * Test status: Missing    # None, Finished <p>
+ * Test status: Finished    # Missing, Finished <p>
  * Doc status: Finished    # Missing <p>
  *
  * @author JiweiHuang
  * @since 20191020
  */
-public class ShortDataArea implements IDataArea {
+public class DoubleArray implements IArray {
+
     //数据区域的容量
     private final int capacity;
 
     //数据区域的存储
-    private final short[] values;
+    private final double[] values;
 
     /**
      * 主构造函数，通过指定数据区域的容量创建数据区域对象，
@@ -65,9 +67,9 @@ public class ShortDataArea implements IDataArea {
      *
      * @param capacity 数据区域的容量
      */
-    public ShortDataArea(final int capacity) {
+    public DoubleArray(final int capacity) {
         this.capacity = capacity; //必须大于等于0
-        this.values = new short[capacity];
+        this.values = new double[capacity];
     }
 
     /**
@@ -80,7 +82,7 @@ public class ShortDataArea implements IDataArea {
      * @param capacity 数据区域的容量。
      * @param value    初始化的数据区域的值。
      */
-    public ShortDataArea(final int capacity, short value) {
+    public DoubleArray(final int capacity, final double value) {
         this(capacity);
         for (int i = 0; i < capacity; i++) {
             this.values[i] = value;
@@ -94,7 +96,7 @@ public class ShortDataArea implements IDataArea {
      * @param capacity     数据区域的容量。
      * @param initFunction 用于初始化数据区域内元素值的函数指针。
      */
-    public ShortDataArea(final int capacity, IShortDataInitFunction initFunction) {
+    public DoubleArray(final int capacity, final IDoubleDataInitFunction initFunction) {
         this(capacity);
         for (int i = 0; i < capacity; i++) {
             this.values[i] = initFunction.call(i);
@@ -107,25 +109,31 @@ public class ShortDataArea implements IDataArea {
      * 函数的参数 {@code index} 表示数据区域的索引，
      * 函数返回值为数据区域内相应索引的初始化值。
      */
-    public interface IShortDataInitFunction extends IFunctionPointer {
+    public interface IDoubleDataInitFunction extends IFunctionPointer {
         /**
          * 用于初始化数据区域内元素值的函数。
          *
          * @param index 数据区域的索引
          * @return 数据区域的初始化值
          */
-        short call(int index);
+        double call(int index);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getCapacity() {
         return capacity;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public ShortDataArea reset() {
+    public DoubleArray reset() {
         for (int i = 0; i < capacity; i++) {
-            this.values[i] = 0;
+            this.values[i] = 0.;
         }
         return this;
     }
@@ -136,7 +144,7 @@ public class ShortDataArea implements IDataArea {
      * @param value 用于重置数据区域的值。
      * @return 值被重置后的数据区域对象
      */
-    public ShortDataArea reset(short value) {
+    public DoubleArray reset(final double value) {
         for (int i = 0; i < capacity; i++) {
             this.values[i] = value;
         }
@@ -149,21 +157,27 @@ public class ShortDataArea implements IDataArea {
      * @param initFunction 用于重置数据区域值的函数指针。
      * @return 值被重置后的数据区域对象
      */
-    public ShortDataArea reset(IShortDataInitFunction initFunction) {
+    public DoubleArray reset(IDoubleDataInitFunction initFunction) {
         for (int i = 0; i < capacity; i++) {
             this.values[i] = initFunction.call(i);
         }
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public ShortDataArea copy(int from, int to) {
-        return shortDataOf(Arrays.copyOfRange(this.values, from, to));
+    public DoubleArray copy(int from, int to) {
+        return doubleDataOf(Arrays.copyOfRange(this.values, from, to));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public IShortPointer createPointer() {
-        return new ShortDataPointer();
+    public IDoublePointer createPointer() {
+        return new DoubleDataPointer();
     }
 
     /**
@@ -174,11 +188,11 @@ public class ShortDataArea implements IDataArea {
      * @param values 用于创建数据区域的值组。
      * @return 一个新的数据区域。
      */
-    public static ShortDataArea shortDataOf(short... values) {
+    public static DoubleArray doubleDataOf(double... values) {
         Objects.requireNonNull(values, "Expected the parameter {values != null}.");
         int len = values.length;
-        ShortDataArea data = new ShortDataArea(len);
-        IShortPointer pointer = data.createPointer();
+        DoubleArray data = new DoubleArray(len);
+        IDoublePointer pointer = data.createPointer();
         for (int i = 0; i < len; i++) {
             pointer.set(i, values[i]);
         }
@@ -186,11 +200,10 @@ public class ShortDataArea implements IDataArea {
     }
 
     /**
-     * 类 {@code ShortDataPointer} 是 {@code IShortPointer}的实现，
-     * 用于表征一个指向 {@code short} 型数据区域的指针。
+     * 类 {@code DoubleDataPointer} 是 {@code IDoublePointer}的实现，
+     * 用于表征一个指向 {@code double} 型数据区域的指针。
      */
-    private class ShortDataPointer implements IShortPointer {
-
+    private class DoubleDataPointer implements IDoublePointer {
         //指向
         private int point;
 
@@ -199,7 +212,7 @@ public class ShortDataArea implements IDataArea {
          * 该构造器将指针的指向设置为0，
          * 构造器是私有的，意味着该类不能被外部初始化。
          */
-        private ShortDataPointer() {
+        private DoubleDataPointer() {
             this.point = 0;
         }
 
@@ -207,7 +220,7 @@ public class ShortDataArea implements IDataArea {
          * {@inheritDoc}
          */
         @Override
-        public short get(int index) {
+        public double get(int index) {
             int i = index + getPoint();
             if (i >= 0 && i < getCapacity()) {
                 return values[i];
@@ -222,7 +235,7 @@ public class ShortDataArea implements IDataArea {
          * {@inheritDoc}
          */
         @Override
-        public void set(int index, short value) {
+        public void set(int index, double value) {
             int i = index + getPoint();
             if (i >= 0 && i < getCapacity()) {
                 values[i] = value;
@@ -246,14 +259,14 @@ public class ShortDataArea implements IDataArea {
          */
         @Override
         public int getCapacity() {
-            return ShortDataArea.this.getCapacity();
+            return DoubleArray.this.getCapacity();
         }
 
         /**
          * {@inheritDoc}
          */
         @Override
-        public ShortDataPointer move(int offset) {
+        public DoubleDataPointer move(int offset) {
             this.point = this.point + offset;
             return this;
         }
@@ -262,15 +275,15 @@ public class ShortDataArea implements IDataArea {
          * {@inheritDoc}
          */
         @Override
-        public ShortDataPointer copy() {
-            return new ShortDataPointer().move(getPoint());
+        public DoubleDataPointer copy() {
+            return new DoubleDataPointer().move(getPoint());
         }
 
         /**
          * {@inheritDoc}
          */
         @Override
-        public ShortDataPointer reset() {
+        public DoubleDataPointer reset() {
             this.point = 0;
             return this;
         }
@@ -282,12 +295,12 @@ public class ShortDataArea implements IDataArea {
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
-        if (!(obj instanceof ShortDataArea)) return false;
-        ShortDataArea that = (ShortDataArea) obj;
+        if (!(obj instanceof DoubleArray)) return false;
+        DoubleArray that = (DoubleArray) obj;
         if (getCapacity() != that.getCapacity()) {
             return false;
         }
-        IShortPointer thatPointer = that.createPointer();
+        IDoublePointer thatPointer = that.createPointer();
         for (int i = 0; i < getCapacity(); i++) {
             if (values[i] != thatPointer.get(i)) {
                 return false;
@@ -311,7 +324,7 @@ public class ShortDataArea implements IDataArea {
      */
     @Override
     public String toString() {
-        return "ShortDataArea{" +
+        return "DoubleDataArea{" +
                 "capacity=" + capacity +
                 ", values=" + Arrays.toString(values) +
                 '}';

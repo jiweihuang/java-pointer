@@ -3,7 +3,8 @@
  *
  * Copyright (c) 2019-2020, Jiwei Huang. All Rights Reserved.
  *
- * This file is a part of projects for textiles (https://github.com/jiweihuang/textiles)
+ * This file is a part of projects for java-pointer
+ *  (https://github.com/jiweihuang/java-pointer)
  *
  *  -------------------------Contact Author--------------------------------
  *  Author: Jiwei Huang

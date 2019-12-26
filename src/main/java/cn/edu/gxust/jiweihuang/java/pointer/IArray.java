@@ -3,7 +3,8 @@
  *
  * Copyright (c) 2019-2020, Jiwei Huang. All Rights Reserved.
  *
- * This file is a part of projects for textiles (https://github.com/jiweihuang/textiles)
+ * This file is a part of projects for java-pointer
+ *  (https://github.com/jiweihuang/java-pointer)
  *
  *  -------------------------Contact Author--------------------------------
  *  Author: Jiwei Huang
@@ -46,7 +47,7 @@ package cn.edu.gxust.jiweihuang.java.pointer;
  * @author JiweiHuang
  * @since 20191020
  */
-public interface IDataArea {
+public interface IArray {
     /**
      * 获取数据区域可容纳数据元素的数量。
      *
@@ -60,7 +61,7 @@ public interface IDataArea {
      * @param <T> 通过泛型参数指定返回具体类型的数据区域。
      * @return 重置0值后的数据区域。
      */
-    <T extends IDataArea> T reset();
+    <T extends IArray> T reset();
 
     /**
      * 通过拷贝创建一个新的数据区域。
@@ -73,7 +74,7 @@ public interface IDataArea {
      * @param <T>  通过泛型参数指定返回具体类型的数据区域。
      * @return 一个新的数据区域。
      */
-    <T extends IDataArea> T copy(int from, int to);
+    <T extends IArray> T copy(int from, int to);
 
     /**
      * 通过拷贝创建一个新的数据区域。
@@ -82,7 +83,7 @@ public interface IDataArea {
      * @param <T>  通过泛型参数指定返回具体类型的数据区域。
      * @return 一个新的数据区域。
      */
-    default <T extends IDataArea> T copy(int from) {
+    default <T extends IArray> T copy(int from) {
         return copy(from, getCapacity());
     }
 
@@ -92,7 +93,7 @@ public interface IDataArea {
      * @param <T> 通过泛型参数指定返回具体类型的数据区域。
      * @return 一个新的数据区域。
      */
-    default <T extends IDataArea> T copy() {
+    default <T extends IArray> T copy() {
         return copy(0, getCapacity());
     }
 

@@ -3,7 +3,8 @@
  *
  * Copyright (c) 2019-2020, Jiwei Huang. All Rights Reserved.
  *
- * This file is a part of projects for textiles (https://github.com/jiweihuang/textiles)
+ * This file is a part of projects for java-pointer
+ *  (https://github.com/jiweihuang/java-pointer)
  *
  *  -------------------------Contact Author--------------------------------
  *  Author: Jiwei Huang
@@ -39,7 +40,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 /**
- * 类 {@code FloatDataArea} 用于表征一块 {@code float} 型数据区域。
+ * 类 {@code CharDataArea} 用于表征一块 {@code char} 型数据区域。
  * <p>
  * Development status: Release    # Developing <p>
  * Completion date: 20191020 <p>
@@ -49,14 +50,14 @@ import java.util.Objects;
  * @author JiweiHuang
  * @since 20191020
  */
-public class FloatDataArea implements IDataArea {
+public class CharArray implements IArray {
 
 
     //数据区域的容量
     private final int capacity;
 
     //数据区域的存储
-    private final float[] values;
+    private final char[] values;
 
     /**
      * 主构造函数，通过指定数据区域的容量创建数据区域对象，
@@ -67,9 +68,9 @@ public class FloatDataArea implements IDataArea {
      *
      * @param capacity 数据区域的容量
      */
-    public FloatDataArea(final int capacity) {
+    public CharArray(final int capacity) {
         this.capacity = capacity; //必须大于等于0
-        this.values = new float[capacity];
+        this.values = new char[capacity];
     }
 
     /**
@@ -82,7 +83,7 @@ public class FloatDataArea implements IDataArea {
      * @param capacity 数据区域的容量。
      * @param value    初始化的数据区域的值。
      */
-    public FloatDataArea(final int capacity, float value) {
+    public CharArray(final int capacity, char value) {
         this(capacity);
         for (int i = 0; i < capacity; i++) {
             this.values[i] = value;
@@ -96,7 +97,7 @@ public class FloatDataArea implements IDataArea {
      * @param capacity     数据区域的容量。
      * @param initFunction 用于初始化数据区域内元素值的函数指针。
      */
-    public FloatDataArea(final int capacity, IFloatDataInitFunction initFunction) {
+    public CharArray(final int capacity, ICharDataInitFunction initFunction) {
         this(capacity);
         for (int i = 0; i < capacity; i++) {
             this.values[i] = initFunction.call(i);
@@ -109,14 +110,14 @@ public class FloatDataArea implements IDataArea {
      * 函数的参数 {@code index} 表示数据区域的索引，
      * 函数返回值为数据区域内相应索引的初始化值。
      */
-    public interface IFloatDataInitFunction extends IFunctionPointer {
+    public interface ICharDataInitFunction extends IFunctionPointer {
         /**
          * 用于初始化数据区域内元素值的函数。
          *
          * @param index 数据区域的索引
          * @return 数据区域的初始化值
          */
-        float call(int index);
+        char call(int index);
     }
 
     /**
@@ -131,7 +132,7 @@ public class FloatDataArea implements IDataArea {
      * {@inheritDoc}
      */
     @Override
-    public FloatDataArea reset() {
+    public CharArray reset() {
         for (int i = 0; i < capacity; i++) {
             this.values[i] = 0;
         }
@@ -144,7 +145,7 @@ public class FloatDataArea implements IDataArea {
      * @param value 用于重置数据区域的值。
      * @return 值被重置后的数据区域对象
      */
-    public FloatDataArea reset(float value) {
+    public CharArray reset(char value) {
         for (int i = 0; i < capacity; i++) {
             this.values[i] = value;
         }
@@ -157,7 +158,7 @@ public class FloatDataArea implements IDataArea {
      * @param initFunction 用于重置数据区域值的函数指针。
      * @return 值被重置后的数据区域对象
      */
-    public FloatDataArea reset(IFloatDataInitFunction initFunction) {
+    public CharArray reset(ICharDataInitFunction initFunction) {
         for (int i = 0; i < capacity; i++) {
             this.values[i] = initFunction.call(i);
         }
@@ -168,16 +169,16 @@ public class FloatDataArea implements IDataArea {
      * {@inheritDoc}
      */
     @Override
-    public FloatDataArea copy(int from, int to) {
-        return floatDataOf(Arrays.copyOfRange(this.values, from, to));
+    public CharArray copy(int from, int to) {
+        return charDataOf(Arrays.copyOfRange(this.values, from, to));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public IFloatPointer createPointer() {
-        return new FloatDataPointer();
+    public ICharPointer createPointer() {
+        return new CharDataPointer();
     }
 
     /**
@@ -188,11 +189,11 @@ public class FloatDataArea implements IDataArea {
      * @param values 用于创建数据区域的值组。
      * @return 一个新的数据区域。
      */
-    public static FloatDataArea floatDataOf(float... values) {
+    public static CharArray charDataOf(char... values) {
         Objects.requireNonNull(values, "Expected the parameter {values != null}.");
         int len = values.length;
-        FloatDataArea data = new FloatDataArea(len);
-        IFloatPointer pointer = data.createPointer();
+        CharArray data = new CharArray(len);
+        ICharPointer pointer = data.createPointer();
         for (int i = 0; i < len; i++) {
             pointer.set(i, values[i]);
         }
@@ -200,10 +201,10 @@ public class FloatDataArea implements IDataArea {
     }
 
     /**
-     * 类 {@code FloatDataPointer} 是 {@code IFloatPointer}的实现，
-     * 用于表征一个指向 {@code float} 型数据区域的指针。
+     * 类 {@code CharDataPointer} 是 {@code ICharPointer}的实现，
+     * 用于表征一个指向 {@code char} 型数据区域的指针。
      */
-    private class FloatDataPointer implements IFloatPointer {
+    private class CharDataPointer implements ICharPointer {
         //指向
         private int point;
 
@@ -212,12 +213,12 @@ public class FloatDataArea implements IDataArea {
          * 该构造器将指针的指向设置为0，
          * 构造器是私有的，意味着该类不能被外部初始化。
          */
-        private FloatDataPointer() {
+        private CharDataPointer() {
             this.point = 0;
         }
 
         @Override
-        public float get(int index) {
+        public char get(int index) {
             int i = index + getPoint();
             if (i >= 0 && i < getCapacity()) {
                 return values[i];
@@ -228,10 +229,13 @@ public class FloatDataArea implements IDataArea {
             }
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
-        public void set(int index, float value) {
+        public void set(int index, char value) {
             int i = index + getPoint();
-            if (i >= 0 && i < getCapacity()) {
+            if (i >= 0 && i < CharArray.this.getCapacity()) {
                 values[i] = value;
             } else {
                 throw new ArrayIndexOutOfBoundsException(String.format(
@@ -253,14 +257,14 @@ public class FloatDataArea implements IDataArea {
          */
         @Override
         public int getCapacity() {
-            return FloatDataArea.this.getCapacity();
+            return CharArray.this.getCapacity();
         }
 
         /**
          * {@inheritDoc}
          */
         @Override
-        public FloatDataPointer move(int offset) {
+        public CharDataPointer move(int offset) {
             this.point = this.point + offset;
             return this;
         }
@@ -269,15 +273,15 @@ public class FloatDataArea implements IDataArea {
          * {@inheritDoc}
          */
         @Override
-        public FloatDataPointer copy() {
-            return new FloatDataPointer().move(getPoint());
+        public CharDataPointer copy() {
+            return new CharDataPointer().move(getPoint());
         }
 
         /**
          * {@inheritDoc}
          */
         @Override
-        public FloatDataPointer reset() {
+        public CharDataPointer reset() {
             this.point = 0;
             return this;
         }
@@ -289,12 +293,12 @@ public class FloatDataArea implements IDataArea {
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
-        if (!(obj instanceof FloatDataArea)) return false;
-        FloatDataArea that = (FloatDataArea) obj;
+        if (!(obj instanceof CharArray)) return false;
+        CharArray that = (CharArray) obj;
         if (getCapacity() != that.getCapacity()) {
             return false;
         }
-        IFloatPointer thatPointer = that.createPointer();
+        ICharPointer thatPointer = that.createPointer();
         for (int i = 0; i < getCapacity(); i++) {
             if (values[i] != thatPointer.get(i)) {
                 return false;
@@ -318,7 +322,7 @@ public class FloatDataArea implements IDataArea {
      */
     @Override
     public String toString() {
-        return "FloatDataArea{" +
+        return "CharDataArea{" +
                 "capacity=" + capacity +
                 ", values=" + Arrays.toString(values) +
                 '}';

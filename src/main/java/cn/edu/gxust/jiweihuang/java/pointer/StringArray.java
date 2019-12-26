@@ -3,7 +3,8 @@
  *
  * Copyright (c) 2019-2020, Jiwei Huang. All Rights Reserved.
  *
- * This file is a part of projects for textiles (https://github.com/jiweihuang/textiles)
+ * This file is a part of projects for java-pointer
+ *  (https://github.com/jiweihuang/java-pointer)
  *
  *  -------------------------Contact Author--------------------------------
  *  Author: Jiwei Huang
@@ -39,7 +40,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 /**
- * 类 {@code ByteDataArea} 用于表征一块 {@code byte} 型数据区域。
+ * 类 {@code StringDataArea} 用于表征一块 {@code String} 型数据区域。
  * <p>
  * Development status: Release    # Developing <p>
  * Completion date: 20191020 <p>
@@ -49,26 +50,26 @@ import java.util.Objects;
  * @author JiweiHuang
  * @since 20191020
  */
-public class ByteDataArea implements IDataArea {
+public class StringArray implements IArray {
 
     //数据区域的容量
     private final int capacity;
 
     //数据区域的存储
-    private final byte[] values;
+    private final String[] values;
 
     /**
      * 主构造函数，通过指定数据区域的容量创建数据区域对象，
-     * 并将数据区域内所有元素的值设置为 {@code 0}。
+     * 并将数据区域内所有元素的值设置为 {@code null}。
      * <p>
      * 注意：参数 {@code capacity}必须大于等于{@code 0}，否则，抛出
      * {@code java.lang.NegativeArraySizeException} 异常。
      *
      * @param capacity 数据区域的容量
      */
-    public ByteDataArea(final int capacity) {
-        this.capacity = capacity;
-        this.values = new byte[capacity];
+    public StringArray(final int capacity) {
+        this.capacity = capacity; //必须大于等于0
+        this.values = new String[capacity];
     }
 
     /**
@@ -81,7 +82,7 @@ public class ByteDataArea implements IDataArea {
      * @param capacity 数据区域的容量。
      * @param value    初始化的数据区域的值。
      */
-    public ByteDataArea(final int capacity, final byte value) {
+    public StringArray(final int capacity, String value) {
         this(capacity);
         for (int i = 0; i < capacity; i++) {
             this.values[i] = value;
@@ -95,7 +96,7 @@ public class ByteDataArea implements IDataArea {
      * @param capacity     数据区域的容量。
      * @param initFunction 用于初始化数据区域内元素值的函数指针。
      */
-    public ByteDataArea(final int capacity, final IByteDataInitFunction initFunction) {
+    public StringArray(final int capacity, IStringDataInitFunction initFunction) {
         this(capacity);
         for (int i = 0; i < capacity; i++) {
             this.values[i] = initFunction.call(i);
@@ -108,14 +109,14 @@ public class ByteDataArea implements IDataArea {
      * 函数的参数 {@code index} 表示数据区域的索引，
      * 函数返回值为数据区域内相应索引的初始化值。
      */
-    public interface IByteDataInitFunction extends IFunctionPointer {
+    public interface IStringDataInitFunction extends IFunctionPointer {
         /**
          * 用于初始化数据区域内元素值的函数。
          *
          * @param index 数据区域的索引
          * @return 数据区域的初始化值
          */
-        byte call(final int index);
+        String call(int index);
     }
 
     /**
@@ -130,9 +131,9 @@ public class ByteDataArea implements IDataArea {
      * {@inheritDoc}
      */
     @Override
-    public ByteDataArea reset() {
+    public StringArray reset() {
         for (int i = 0; i < capacity; i++) {
-            this.values[i] = 0;
+            this.values[i] = null;
         }
         return this;
     }
@@ -143,7 +144,7 @@ public class ByteDataArea implements IDataArea {
      * @param value 用于重置数据区域的值。
      * @return 值被重置后的数据区域对象
      */
-    public ByteDataArea reset(final byte value) {
+    public StringArray reset(String value) {
         for (int i = 0; i < capacity; i++) {
             this.values[i] = value;
         }
@@ -156,7 +157,7 @@ public class ByteDataArea implements IDataArea {
      * @param initFunction 用于重置数据区域值的函数指针。
      * @return 值被重置后的数据区域对象
      */
-    public ByteDataArea reset(IByteDataInitFunction initFunction) {
+    public StringArray reset(IStringDataInitFunction initFunction) {
         for (int i = 0; i < capacity; i++) {
             this.values[i] = initFunction.call(i);
         }
@@ -167,16 +168,16 @@ public class ByteDataArea implements IDataArea {
      * {@inheritDoc}
      */
     @Override
-    public ByteDataArea copy(int from, int to) {
-        return byteDataOf(Arrays.copyOfRange(this.values, from, to));
+    public StringArray copy(int from, int to) {
+        return stringDataOf(Arrays.copyOfRange(this.values, from, to));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public IBytePointer createPointer() {
-        return new ByteDataPointer();
+    public IStringPointer createPointer() {
+        return new StringDataPointer();
     }
 
     /**
@@ -187,11 +188,11 @@ public class ByteDataArea implements IDataArea {
      * @param values 用于创建数据区域的值组。
      * @return 一个新的数据区域。
      */
-    public static ByteDataArea byteDataOf(byte... values) {
+    public static StringArray stringDataOf(String... values) {
         Objects.requireNonNull(values, "Expected the parameter {values != null}.");
         int len = values.length;
-        ByteDataArea data = new ByteDataArea(len);
-        IBytePointer pointer = data.createPointer();
+        StringArray data = new StringArray(len);
+        IStringPointer pointer = data.createPointer();
         for (int i = 0; i < len; i++) {
             pointer.set(i, values[i]);
         }
@@ -199,10 +200,11 @@ public class ByteDataArea implements IDataArea {
     }
 
     /**
-     * 类 {@code ByteDataPointer} 是 {@code IBytePointer}的实现，
-     * 用于表征一个指向 {@code byte} 型数据区域的指针。
+     * 类 {@code StringDataPointer} 是 {@code IStringPointer}的实现，
+     * 用于表征一个指向 {@code String} 型数据区域的指针。
      */
-    private class ByteDataPointer implements IBytePointer {
+    private class StringDataPointer implements IStringPointer {
+
         //指向
         private int point;
 
@@ -211,7 +213,7 @@ public class ByteDataArea implements IDataArea {
          * 该构造器将指针的指向设置为0，
          * 构造器是私有的，意味着该类不能被外部初始化。
          */
-        private ByteDataPointer() {
+        private StringDataPointer() {
             this.point = 0;
         }
 
@@ -219,7 +221,7 @@ public class ByteDataArea implements IDataArea {
          * {@inheritDoc}
          */
         @Override
-        public byte get(int index) {
+        public String get(int index) {
             int i = index + getPoint();
             if (i >= 0 && i < getCapacity()) {
                 return values[i];
@@ -234,7 +236,7 @@ public class ByteDataArea implements IDataArea {
          * {@inheritDoc}
          */
         @Override
-        public void set(int index, byte value) {
+        public void set(int index, String value) {
             int i = index + getPoint();
             if (i >= 0 && i < getCapacity()) {
                 values[i] = value;
@@ -258,14 +260,14 @@ public class ByteDataArea implements IDataArea {
          */
         @Override
         public int getCapacity() {
-            return ByteDataArea.this.getCapacity();
+            return StringArray.this.getCapacity();
         }
 
         /**
          * {@inheritDoc}
          */
         @Override
-        public ByteDataPointer move(int offset) {
+        public StringDataPointer move(int offset) {
             this.point = this.point + offset;
             return this;
         }
@@ -274,15 +276,15 @@ public class ByteDataArea implements IDataArea {
          * {@inheritDoc}
          */
         @Override
-        public ByteDataPointer copy() {
-            return new ByteDataPointer().move(getPoint());
+        public StringDataPointer copy() {
+            return new StringDataPointer().move(getPoint());
         }
 
         /**
          * {@inheritDoc}
          */
         @Override
-        public ByteDataPointer reset() {
+        public StringDataPointer reset() {
             this.point = 0;
             return this;
         }
@@ -294,12 +296,12 @@ public class ByteDataArea implements IDataArea {
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
-        if (!(obj instanceof ByteDataArea)) return false;
-        ByteDataArea that = (ByteDataArea) obj;
+        if (!(obj instanceof StringArray)) return false;
+        StringArray that = (StringArray) obj;
         if (getCapacity() != that.getCapacity()) {
             return false;
         }
-        IBytePointer thatPointer = that.createPointer();
+        IStringPointer thatPointer = that.createPointer();
         for (int i = 0; i < getCapacity(); i++) {
             if (values[i] != thatPointer.get(i)) {
                 return false;
@@ -323,7 +325,7 @@ public class ByteDataArea implements IDataArea {
      */
     @Override
     public String toString() {
-        return "ByteDataArea{" +
+        return "StringDataArea{" +
                 "capacity=" + capacity +
                 ", values=" + Arrays.toString(values) +
                 '}';

@@ -3,7 +3,8 @@
  *
  * Copyright (c) 2019-2020, Jiwei Huang. All Rights Reserved.
  *
- * This file is a part of projects for textiles (https://github.com/jiweihuang/textiles)
+ * This file is a part of projects for java-pointer
+ *  (https://github.com/jiweihuang/java-pointer)
  *
  *  -------------------------Contact Author--------------------------------
  *  Author: Jiwei Huang
@@ -39,7 +40,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 /**
- * 类 {@code BooleanDataArea} 用于表征一块 {@code boolean} 型数据区域。
+ * 类 {@code ByteDataArea} 用于表征一块 {@code byte} 型数据区域。
  * <p>
  * Development status: Release    # Developing <p>
  * Completion date: 20191020 <p>
@@ -49,26 +50,26 @@ import java.util.Objects;
  * @author JiweiHuang
  * @since 20191020
  */
-public class BooleanDataArea implements IDataArea {
+public class ByteArray implements IArray {
 
     //数据区域的容量
     private final int capacity;
 
     //数据区域的存储
-    private final boolean[] values;
+    private final byte[] values;
 
     /**
      * 主构造函数，通过指定数据区域的容量创建数据区域对象，
-     * 并将数据区域内所有元素的值设置为 {@code false}。
+     * 并将数据区域内所有元素的值设置为 {@code 0}。
      * <p>
      * 注意：参数 {@code capacity}必须大于等于{@code 0}，否则，抛出
      * {@code java.lang.NegativeArraySizeException} 异常。
      *
      * @param capacity 数据区域的容量
      */
-    public BooleanDataArea(final int capacity) {
-        this.capacity = capacity; //必须大于等于0
-        this.values = new boolean[capacity];
+    public ByteArray(final int capacity) {
+        this.capacity = capacity;
+        this.values = new byte[capacity];
     }
 
     /**
@@ -79,9 +80,9 @@ public class BooleanDataArea implements IDataArea {
      * {@code java.lang.NegativeArraySizeException} 异常。
      *
      * @param capacity 数据区域的容量。
-     * @param value    用于初始化数据区域的值。
+     * @param value    初始化的数据区域的值。
      */
-    public BooleanDataArea(final int capacity, boolean value) {
+    public ByteArray(final int capacity, final byte value) {
         this(capacity);
         for (int i = 0; i < capacity; i++) {
             this.values[i] = value;
@@ -95,7 +96,7 @@ public class BooleanDataArea implements IDataArea {
      * @param capacity     数据区域的容量。
      * @param initFunction 用于初始化数据区域内元素值的函数指针。
      */
-    public BooleanDataArea(final int capacity, IBooleanDataInitFunction initFunction) {
+    public ByteArray(final int capacity, final IByteDataInitFunction initFunction) {
         this(capacity);
         for (int i = 0; i < capacity; i++) {
             this.values[i] = initFunction.call(i);
@@ -104,18 +105,18 @@ public class BooleanDataArea implements IDataArea {
 
     /**
      * 一个函数指针，用于初始化数据区域内元素值。
-     * 根据约定，函数指针所指向的函数名为 {@code call},
+     * 根据预定，函数指针所指向的函数名为 {@code call},
      * 函数的参数 {@code index} 表示数据区域的索引，
      * 函数返回值为数据区域内相应索引的初始化值。
      */
-    public interface IBooleanDataInitFunction extends IFunctionPointer {
+    public interface IByteDataInitFunction extends IFunctionPointer {
         /**
          * 用于初始化数据区域内元素值的函数。
          *
          * @param index 数据区域的索引
          * @return 数据区域的初始化值
          */
-        boolean call(int index);
+        byte call(final int index);
     }
 
     /**
@@ -130,9 +131,9 @@ public class BooleanDataArea implements IDataArea {
      * {@inheritDoc}
      */
     @Override
-    public BooleanDataArea reset() {
+    public ByteArray reset() {
         for (int i = 0; i < capacity; i++) {
-            this.values[i] = false;
+            this.values[i] = 0;
         }
         return this;
     }
@@ -143,7 +144,7 @@ public class BooleanDataArea implements IDataArea {
      * @param value 用于重置数据区域的值。
      * @return 值被重置后的数据区域对象
      */
-    public BooleanDataArea reset(boolean value) {
+    public ByteArray reset(final byte value) {
         for (int i = 0; i < capacity; i++) {
             this.values[i] = value;
         }
@@ -156,7 +157,7 @@ public class BooleanDataArea implements IDataArea {
      * @param initFunction 用于重置数据区域值的函数指针。
      * @return 值被重置后的数据区域对象
      */
-    public BooleanDataArea reset(IBooleanDataInitFunction initFunction) {
+    public ByteArray reset(IByteDataInitFunction initFunction) {
         for (int i = 0; i < capacity; i++) {
             this.values[i] = initFunction.call(i);
         }
@@ -167,31 +168,31 @@ public class BooleanDataArea implements IDataArea {
      * {@inheritDoc}
      */
     @Override
-    public BooleanDataArea copy(int from, int to) {
-        return doubleDataOf(Arrays.copyOfRange(this.values, from, to));
+    public ByteArray copy(int from, int to) {
+        return byteDataOf(Arrays.copyOfRange(this.values, from, to));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public IBooleanPointer createPointer() {
-        return new BooleanDataPointer();
+    public IBytePointer createPointer() {
+        return new ByteDataPointer();
     }
 
     /**
-     * 通过指定值组的方式创建数据区域，该方法可能并不高效，因为先创建了对象，
-     * 接着创建了对象的指针，最后利用该指针初始化了该对象内元素的值，但考虑到
+     * 通过指定值的方式创建数据区域，该方法可能并不高效，因为先创建了对象，
+     * 接着创建了对象的指针，最后利用该指针初始化了该对象内的值。但考虑到
      * 数据封装的原则，牺牲了性能。
      *
      * @param values 用于创建数据区域的值组。
      * @return 一个新的数据区域。
      */
-    public static BooleanDataArea doubleDataOf(boolean... values) {
+    public static ByteArray byteDataOf(byte... values) {
         Objects.requireNonNull(values, "Expected the parameter {values != null}.");
         int len = values.length;
-        BooleanDataArea data = new BooleanDataArea(len);
-        IBooleanPointer pointer = data.createPointer();
+        ByteArray data = new ByteArray(len);
+        IBytePointer pointer = data.createPointer();
         for (int i = 0; i < len; i++) {
             pointer.set(i, values[i]);
         }
@@ -199,19 +200,19 @@ public class BooleanDataArea implements IDataArea {
     }
 
     /**
-     * 类 {@code BooleanDataPointer} 是 {@code IBooleanPointer}的实现，
-     * 用于表征一个指向 {@code boolean} 型数据区域的指针。
+     * 类 {@code ByteDataPointer} 是 {@code IBytePointer}的实现，
+     * 用于表征一个指向 {@code byte} 型数据区域的指针。
      */
-    private class BooleanDataPointer implements IBooleanPointer {
+    private class ByteDataPointer implements IBytePointer {
         //指向
         private int point;
 
         /**
          * 主构造器，也是唯一的构造器。
          * 该构造器将指针的指向设置为0，
-         * 构造器是私有的，意味着该类不能被外部实例化。
+         * 构造器是私有的，意味着该类不能被外部初始化。
          */
-        private BooleanDataPointer() {
+        private ByteDataPointer() {
             this.point = 0;
         }
 
@@ -219,7 +220,7 @@ public class BooleanDataArea implements IDataArea {
          * {@inheritDoc}
          */
         @Override
-        public boolean get(int index) {
+        public byte get(int index) {
             int i = index + getPoint();
             if (i >= 0 && i < getCapacity()) {
                 return values[i];
@@ -234,7 +235,7 @@ public class BooleanDataArea implements IDataArea {
          * {@inheritDoc}
          */
         @Override
-        public void set(int index, boolean value) {
+        public void set(int index, byte value) {
             int i = index + getPoint();
             if (i >= 0 && i < getCapacity()) {
                 values[i] = value;
@@ -258,14 +259,14 @@ public class BooleanDataArea implements IDataArea {
          */
         @Override
         public int getCapacity() {
-            return BooleanDataArea.this.getCapacity();
+            return ByteArray.this.getCapacity();
         }
 
         /**
          * {@inheritDoc}
          */
         @Override
-        public BooleanDataPointer move(int offset) {
+        public ByteDataPointer move(int offset) {
             this.point = this.point + offset;
             return this;
         }
@@ -274,15 +275,15 @@ public class BooleanDataArea implements IDataArea {
          * {@inheritDoc}
          */
         @Override
-        public BooleanDataPointer copy() {
-            return new BooleanDataPointer().move(getPoint());
+        public ByteDataPointer copy() {
+            return new ByteDataPointer().move(getPoint());
         }
 
         /**
          * {@inheritDoc}
          */
         @Override
-        public BooleanDataPointer reset() {
+        public ByteDataPointer reset() {
             this.point = 0;
             return this;
         }
@@ -294,12 +295,12 @@ public class BooleanDataArea implements IDataArea {
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
-        if (!(obj instanceof BooleanDataArea)) return false;
-        BooleanDataArea that = (BooleanDataArea) obj;
+        if (!(obj instanceof ByteArray)) return false;
+        ByteArray that = (ByteArray) obj;
         if (getCapacity() != that.getCapacity()) {
             return false;
         }
-        IBooleanPointer thatPointer = that.createPointer();
+        IBytePointer thatPointer = that.createPointer();
         for (int i = 0; i < getCapacity(); i++) {
             if (values[i] != thatPointer.get(i)) {
                 return false;
@@ -323,7 +324,7 @@ public class BooleanDataArea implements IDataArea {
      */
     @Override
     public String toString() {
-        return "BooleanDataArea{" +
+        return "ByteDataArea{" +
                 "capacity=" + capacity +
                 ", values=" + Arrays.toString(values) +
                 '}';
