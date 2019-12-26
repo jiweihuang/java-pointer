@@ -36,6 +36,8 @@
  */
 package cn.edu.gxust.jiweihuang.java.pointer;
 
+import cn.edu.gxust.jiweihuang.java.pointer.primitive.IDataPointer;
+
 /**
  * 接口{@code IPointer}是一个标记接口(marker interface)，用于表征c/cpp语言中的 '指针'。
  * 该接口有三个子接口，分别是用于表征数据指针的{@code IDataPointer}、

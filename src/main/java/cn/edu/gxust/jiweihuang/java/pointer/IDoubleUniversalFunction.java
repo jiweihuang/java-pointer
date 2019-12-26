@@ -36,6 +36,8 @@
  */
 package cn.edu.gxust.jiweihuang.java.pointer;
 
+import cn.edu.gxust.jiweihuang.java.pointer.primitive.IDoublePointer;
+
 /**
  * 接口 {@code IDoubleUniversalFunction} 用于表征通用{@code double}型函数指针。
  * <p>

@@ -34,7 +34,9 @@
  * SOFTWARE.
  *
  */
-package cn.edu.gxust.jiweihuang.java.pointer;
+package cn.edu.gxust.jiweihuang.java.pointer.primitive;
+
+import cn.edu.gxust.jiweihuang.java.pointer.IPointer;
 
 /**
  * 接口 {@code IDataPointer} 用于表征指向一块数据区域（内部实现为指定类型的数组）的指针。<p>

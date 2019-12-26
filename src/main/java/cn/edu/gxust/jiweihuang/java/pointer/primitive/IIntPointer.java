@@ -34,9 +34,10 @@
  * SOFTWARE.
  *
  */
-package cn.edu.gxust.jiweihuang.java.pointer;
+package cn.edu.gxust.jiweihuang.java.pointer.primitive;
+
 /**
- * 接口 {@code ILongPointer} 用于表征一个指向 {@code long} 型数据区域的指针。
+ * 接口 {@code IIntPointer} 用于表征一个指向 {@code int} 型数据区域的指针。
  * <p>
  * Development status: Release    # Developing <p>
  * Completion date: 20191022 <p>
@@ -47,14 +48,14 @@ package cn.edu.gxust.jiweihuang.java.pointer;
  * @see IDataPointer
  * @since 20191020
  */
-public interface ILongPointer extends IDataPointer {
+public interface IIntPointer extends IDataPointer {
     /**
      * 获取指定索引处的数据。
      *
      * @param index 指定的索引。
      * @return 指定索引处的数据。
      */
-    long get(int index);
+    int get(int index);
 
     /**
      * 获取指针指向处的数据。
@@ -62,7 +63,7 @@ public interface ILongPointer extends IDataPointer {
      *
      * @return 指针指向处的数据。
      */
-    default long get() {
+    default int get() {
         return get(0);
     }
 
@@ -72,7 +73,7 @@ public interface ILongPointer extends IDataPointer {
      * @param index 指定的索引
      * @param value 需要设置的值。
      */
-    void set(int index, long value);
+    void set(int index, int value);
 
     /**
      * 设置指针指向处的数据。
@@ -80,7 +81,7 @@ public interface ILongPointer extends IDataPointer {
      *
      * @param value 需要设置的值。
      */
-    default void set(long value) {
+    default void set(int value) {
         set(0, value);
     }
 }

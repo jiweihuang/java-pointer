@@ -31,9 +31,9 @@
  */
 package cn.edu.gxust.jiweihuang.java.pointer.cminpack;
 
-import cn.edu.gxust.jiweihuang.java.pointer.IDoublePointer;
+import cn.edu.gxust.jiweihuang.java.pointer.primitive.IDoublePointer;
 import cn.edu.gxust.jiweihuang.java.pointer.IFunctionPointer;
-import cn.edu.gxust.jiweihuang.java.pointer.IIntPointer;
+import cn.edu.gxust.jiweihuang.java.pointer.primitive.IIntPointer;
 import cn.edu.gxust.jiweihuang.java.pointer.IPointer;
 
 import static java.lang.Math.*;

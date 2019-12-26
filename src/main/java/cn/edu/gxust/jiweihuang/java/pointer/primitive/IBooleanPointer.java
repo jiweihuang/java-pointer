@@ -34,7 +34,7 @@
  * SOFTWARE.
  *
  */
-package cn.edu.gxust.jiweihuang.java.pointer;
+package cn.edu.gxust.jiweihuang.java.pointer.primitive;
 
 /**
  * 接口 {@code IBooleanPointer} 用于表征一个指向 {@code boolean} 型数据区域的指针。

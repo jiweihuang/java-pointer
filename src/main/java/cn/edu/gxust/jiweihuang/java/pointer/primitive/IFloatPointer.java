@@ -34,10 +34,9 @@
  * SOFTWARE.
  *
  */
-package cn.edu.gxust.jiweihuang.java.pointer;
-
+package cn.edu.gxust.jiweihuang.java.pointer.primitive;
 /**
- * 接口 {@code IShortPointer} 用于表征一个指向{@code short} 型数据区域的指针。
+ * 接口 {@code IFloatPointer} 用于表征一个指向 {@code float}型数据区域的指针。
  * <p>
  * Development status: Release    # Developing <p>
  * Completion date: 20191022 <p>
@@ -48,14 +47,14 @@ package cn.edu.gxust.jiweihuang.java.pointer;
  * @see IDataPointer
  * @since 20191020
  */
-public interface IShortPointer extends IDataPointer {
+public interface IFloatPointer extends IDataPointer {
     /**
      * 获取指定索引处的数据。
      *
      * @param index 指定的索引。
      * @return 指定索引处的数据。
      */
-    short get(int index);
+    float get(int index);
 
     /**
      * 获取指针指向处的数据。
@@ -63,7 +62,7 @@ public interface IShortPointer extends IDataPointer {
      *
      * @return 指针指向处的数据。
      */
-    default short get() {
+    default float get() {
         return get(0);
     }
 
@@ -73,7 +72,7 @@ public interface IShortPointer extends IDataPointer {
      * @param index 指定的索引
      * @param value 需要设置的值。
      */
-    void set(int index, short value);
+    void set(int index, float value);
 
     /**
      * 设置指针指向处的数据。
@@ -81,7 +80,7 @@ public interface IShortPointer extends IDataPointer {
      *
      * @param value 需要设置的值。
      */
-    default void set(short value) {
+    default void set(float value) {
         set(0, value);
     }
 }

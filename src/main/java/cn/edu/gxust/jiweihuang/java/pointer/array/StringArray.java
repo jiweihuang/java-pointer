@@ -34,42 +34,46 @@
  * SOFTWARE.
  *
  */
-package cn.edu.gxust.jiweihuang.java.pointer;
+package cn.edu.gxust.jiweihuang.java.pointer.array;
+
+import cn.edu.gxust.jiweihuang.java.pointer.IArray;
+import cn.edu.gxust.jiweihuang.java.pointer.IFunctionPointer;
+import cn.edu.gxust.jiweihuang.java.pointer.primitive.IStringPointer;
 
 import java.util.Arrays;
 import java.util.Objects;
 
 /**
- * 类 {@code DoubleDataArea} 用于表征一块 {@code double} 型数据区域。
+ * 类 {@code StringDataArea} 用于表征一块 {@code String} 型数据区域。
  * <p>
  * Development status: Release    # Developing <p>
  * Completion date: 20191020 <p>
- * Test status: Finished    # Missing, Finished <p>
+ * Test status: Missing    # None, Finished <p>
  * Doc status: Finished    # Missing <p>
  *
  * @author JiweiHuang
  * @since 20191020
  */
-public class DoubleArray implements IArray {
+public class StringArray implements IArray {
 
     //数据区域的容量
     private final int capacity;
 
     //数据区域的存储
-    private final double[] values;
+    private final String[] values;
 
     /**
      * 主构造函数，通过指定数据区域的容量创建数据区域对象，
-     * 并将数据区域内所有元素的值设置为 {@code 0}。
+     * 并将数据区域内所有元素的值设置为 {@code null}。
      * <p>
      * 注意：参数 {@code capacity}必须大于等于{@code 0}，否则，抛出
      * {@code java.lang.NegativeArraySizeException} 异常。
      *
      * @param capacity 数据区域的容量
      */
-    public DoubleArray(final int capacity) {
+    public StringArray(final int capacity) {
         this.capacity = capacity; //必须大于等于0
-        this.values = new double[capacity];
+        this.values = new String[capacity];
     }
 
     /**
@@ -82,7 +86,7 @@ public class DoubleArray implements IArray {
      * @param capacity 数据区域的容量。
      * @param value    初始化的数据区域的值。
      */
-    public DoubleArray(final int capacity, final double value) {
+    public StringArray(final int capacity, String value) {
         this(capacity);
         for (int i = 0; i < capacity; i++) {
             this.values[i] = value;
@@ -96,7 +100,7 @@ public class DoubleArray implements IArray {
      * @param capacity     数据区域的容量。
      * @param initFunction 用于初始化数据区域内元素值的函数指针。
      */
-    public DoubleArray(final int capacity, final IDoubleDataInitFunction initFunction) {
+    public StringArray(final int capacity, IStringDataInitFunction initFunction) {
         this(capacity);
         for (int i = 0; i < capacity; i++) {
             this.values[i] = initFunction.call(i);
@@ -109,14 +113,14 @@ public class DoubleArray implements IArray {
      * 函数的参数 {@code index} 表示数据区域的索引，
      * 函数返回值为数据区域内相应索引的初始化值。
      */
-    public interface IDoubleDataInitFunction extends IFunctionPointer {
+    public interface IStringDataInitFunction extends IFunctionPointer {
         /**
          * 用于初始化数据区域内元素值的函数。
          *
          * @param index 数据区域的索引
          * @return 数据区域的初始化值
          */
-        double call(int index);
+        String call(int index);
     }
 
     /**
@@ -131,9 +135,9 @@ public class DoubleArray implements IArray {
      * {@inheritDoc}
      */
     @Override
-    public DoubleArray reset() {
+    public StringArray reset() {
         for (int i = 0; i < capacity; i++) {
-            this.values[i] = 0.;
+            this.values[i] = null;
         }
         return this;
     }
@@ -144,7 +148,7 @@ public class DoubleArray implements IArray {
      * @param value 用于重置数据区域的值。
      * @return 值被重置后的数据区域对象
      */
-    public DoubleArray reset(final double value) {
+    public StringArray reset(String value) {
         for (int i = 0; i < capacity; i++) {
             this.values[i] = value;
         }
@@ -157,7 +161,7 @@ public class DoubleArray implements IArray {
      * @param initFunction 用于重置数据区域值的函数指针。
      * @return 值被重置后的数据区域对象
      */
-    public DoubleArray reset(IDoubleDataInitFunction initFunction) {
+    public StringArray reset(IStringDataInitFunction initFunction) {
         for (int i = 0; i < capacity; i++) {
             this.values[i] = initFunction.call(i);
         }
@@ -168,16 +172,16 @@ public class DoubleArray implements IArray {
      * {@inheritDoc}
      */
     @Override
-    public DoubleArray copy(int from, int to) {
-        return doubleDataOf(Arrays.copyOfRange(this.values, from, to));
+    public StringArray copy(int from, int to) {
+        return stringDataOf(Arrays.copyOfRange(this.values, from, to));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public IDoublePointer createPointer() {
-        return new DoubleDataPointer();
+    public IStringPointer createPointer() {
+        return new StringDataPointer();
     }
 
     /**
@@ -188,11 +192,11 @@ public class DoubleArray implements IArray {
      * @param values 用于创建数据区域的值组。
      * @return 一个新的数据区域。
      */
-    public static DoubleArray doubleDataOf(double... values) {
+    public static StringArray stringDataOf(String... values) {
         Objects.requireNonNull(values, "Expected the parameter {values != null}.");
         int len = values.length;
-        DoubleArray data = new DoubleArray(len);
-        IDoublePointer pointer = data.createPointer();
+        StringArray data = new StringArray(len);
+        IStringPointer pointer = data.createPointer();
         for (int i = 0; i < len; i++) {
             pointer.set(i, values[i]);
         }
@@ -200,10 +204,11 @@ public class DoubleArray implements IArray {
     }
 
     /**
-     * 类 {@code DoubleDataPointer} 是 {@code IDoublePointer}的实现，
-     * 用于表征一个指向 {@code double} 型数据区域的指针。
+     * 类 {@code StringDataPointer} 是 {@code IStringPointer}的实现，
+     * 用于表征一个指向 {@code String} 型数据区域的指针。
      */
-    private class DoubleDataPointer implements IDoublePointer {
+    private class StringDataPointer implements IStringPointer {
+
         //指向
         private int point;
 
@@ -212,7 +217,7 @@ public class DoubleArray implements IArray {
          * 该构造器将指针的指向设置为0，
          * 构造器是私有的，意味着该类不能被外部初始化。
          */
-        private DoubleDataPointer() {
+        private StringDataPointer() {
             this.point = 0;
         }
 
@@ -220,7 +225,7 @@ public class DoubleArray implements IArray {
          * {@inheritDoc}
          */
         @Override
-        public double get(int index) {
+        public String get(int index) {
             int i = index + getPoint();
             if (i >= 0 && i < getCapacity()) {
                 return values[i];
@@ -235,7 +240,7 @@ public class DoubleArray implements IArray {
          * {@inheritDoc}
          */
         @Override
-        public void set(int index, double value) {
+        public void set(int index, String value) {
             int i = index + getPoint();
             if (i >= 0 && i < getCapacity()) {
                 values[i] = value;
@@ -259,14 +264,14 @@ public class DoubleArray implements IArray {
          */
         @Override
         public int getCapacity() {
-            return DoubleArray.this.getCapacity();
+            return StringArray.this.getCapacity();
         }
 
         /**
          * {@inheritDoc}
          */
         @Override
-        public DoubleDataPointer move(int offset) {
+        public StringDataPointer move(int offset) {
             this.point = this.point + offset;
             return this;
         }
@@ -275,15 +280,15 @@ public class DoubleArray implements IArray {
          * {@inheritDoc}
          */
         @Override
-        public DoubleDataPointer copy() {
-            return new DoubleDataPointer().move(getPoint());
+        public StringDataPointer copy() {
+            return new StringDataPointer().move(getPoint());
         }
 
         /**
          * {@inheritDoc}
          */
         @Override
-        public DoubleDataPointer reset() {
+        public StringDataPointer reset() {
             this.point = 0;
             return this;
         }
@@ -295,12 +300,12 @@ public class DoubleArray implements IArray {
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
-        if (!(obj instanceof DoubleArray)) return false;
-        DoubleArray that = (DoubleArray) obj;
+        if (!(obj instanceof StringArray)) return false;
+        StringArray that = (StringArray) obj;
         if (getCapacity() != that.getCapacity()) {
             return false;
         }
-        IDoublePointer thatPointer = that.createPointer();
+        IStringPointer thatPointer = that.createPointer();
         for (int i = 0; i < getCapacity(); i++) {
             if (values[i] != thatPointer.get(i)) {
                 return false;
@@ -324,7 +329,7 @@ public class DoubleArray implements IArray {
      */
     @Override
     public String toString() {
-        return "DoubleDataArea{" +
+        return "StringDataArea{" +
                 "capacity=" + capacity +
                 ", values=" + Arrays.toString(values) +
                 '}';

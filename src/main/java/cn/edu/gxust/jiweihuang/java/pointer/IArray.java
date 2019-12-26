@@ -36,6 +36,8 @@
  */
 package cn.edu.gxust.jiweihuang.java.pointer;
 
+import cn.edu.gxust.jiweihuang.java.pointer.primitive.IDataPointer;
+
 /**
  * 接口 {@code IDataArea} 是用于表征一块数据区域的基接口。
  * <p>

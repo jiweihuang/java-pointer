@@ -34,10 +34,10 @@
  * SOFTWARE.
  *
  */
-package cn.edu.gxust.jiweihuang.java.pointer;
+package cn.edu.gxust.jiweihuang.java.pointer.primitive;
 
 /**
- * 接口 {@code IIntPointer} 用于表征一个指向 {@code int} 型数据区域的指针。
+ * 接口 {@code IDoublePointer} 用于表征一个指向 {@code double} 型数据区域的指针。
  * <p>
  * Development status: Release    # Developing <p>
  * Completion date: 20191022 <p>
@@ -48,14 +48,14 @@ package cn.edu.gxust.jiweihuang.java.pointer;
  * @see IDataPointer
  * @since 20191020
  */
-public interface IIntPointer extends IDataPointer {
+public interface IDoublePointer extends IDataPointer {
     /**
      * 获取指定索引处的数据。
      *
      * @param index 指定的索引。
      * @return 指定索引处的数据。
      */
-    int get(int index);
+    double get(int index);
 
     /**
      * 获取指针指向处的数据。
@@ -63,7 +63,7 @@ public interface IIntPointer extends IDataPointer {
      *
      * @return 指针指向处的数据。
      */
-    default int get() {
+    default double get() {
         return get(0);
     }
 
@@ -73,7 +73,7 @@ public interface IIntPointer extends IDataPointer {
      * @param index 指定的索引
      * @param value 需要设置的值。
      */
-    void set(int index, int value);
+    void set(int index, double value);
 
     /**
      * 设置指针指向处的数据。
@@ -81,7 +81,7 @@ public interface IIntPointer extends IDataPointer {
      *
      * @param value 需要设置的值。
      */
-    default void set(int value) {
+    default void set(double value) {
         set(0, value);
     }
 }

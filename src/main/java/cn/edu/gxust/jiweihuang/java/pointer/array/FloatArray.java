@@ -34,13 +34,17 @@
  * SOFTWARE.
  *
  */
-package cn.edu.gxust.jiweihuang.java.pointer;
+package cn.edu.gxust.jiweihuang.java.pointer.array;
+
+import cn.edu.gxust.jiweihuang.java.pointer.IArray;
+import cn.edu.gxust.jiweihuang.java.pointer.primitive.IFloatPointer;
+import cn.edu.gxust.jiweihuang.java.pointer.IFunctionPointer;
 
 import java.util.Arrays;
 import java.util.Objects;
 
 /**
- * 类 {@code ByteDataArea} 用于表征一块 {@code byte} 型数据区域。
+ * 类 {@code FloatDataArea} 用于表征一块 {@code float} 型数据区域。
  * <p>
  * Development status: Release    # Developing <p>
  * Completion date: 20191020 <p>
@@ -50,13 +54,14 @@ import java.util.Objects;
  * @author JiweiHuang
  * @since 20191020
  */
-public class ByteArray implements IArray {
+public class FloatArray implements IArray {
+
 
     //数据区域的容量
     private final int capacity;
 
     //数据区域的存储
-    private final byte[] values;
+    private final float[] values;
 
     /**
      * 主构造函数，通过指定数据区域的容量创建数据区域对象，
@@ -67,9 +72,9 @@ public class ByteArray implements IArray {
      *
      * @param capacity 数据区域的容量
      */
-    public ByteArray(final int capacity) {
-        this.capacity = capacity;
-        this.values = new byte[capacity];
+    public FloatArray(final int capacity) {
+        this.capacity = capacity; //必须大于等于0
+        this.values = new float[capacity];
     }
 
     /**
@@ -82,7 +87,7 @@ public class ByteArray implements IArray {
      * @param capacity 数据区域的容量。
      * @param value    初始化的数据区域的值。
      */
-    public ByteArray(final int capacity, final byte value) {
+    public FloatArray(final int capacity, float value) {
         this(capacity);
         for (int i = 0; i < capacity; i++) {
             this.values[i] = value;
@@ -96,7 +101,7 @@ public class ByteArray implements IArray {
      * @param capacity     数据区域的容量。
      * @param initFunction 用于初始化数据区域内元素值的函数指针。
      */
-    public ByteArray(final int capacity, final IByteDataInitFunction initFunction) {
+    public FloatArray(final int capacity, IFloatDataInitFunction initFunction) {
         this(capacity);
         for (int i = 0; i < capacity; i++) {
             this.values[i] = initFunction.call(i);
@@ -109,14 +114,14 @@ public class ByteArray implements IArray {
      * 函数的参数 {@code index} 表示数据区域的索引，
      * 函数返回值为数据区域内相应索引的初始化值。
      */
-    public interface IByteDataInitFunction extends IFunctionPointer {
+    public interface IFloatDataInitFunction extends IFunctionPointer {
         /**
          * 用于初始化数据区域内元素值的函数。
          *
          * @param index 数据区域的索引
          * @return 数据区域的初始化值
          */
-        byte call(final int index);
+        float call(int index);
     }
 
     /**
@@ -131,7 +136,7 @@ public class ByteArray implements IArray {
      * {@inheritDoc}
      */
     @Override
-    public ByteArray reset() {
+    public FloatArray reset() {
         for (int i = 0; i < capacity; i++) {
             this.values[i] = 0;
         }
@@ -144,7 +149,7 @@ public class ByteArray implements IArray {
      * @param value 用于重置数据区域的值。
      * @return 值被重置后的数据区域对象
      */
-    public ByteArray reset(final byte value) {
+    public FloatArray reset(float value) {
         for (int i = 0; i < capacity; i++) {
             this.values[i] = value;
         }
@@ -157,7 +162,7 @@ public class ByteArray implements IArray {
      * @param initFunction 用于重置数据区域值的函数指针。
      * @return 值被重置后的数据区域对象
      */
-    public ByteArray reset(IByteDataInitFunction initFunction) {
+    public FloatArray reset(IFloatDataInitFunction initFunction) {
         for (int i = 0; i < capacity; i++) {
             this.values[i] = initFunction.call(i);
         }
@@ -168,16 +173,16 @@ public class ByteArray implements IArray {
      * {@inheritDoc}
      */
     @Override
-    public ByteArray copy(int from, int to) {
-        return byteDataOf(Arrays.copyOfRange(this.values, from, to));
+    public FloatArray copy(int from, int to) {
+        return floatDataOf(Arrays.copyOfRange(this.values, from, to));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public IBytePointer createPointer() {
-        return new ByteDataPointer();
+    public IFloatPointer createPointer() {
+        return new FloatDataPointer();
     }
 
     /**
@@ -188,11 +193,11 @@ public class ByteArray implements IArray {
      * @param values 用于创建数据区域的值组。
      * @return 一个新的数据区域。
      */
-    public static ByteArray byteDataOf(byte... values) {
+    public static FloatArray floatDataOf(float... values) {
         Objects.requireNonNull(values, "Expected the parameter {values != null}.");
         int len = values.length;
-        ByteArray data = new ByteArray(len);
-        IBytePointer pointer = data.createPointer();
+        FloatArray data = new FloatArray(len);
+        IFloatPointer pointer = data.createPointer();
         for (int i = 0; i < len; i++) {
             pointer.set(i, values[i]);
         }
@@ -200,10 +205,10 @@ public class ByteArray implements IArray {
     }
 
     /**
-     * 类 {@code ByteDataPointer} 是 {@code IBytePointer}的实现，
-     * 用于表征一个指向 {@code byte} 型数据区域的指针。
+     * 类 {@code FloatDataPointer} 是 {@code IFloatPointer}的实现，
+     * 用于表征一个指向 {@code float} 型数据区域的指针。
      */
-    private class ByteDataPointer implements IBytePointer {
+    private class FloatDataPointer implements IFloatPointer {
         //指向
         private int point;
 
@@ -212,15 +217,12 @@ public class ByteArray implements IArray {
          * 该构造器将指针的指向设置为0，
          * 构造器是私有的，意味着该类不能被外部初始化。
          */
-        private ByteDataPointer() {
+        private FloatDataPointer() {
             this.point = 0;
         }
 
-        /**
-         * {@inheritDoc}
-         */
         @Override
-        public byte get(int index) {
+        public float get(int index) {
             int i = index + getPoint();
             if (i >= 0 && i < getCapacity()) {
                 return values[i];
@@ -231,11 +233,8 @@ public class ByteArray implements IArray {
             }
         }
 
-        /**
-         * {@inheritDoc}
-         */
         @Override
-        public void set(int index, byte value) {
+        public void set(int index, float value) {
             int i = index + getPoint();
             if (i >= 0 && i < getCapacity()) {
                 values[i] = value;
@@ -259,14 +258,14 @@ public class ByteArray implements IArray {
          */
         @Override
         public int getCapacity() {
-            return ByteArray.this.getCapacity();
+            return FloatArray.this.getCapacity();
         }
 
         /**
          * {@inheritDoc}
          */
         @Override
-        public ByteDataPointer move(int offset) {
+        public FloatDataPointer move(int offset) {
             this.point = this.point + offset;
             return this;
         }
@@ -275,15 +274,15 @@ public class ByteArray implements IArray {
          * {@inheritDoc}
          */
         @Override
-        public ByteDataPointer copy() {
-            return new ByteDataPointer().move(getPoint());
+        public FloatDataPointer copy() {
+            return new FloatDataPointer().move(getPoint());
         }
 
         /**
          * {@inheritDoc}
          */
         @Override
-        public ByteDataPointer reset() {
+        public FloatDataPointer reset() {
             this.point = 0;
             return this;
         }
@@ -295,12 +294,12 @@ public class ByteArray implements IArray {
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
-        if (!(obj instanceof ByteArray)) return false;
-        ByteArray that = (ByteArray) obj;
+        if (!(obj instanceof FloatArray)) return false;
+        FloatArray that = (FloatArray) obj;
         if (getCapacity() != that.getCapacity()) {
             return false;
         }
-        IBytePointer thatPointer = that.createPointer();
+        IFloatPointer thatPointer = that.createPointer();
         for (int i = 0; i < getCapacity(); i++) {
             if (values[i] != thatPointer.get(i)) {
                 return false;
@@ -324,7 +323,7 @@ public class ByteArray implements IArray {
      */
     @Override
     public String toString() {
-        return "ByteDataArea{" +
+        return "FloatDataArea{" +
                 "capacity=" + capacity +
                 ", values=" + Arrays.toString(values) +
                 '}';

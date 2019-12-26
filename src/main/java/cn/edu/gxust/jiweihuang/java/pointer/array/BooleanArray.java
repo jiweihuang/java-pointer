@@ -34,13 +34,17 @@
  * SOFTWARE.
  *
  */
-package cn.edu.gxust.jiweihuang.java.pointer;
+package cn.edu.gxust.jiweihuang.java.pointer.array;
+
+import cn.edu.gxust.jiweihuang.java.pointer.IArray;
+import cn.edu.gxust.jiweihuang.java.pointer.primitive.IBooleanPointer;
+import cn.edu.gxust.jiweihuang.java.pointer.IFunctionPointer;
 
 import java.util.Arrays;
 import java.util.Objects;
 
 /**
- * 类 {@code ShortDataArea} 用于表征一块 {@code short} 型数据区域。
+ * 类 {@code BooleanDataArea} 用于表征一块 {@code boolean} 型数据区域。
  * <p>
  * Development status: Release    # Developing <p>
  * Completion date: 20191020 <p>
@@ -50,25 +54,26 @@ import java.util.Objects;
  * @author JiweiHuang
  * @since 20191020
  */
-public class ShortArray implements IArray {
+public class BooleanArray implements IArray {
+
     //数据区域的容量
     private final int capacity;
 
     //数据区域的存储
-    private final short[] values;
+    private final boolean[] values;
 
     /**
      * 主构造函数，通过指定数据区域的容量创建数据区域对象，
-     * 并将数据区域内所有元素的值设置为 {@code 0}。
+     * 并将数据区域内所有元素的值设置为 {@code false}。
      * <p>
      * 注意：参数 {@code capacity}必须大于等于{@code 0}，否则，抛出
      * {@code java.lang.NegativeArraySizeException} 异常。
      *
      * @param capacity 数据区域的容量
      */
-    public ShortArray(final int capacity) {
+    public BooleanArray(final int capacity) {
         this.capacity = capacity; //必须大于等于0
-        this.values = new short[capacity];
+        this.values = new boolean[capacity];
     }
 
     /**
@@ -79,9 +84,9 @@ public class ShortArray implements IArray {
      * {@code java.lang.NegativeArraySizeException} 异常。
      *
      * @param capacity 数据区域的容量。
-     * @param value    初始化的数据区域的值。
+     * @param value    用于初始化数据区域的值。
      */
-    public ShortArray(final int capacity, short value) {
+    public BooleanArray(final int capacity, boolean value) {
         this(capacity);
         for (int i = 0; i < capacity; i++) {
             this.values[i] = value;
@@ -95,7 +100,7 @@ public class ShortArray implements IArray {
      * @param capacity     数据区域的容量。
      * @param initFunction 用于初始化数据区域内元素值的函数指针。
      */
-    public ShortArray(final int capacity, IShortDataInitFunction initFunction) {
+    public BooleanArray(final int capacity, IBooleanDataInitFunction initFunction) {
         this(capacity);
         for (int i = 0; i < capacity; i++) {
             this.values[i] = initFunction.call(i);
@@ -104,29 +109,35 @@ public class ShortArray implements IArray {
 
     /**
      * 一个函数指针，用于初始化数据区域内元素值。
-     * 根据预定，函数指针所指向的函数名为 {@code call},
+     * 根据约定，函数指针所指向的函数名为 {@code call},
      * 函数的参数 {@code index} 表示数据区域的索引，
      * 函数返回值为数据区域内相应索引的初始化值。
      */
-    public interface IShortDataInitFunction extends IFunctionPointer {
+    public interface IBooleanDataInitFunction extends IFunctionPointer {
         /**
          * 用于初始化数据区域内元素值的函数。
          *
          * @param index 数据区域的索引
          * @return 数据区域的初始化值
          */
-        short call(int index);
+        boolean call(int index);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getCapacity() {
         return capacity;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public ShortArray reset() {
+    public BooleanArray reset() {
         for (int i = 0; i < capacity; i++) {
-            this.values[i] = 0;
+            this.values[i] = false;
         }
         return this;
     }
@@ -137,7 +148,7 @@ public class ShortArray implements IArray {
      * @param value 用于重置数据区域的值。
      * @return 值被重置后的数据区域对象
      */
-    public ShortArray reset(short value) {
+    public BooleanArray reset(boolean value) {
         for (int i = 0; i < capacity; i++) {
             this.values[i] = value;
         }
@@ -150,36 +161,42 @@ public class ShortArray implements IArray {
      * @param initFunction 用于重置数据区域值的函数指针。
      * @return 值被重置后的数据区域对象
      */
-    public ShortArray reset(IShortDataInitFunction initFunction) {
+    public BooleanArray reset(IBooleanDataInitFunction initFunction) {
         for (int i = 0; i < capacity; i++) {
             this.values[i] = initFunction.call(i);
         }
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public ShortArray copy(int from, int to) {
-        return shortDataOf(Arrays.copyOfRange(this.values, from, to));
-    }
-
-    @Override
-    public IShortPointer createPointer() {
-        return new ShortDataPointer();
+    public BooleanArray copy(int from, int to) {
+        return doubleDataOf(Arrays.copyOfRange(this.values, from, to));
     }
 
     /**
-     * 通过指定值的方式创建数据区域，该方法可能并不高效，因为先创建了对象，
-     * 接着创建了对象的指针，最后利用该指针初始化了该对象内的值。但考虑到
+     * {@inheritDoc}
+     */
+    @Override
+    public IBooleanPointer createPointer() {
+        return new BooleanDataPointer();
+    }
+
+    /**
+     * 通过指定值组的方式创建数据区域，该方法可能并不高效，因为先创建了对象，
+     * 接着创建了对象的指针，最后利用该指针初始化了该对象内元素的值，但考虑到
      * 数据封装的原则，牺牲了性能。
      *
      * @param values 用于创建数据区域的值组。
      * @return 一个新的数据区域。
      */
-    public static ShortArray shortDataOf(short... values) {
+    public static BooleanArray doubleDataOf(boolean... values) {
         Objects.requireNonNull(values, "Expected the parameter {values != null}.");
         int len = values.length;
-        ShortArray data = new ShortArray(len);
-        IShortPointer pointer = data.createPointer();
+        BooleanArray data = new BooleanArray(len);
+        IBooleanPointer pointer = data.createPointer();
         for (int i = 0; i < len; i++) {
             pointer.set(i, values[i]);
         }
@@ -187,20 +204,19 @@ public class ShortArray implements IArray {
     }
 
     /**
-     * 类 {@code ShortDataPointer} 是 {@code IShortPointer}的实现，
-     * 用于表征一个指向 {@code short} 型数据区域的指针。
+     * 类 {@code BooleanDataPointer} 是 {@code IBooleanPointer}的实现，
+     * 用于表征一个指向 {@code boolean} 型数据区域的指针。
      */
-    private class ShortDataPointer implements IShortPointer {
-
+    private class BooleanDataPointer implements IBooleanPointer {
         //指向
         private int point;
 
         /**
          * 主构造器，也是唯一的构造器。
          * 该构造器将指针的指向设置为0，
-         * 构造器是私有的，意味着该类不能被外部初始化。
+         * 构造器是私有的，意味着该类不能被外部实例化。
          */
-        private ShortDataPointer() {
+        private BooleanDataPointer() {
             this.point = 0;
         }
 
@@ -208,7 +224,7 @@ public class ShortArray implements IArray {
          * {@inheritDoc}
          */
         @Override
-        public short get(int index) {
+        public boolean get(int index) {
             int i = index + getPoint();
             if (i >= 0 && i < getCapacity()) {
                 return values[i];
@@ -223,7 +239,7 @@ public class ShortArray implements IArray {
          * {@inheritDoc}
          */
         @Override
-        public void set(int index, short value) {
+        public void set(int index, boolean value) {
             int i = index + getPoint();
             if (i >= 0 && i < getCapacity()) {
                 values[i] = value;
@@ -247,14 +263,14 @@ public class ShortArray implements IArray {
          */
         @Override
         public int getCapacity() {
-            return ShortArray.this.getCapacity();
+            return BooleanArray.this.getCapacity();
         }
 
         /**
          * {@inheritDoc}
          */
         @Override
-        public ShortDataPointer move(int offset) {
+        public BooleanDataPointer move(int offset) {
             this.point = this.point + offset;
             return this;
         }
@@ -263,15 +279,15 @@ public class ShortArray implements IArray {
          * {@inheritDoc}
          */
         @Override
-        public ShortDataPointer copy() {
-            return new ShortDataPointer().move(getPoint());
+        public BooleanDataPointer copy() {
+            return new BooleanDataPointer().move(getPoint());
         }
 
         /**
          * {@inheritDoc}
          */
         @Override
-        public ShortDataPointer reset() {
+        public BooleanDataPointer reset() {
             this.point = 0;
             return this;
         }
@@ -283,12 +299,12 @@ public class ShortArray implements IArray {
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
-        if (!(obj instanceof ShortArray)) return false;
-        ShortArray that = (ShortArray) obj;
+        if (!(obj instanceof BooleanArray)) return false;
+        BooleanArray that = (BooleanArray) obj;
         if (getCapacity() != that.getCapacity()) {
             return false;
         }
-        IShortPointer thatPointer = that.createPointer();
+        IBooleanPointer thatPointer = that.createPointer();
         for (int i = 0; i < getCapacity(); i++) {
             if (values[i] != thatPointer.get(i)) {
                 return false;
@@ -312,7 +328,7 @@ public class ShortArray implements IArray {
      */
     @Override
     public String toString() {
-        return "ShortDataArea{" +
+        return "BooleanDataArea{" +
                 "capacity=" + capacity +
                 ", values=" + Arrays.toString(values) +
                 '}';

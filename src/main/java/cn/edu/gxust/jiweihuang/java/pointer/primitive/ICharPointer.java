@@ -34,7 +34,7 @@
  * SOFTWARE.
  *
  */
-package cn.edu.gxust.jiweihuang.java.pointer;
+package cn.edu.gxust.jiweihuang.java.pointer.primitive;
 
 /**
  * 接口 {@code ICharPointer} 用于表征一个指向 {@code char} 数据区域的指针。

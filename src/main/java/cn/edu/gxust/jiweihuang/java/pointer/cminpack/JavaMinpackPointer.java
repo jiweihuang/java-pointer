@@ -34,7 +34,12 @@
  * SOFTWARE.
  *
  */
-package cn.edu.gxust.jiweihuang.java.pointer;
+package cn.edu.gxust.jiweihuang.java.pointer.cminpack;
+
+import cn.edu.gxust.jiweihuang.java.pointer.IFunctionPointer;
+import cn.edu.gxust.jiweihuang.java.pointer.IPointer;
+import cn.edu.gxust.jiweihuang.java.pointer.primitive.IDoublePointer;
+import cn.edu.gxust.jiweihuang.java.pointer.primitive.IIntPointer;
 
 import static java.lang.Math.*;
 

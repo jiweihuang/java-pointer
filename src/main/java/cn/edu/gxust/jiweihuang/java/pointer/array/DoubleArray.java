@@ -34,30 +34,33 @@
  * SOFTWARE.
  *
  */
-package cn.edu.gxust.jiweihuang.java.pointer;
+package cn.edu.gxust.jiweihuang.java.pointer.array;
+
+import cn.edu.gxust.jiweihuang.java.pointer.IArray;
+import cn.edu.gxust.jiweihuang.java.pointer.primitive.IDoublePointer;
+import cn.edu.gxust.jiweihuang.java.pointer.IFunctionPointer;
 
 import java.util.Arrays;
 import java.util.Objects;
 
 /**
- * 类 {@code FloatDataArea} 用于表征一块 {@code float} 型数据区域。
+ * 类 {@code DoubleDataArea} 用于表征一块 {@code double} 型数据区域。
  * <p>
  * Development status: Release    # Developing <p>
  * Completion date: 20191020 <p>
- * Test status: Missing    # None, Finished <p>
+ * Test status: Finished    # Missing, Finished <p>
  * Doc status: Finished    # Missing <p>
  *
  * @author JiweiHuang
  * @since 20191020
  */
-public class FloatArray implements IArray {
-
+public class DoubleArray implements IArray {
 
     //数据区域的容量
     private final int capacity;
 
     //数据区域的存储
-    private final float[] values;
+    private final double[] values;
 
     /**
      * 主构造函数，通过指定数据区域的容量创建数据区域对象，
@@ -68,9 +71,9 @@ public class FloatArray implements IArray {
      *
      * @param capacity 数据区域的容量
      */
-    public FloatArray(final int capacity) {
+    public DoubleArray(final int capacity) {
         this.capacity = capacity; //必须大于等于0
-        this.values = new float[capacity];
+        this.values = new double[capacity];
     }
 
     /**
@@ -83,7 +86,7 @@ public class FloatArray implements IArray {
      * @param capacity 数据区域的容量。
      * @param value    初始化的数据区域的值。
      */
-    public FloatArray(final int capacity, float value) {
+    public DoubleArray(final int capacity, final double value) {
         this(capacity);
         for (int i = 0; i < capacity; i++) {
             this.values[i] = value;
@@ -97,7 +100,7 @@ public class FloatArray implements IArray {
      * @param capacity     数据区域的容量。
      * @param initFunction 用于初始化数据区域内元素值的函数指针。
      */
-    public FloatArray(final int capacity, IFloatDataInitFunction initFunction) {
+    public DoubleArray(final int capacity, final IDoubleDataInitFunction initFunction) {
         this(capacity);
         for (int i = 0; i < capacity; i++) {
             this.values[i] = initFunction.call(i);
@@ -110,14 +113,14 @@ public class FloatArray implements IArray {
      * 函数的参数 {@code index} 表示数据区域的索引，
      * 函数返回值为数据区域内相应索引的初始化值。
      */
-    public interface IFloatDataInitFunction extends IFunctionPointer {
+    public interface IDoubleDataInitFunction extends IFunctionPointer {
         /**
          * 用于初始化数据区域内元素值的函数。
          *
          * @param index 数据区域的索引
          * @return 数据区域的初始化值
          */
-        float call(int index);
+        double call(int index);
     }
 
     /**
@@ -132,9 +135,9 @@ public class FloatArray implements IArray {
      * {@inheritDoc}
      */
     @Override
-    public FloatArray reset() {
+    public DoubleArray reset() {
         for (int i = 0; i < capacity; i++) {
-            this.values[i] = 0;
+            this.values[i] = 0.;
         }
         return this;
     }
@@ -145,7 +148,7 @@ public class FloatArray implements IArray {
      * @param value 用于重置数据区域的值。
      * @return 值被重置后的数据区域对象
      */
-    public FloatArray reset(float value) {
+    public DoubleArray reset(final double value) {
         for (int i = 0; i < capacity; i++) {
             this.values[i] = value;
         }
@@ -158,7 +161,7 @@ public class FloatArray implements IArray {
      * @param initFunction 用于重置数据区域值的函数指针。
      * @return 值被重置后的数据区域对象
      */
-    public FloatArray reset(IFloatDataInitFunction initFunction) {
+    public DoubleArray reset(IDoubleDataInitFunction initFunction) {
         for (int i = 0; i < capacity; i++) {
             this.values[i] = initFunction.call(i);
         }
@@ -169,16 +172,16 @@ public class FloatArray implements IArray {
      * {@inheritDoc}
      */
     @Override
-    public FloatArray copy(int from, int to) {
-        return floatDataOf(Arrays.copyOfRange(this.values, from, to));
+    public DoubleArray copy(int from, int to) {
+        return doubleDataOf(Arrays.copyOfRange(this.values, from, to));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public IFloatPointer createPointer() {
-        return new FloatDataPointer();
+    public IDoublePointer createPointer() {
+        return new DoubleDataPointer();
     }
 
     /**
@@ -189,11 +192,11 @@ public class FloatArray implements IArray {
      * @param values 用于创建数据区域的值组。
      * @return 一个新的数据区域。
      */
-    public static FloatArray floatDataOf(float... values) {
+    public static DoubleArray doubleDataOf(double... values) {
         Objects.requireNonNull(values, "Expected the parameter {values != null}.");
         int len = values.length;
-        FloatArray data = new FloatArray(len);
-        IFloatPointer pointer = data.createPointer();
+        DoubleArray data = new DoubleArray(len);
+        IDoublePointer pointer = data.createPointer();
         for (int i = 0; i < len; i++) {
             pointer.set(i, values[i]);
         }
@@ -201,10 +204,10 @@ public class FloatArray implements IArray {
     }
 
     /**
-     * 类 {@code FloatDataPointer} 是 {@code IFloatPointer}的实现，
-     * 用于表征一个指向 {@code float} 型数据区域的指针。
+     * 类 {@code DoubleDataPointer} 是 {@code IDoublePointer}的实现，
+     * 用于表征一个指向 {@code double} 型数据区域的指针。
      */
-    private class FloatDataPointer implements IFloatPointer {
+    private class DoubleDataPointer implements IDoublePointer {
         //指向
         private int point;
 
@@ -213,12 +216,15 @@ public class FloatArray implements IArray {
          * 该构造器将指针的指向设置为0，
          * 构造器是私有的，意味着该类不能被外部初始化。
          */
-        private FloatDataPointer() {
+        private DoubleDataPointer() {
             this.point = 0;
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
-        public float get(int index) {
+        public double get(int index) {
             int i = index + getPoint();
             if (i >= 0 && i < getCapacity()) {
                 return values[i];
@@ -229,8 +235,11 @@ public class FloatArray implements IArray {
             }
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
-        public void set(int index, float value) {
+        public void set(int index, double value) {
             int i = index + getPoint();
             if (i >= 0 && i < getCapacity()) {
                 values[i] = value;
@@ -254,14 +263,14 @@ public class FloatArray implements IArray {
          */
         @Override
         public int getCapacity() {
-            return FloatArray.this.getCapacity();
+            return DoubleArray.this.getCapacity();
         }
 
         /**
          * {@inheritDoc}
          */
         @Override
-        public FloatDataPointer move(int offset) {
+        public DoubleDataPointer move(int offset) {
             this.point = this.point + offset;
             return this;
         }
@@ -270,15 +279,15 @@ public class FloatArray implements IArray {
          * {@inheritDoc}
          */
         @Override
-        public FloatDataPointer copy() {
-            return new FloatDataPointer().move(getPoint());
+        public DoubleDataPointer copy() {
+            return new DoubleDataPointer().move(getPoint());
         }
 
         /**
          * {@inheritDoc}
          */
         @Override
-        public FloatDataPointer reset() {
+        public DoubleDataPointer reset() {
             this.point = 0;
             return this;
         }
@@ -290,12 +299,12 @@ public class FloatArray implements IArray {
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
-        if (!(obj instanceof FloatArray)) return false;
-        FloatArray that = (FloatArray) obj;
+        if (!(obj instanceof DoubleArray)) return false;
+        DoubleArray that = (DoubleArray) obj;
         if (getCapacity() != that.getCapacity()) {
             return false;
         }
-        IFloatPointer thatPointer = that.createPointer();
+        IDoublePointer thatPointer = that.createPointer();
         for (int i = 0; i < getCapacity(); i++) {
             if (values[i] != thatPointer.get(i)) {
                 return false;
@@ -319,7 +328,7 @@ public class FloatArray implements IArray {
      */
     @Override
     public String toString() {
-        return "FloatDataArea{" +
+        return "DoubleDataArea{" +
                 "capacity=" + capacity +
                 ", values=" + Arrays.toString(values) +
                 '}';

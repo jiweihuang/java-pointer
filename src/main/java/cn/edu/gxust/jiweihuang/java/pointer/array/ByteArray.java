@@ -34,13 +34,17 @@
  * SOFTWARE.
  *
  */
-package cn.edu.gxust.jiweihuang.java.pointer;
+package cn.edu.gxust.jiweihuang.java.pointer.array;
+
+import cn.edu.gxust.jiweihuang.java.pointer.IArray;
+import cn.edu.gxust.jiweihuang.java.pointer.primitive.IBytePointer;
+import cn.edu.gxust.jiweihuang.java.pointer.IFunctionPointer;
 
 import java.util.Arrays;
 import java.util.Objects;
 
 /**
- * 类 {@code CharDataArea} 用于表征一块 {@code char} 型数据区域。
+ * 类 {@code ByteDataArea} 用于表征一块 {@code byte} 型数据区域。
  * <p>
  * Development status: Release    # Developing <p>
  * Completion date: 20191020 <p>
@@ -50,14 +54,13 @@ import java.util.Objects;
  * @author JiweiHuang
  * @since 20191020
  */
-public class CharArray implements IArray {
-
+public class ByteArray implements IArray {
 
     //数据区域的容量
     private final int capacity;
 
     //数据区域的存储
-    private final char[] values;
+    private final byte[] values;
 
     /**
      * 主构造函数，通过指定数据区域的容量创建数据区域对象，
@@ -68,9 +71,9 @@ public class CharArray implements IArray {
      *
      * @param capacity 数据区域的容量
      */
-    public CharArray(final int capacity) {
-        this.capacity = capacity; //必须大于等于0
-        this.values = new char[capacity];
+    public ByteArray(final int capacity) {
+        this.capacity = capacity;
+        this.values = new byte[capacity];
     }
 
     /**
@@ -83,7 +86,7 @@ public class CharArray implements IArray {
      * @param capacity 数据区域的容量。
      * @param value    初始化的数据区域的值。
      */
-    public CharArray(final int capacity, char value) {
+    public ByteArray(final int capacity, final byte value) {
         this(capacity);
         for (int i = 0; i < capacity; i++) {
             this.values[i] = value;
@@ -97,7 +100,7 @@ public class CharArray implements IArray {
      * @param capacity     数据区域的容量。
      * @param initFunction 用于初始化数据区域内元素值的函数指针。
      */
-    public CharArray(final int capacity, ICharDataInitFunction initFunction) {
+    public ByteArray(final int capacity, final IByteDataInitFunction initFunction) {
         this(capacity);
         for (int i = 0; i < capacity; i++) {
             this.values[i] = initFunction.call(i);
@@ -110,14 +113,14 @@ public class CharArray implements IArray {
      * 函数的参数 {@code index} 表示数据区域的索引，
      * 函数返回值为数据区域内相应索引的初始化值。
      */
-    public interface ICharDataInitFunction extends IFunctionPointer {
+    public interface IByteDataInitFunction extends IFunctionPointer {
         /**
          * 用于初始化数据区域内元素值的函数。
          *
          * @param index 数据区域的索引
          * @return 数据区域的初始化值
          */
-        char call(int index);
+        byte call(final int index);
     }
 
     /**
@@ -132,7 +135,7 @@ public class CharArray implements IArray {
      * {@inheritDoc}
      */
     @Override
-    public CharArray reset() {
+    public ByteArray reset() {
         for (int i = 0; i < capacity; i++) {
             this.values[i] = 0;
         }
@@ -145,7 +148,7 @@ public class CharArray implements IArray {
      * @param value 用于重置数据区域的值。
      * @return 值被重置后的数据区域对象
      */
-    public CharArray reset(char value) {
+    public ByteArray reset(final byte value) {
         for (int i = 0; i < capacity; i++) {
             this.values[i] = value;
         }
@@ -158,7 +161,7 @@ public class CharArray implements IArray {
      * @param initFunction 用于重置数据区域值的函数指针。
      * @return 值被重置后的数据区域对象
      */
-    public CharArray reset(ICharDataInitFunction initFunction) {
+    public ByteArray reset(IByteDataInitFunction initFunction) {
         for (int i = 0; i < capacity; i++) {
             this.values[i] = initFunction.call(i);
         }
@@ -169,16 +172,16 @@ public class CharArray implements IArray {
      * {@inheritDoc}
      */
     @Override
-    public CharArray copy(int from, int to) {
-        return charDataOf(Arrays.copyOfRange(this.values, from, to));
+    public ByteArray copy(int from, int to) {
+        return byteDataOf(Arrays.copyOfRange(this.values, from, to));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public ICharPointer createPointer() {
-        return new CharDataPointer();
+    public IBytePointer createPointer() {
+        return new ByteDataPointer();
     }
 
     /**
@@ -189,11 +192,11 @@ public class CharArray implements IArray {
      * @param values 用于创建数据区域的值组。
      * @return 一个新的数据区域。
      */
-    public static CharArray charDataOf(char... values) {
+    public static ByteArray byteDataOf(byte... values) {
         Objects.requireNonNull(values, "Expected the parameter {values != null}.");
         int len = values.length;
-        CharArray data = new CharArray(len);
-        ICharPointer pointer = data.createPointer();
+        ByteArray data = new ByteArray(len);
+        IBytePointer pointer = data.createPointer();
         for (int i = 0; i < len; i++) {
             pointer.set(i, values[i]);
         }
@@ -201,10 +204,10 @@ public class CharArray implements IArray {
     }
 
     /**
-     * 类 {@code CharDataPointer} 是 {@code ICharPointer}的实现，
-     * 用于表征一个指向 {@code char} 型数据区域的指针。
+     * 类 {@code ByteDataPointer} 是 {@code IBytePointer}的实现，
+     * 用于表征一个指向 {@code byte} 型数据区域的指针。
      */
-    private class CharDataPointer implements ICharPointer {
+    private class ByteDataPointer implements IBytePointer {
         //指向
         private int point;
 
@@ -213,12 +216,15 @@ public class CharArray implements IArray {
          * 该构造器将指针的指向设置为0，
          * 构造器是私有的，意味着该类不能被外部初始化。
          */
-        private CharDataPointer() {
+        private ByteDataPointer() {
             this.point = 0;
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
-        public char get(int index) {
+        public byte get(int index) {
             int i = index + getPoint();
             if (i >= 0 && i < getCapacity()) {
                 return values[i];
@@ -233,9 +239,9 @@ public class CharArray implements IArray {
          * {@inheritDoc}
          */
         @Override
-        public void set(int index, char value) {
+        public void set(int index, byte value) {
             int i = index + getPoint();
-            if (i >= 0 && i < CharArray.this.getCapacity()) {
+            if (i >= 0 && i < getCapacity()) {
                 values[i] = value;
             } else {
                 throw new ArrayIndexOutOfBoundsException(String.format(
@@ -257,14 +263,14 @@ public class CharArray implements IArray {
          */
         @Override
         public int getCapacity() {
-            return CharArray.this.getCapacity();
+            return ByteArray.this.getCapacity();
         }
 
         /**
          * {@inheritDoc}
          */
         @Override
-        public CharDataPointer move(int offset) {
+        public ByteDataPointer move(int offset) {
             this.point = this.point + offset;
             return this;
         }
@@ -273,15 +279,15 @@ public class CharArray implements IArray {
          * {@inheritDoc}
          */
         @Override
-        public CharDataPointer copy() {
-            return new CharDataPointer().move(getPoint());
+        public ByteDataPointer copy() {
+            return new ByteDataPointer().move(getPoint());
         }
 
         /**
          * {@inheritDoc}
          */
         @Override
-        public CharDataPointer reset() {
+        public ByteDataPointer reset() {
             this.point = 0;
             return this;
         }
@@ -293,12 +299,12 @@ public class CharArray implements IArray {
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
-        if (!(obj instanceof CharArray)) return false;
-        CharArray that = (CharArray) obj;
+        if (!(obj instanceof ByteArray)) return false;
+        ByteArray that = (ByteArray) obj;
         if (getCapacity() != that.getCapacity()) {
             return false;
         }
-        ICharPointer thatPointer = that.createPointer();
+        IBytePointer thatPointer = that.createPointer();
         for (int i = 0; i < getCapacity(); i++) {
             if (values[i] != thatPointer.get(i)) {
                 return false;
@@ -322,7 +328,7 @@ public class CharArray implements IArray {
      */
     @Override
     public String toString() {
-        return "CharDataArea{" +
+        return "ByteDataArea{" +
                 "capacity=" + capacity +
                 ", values=" + Arrays.toString(values) +
                 '}';
