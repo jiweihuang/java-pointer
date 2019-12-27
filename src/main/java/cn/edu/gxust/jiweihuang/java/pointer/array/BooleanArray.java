@@ -141,7 +141,7 @@ public class BooleanArray {
     }
 
     /**
-     * 重置数组的值至其缺省值。
+     * 重置数组的值至其缺省值{@code false}。
      *
      * @return 元素值重置后的数组。
      */
@@ -166,9 +166,9 @@ public class BooleanArray {
     }
 
     /**
-     * 用一个函数指针重置数组的值。
+     * 用一个boolean数组初始化函数指针重置数组的值。
      *
-     * @param initFunction 用于重置数组值的函数指针。
+     * @param initFunction 用于重置数组值的boolean数组初始化函数指针。
      * @return 值被重置后的数组对象。
      */
     public BooleanArray reset(IBooleanArrayInitFunction initFunction) {
@@ -193,7 +193,9 @@ public class BooleanArray {
     }
 
     /**
-     * 通过拷贝创建一个新的数组对象。
+     * 通过拷贝创建一个新的数组对象。<p>
+     * 注意：参数from应在{@code [0, getCapacity()]}范围内，
+     * 拷贝数据的索引范围为[from,getCapacity()]。
      *
      * @param from 所需要拷贝数组对象的起始索引，（包含该点）。
      * @return 一个新的数组对象。
@@ -203,7 +205,8 @@ public class BooleanArray {
     }
 
     /**
-     * 通过拷贝创建一个新的数组对象。
+     * 通过拷贝创建一个新的数组对象。<p>
+     * 拷贝数据的索引范围为[0,getCapacity()]。
      *
      * @return 一个新的数组对象。
      */
@@ -213,7 +216,7 @@ public class BooleanArray {
 
     /**
      * 创建一个指向该数组的指针。
-     *
+     * 指针的初始指向为0。
      * @return 一个指向该数据区域的指针。
      */
     public IBooleanPointer createPointer() {
@@ -221,7 +224,8 @@ public class BooleanArray {
     }
 
     /**
-     * 创建一个指向该数组的指针，并使指针指向 {@code offset}。
+     * 创建一个指向该数组的指针，
+     * 并使指针指向 {@code offset}。
      *
      * @param offset 指针指向的移动量。
      * @return 一个指向数组的指针。
