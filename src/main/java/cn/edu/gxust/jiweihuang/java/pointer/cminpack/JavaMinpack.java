@@ -44,148 +44,254 @@ import cn.edu.gxust.jiweihuang.java.pointer.IPointer;
 import static java.lang.Math.*;
 
 /**
- * 类{@code JavaMinpackPointer}采用Java语言和<a href="https://github.com/gxusthjw/JavaPointer">JavaPointer</a>库
- * 重新实现了<a href="https://github.com/devernay/cminpack">cminpack</a>库。<p>
- * cminpack包是一种C语言实现，源于Fortran编写的<a href="http://www.netlib.org/minpack/">minpack</a>库。
+ * 类{@code JavaMinpack}是<a href=
+ * "https://github.com/devernay/cminpack">cminpack</a>库的Java语言重写，
+ * 而cminpack库是一种源于Fortran编写的<a href=
+ * "http://www.netlib.org/minpack/">minpack</a>库的C语言实现。
+ * <p>
+ * Development status：Finished    # Developing, Finished  <p>
+ * Javadoc status: Finished        # Missing, Developing, Finished  <p>
+ * Test status: None               # None, Missing, Developing, Finished  <p>
+ * Last revision date: 2019-12-15  <p>
  *
  * @author JiweiHuang
- * @since 20191102
+ * @since 20191020
  */
 public class JavaMinpack {
 
-    //========================== function interface ==============================================
+    //========================== Function interface (base)==============================
 
     /**
-     * The interface {@code IFunctionNNPointer} packages user-supplied function.
-     * It inherits from {@code IFunctionPointer} of
-     * <a href="https://github.com/gxusthjw/JavaPointer">JavaPointer library </a>
-     * for using the facilities provided.<p>
-     * It is used by {@code fdjac1}, {@code hybrd} and {@code hybrd1} in
-     * {@code JavaMinpack}.<p>
-     *
-     * @author JiweiHuang
-     * @since 20191023
+     * 接口{@code INonlinearFunctions}是所有用于提供“非线性问题计算式”函数接口的父接口，
+     * 此接口提供了三个属性，其中：<p>
+     * （1）属性{@code getN()}用于表征“非线性问题计算式”中变量的数量。<p>
+     * （2）属性{@code getM()}用于表征“非线性问题计算式”中方程的数量。<p>
+     * (3) 属性{@code getPointer()}用于表征“非线性问题计算式”中所需的额外参数或数据。<p>
+     * 就类{@code JavaMinpack}中所能求解的“非线性问题”，可分为两类：<p>
+     * （1）对于“非线性方程组”，要求{@code getN() == getM()}，即“N个方程组N元非线性方程组”。<p>
+     * （2）对于“非线性最小二乘问题”，要求{@code getN() <= getM()},即变量的数量小于方程的数量。<p>
      */
-    public interface IFunctionNNPointer extends IFunctionPointer {
+    public interface INonlinearFunctions extends IFunctionPointer {
         /**
-         * The user-supplied function.
-         * <p>
-         * Notes: the function signature references which of
-         * <a href ="http://bytedeco.org/"> javacpp</a> api.
+         * 获取“非线性问题计算式”中变量的数量。
+         *
+         * @return “非线性问题计算式”中变量的数量。
          */
-        int call(int n, IDoublePointer x, IDoublePointer fvec,
-                 int iflag, IPointer... p);
+        int getN();
+
+        /**
+         * 获取“非线性问题计算式”中方程的数量。
+         *
+         * @return “非线性问题计算式”中方程的数量。
+         */
+        int getM();
+
+        /**
+         * 获取“非线性问题计算式”中所需的额外参数或数据。<p>
+         * 默认返回一个空的指针，如果需要提供额外的数据，
+         * 可以通过重载该方法来达到目的。
+         *
+         * @return “非线性问题计算式”中所需的额外参数或数据。
+         */
+        default IPointer getPointer() {
+            return new IPointer() {
+            };
+        }
+    }
+    //========================== function interface (5 concrete) ==========================
+
+    /**
+     * 接口{@code INNonlinearEquations}是一个函数式接口，
+     * 包装了“用户提供函数（user-supplied function）”，
+     * 定义了“N个方程组N元非线性方程组”的计算式。
+     * <p>
+     * 此接口被{@code fdjac1}，{@code hybrd}和{@code hybrd1}等函数作为参数使用，
+     * 用于求解非线性方程组，其中，“非线性方程组”计算式的雅可比矩阵采用“向前差分法”近似求解。<p>
+     */
+    public interface INNonlinearEquations extends INonlinearFunctions {
+        /**
+         * 被包装的用户提供函数（user-supplied function）。<p>
+         * 函数签名参考了<a href ="http://bytedeco.org/">JavaCPP</a>的API。<p>
+         *
+         * @param n     “非线性方程组”计算式中变量的数量，该值应与{@code getN()}的返回值一致。
+         * @param x     “非线性方程组”计算式中变量的值，该指针指向一个长度为n的数组,
+         *              方程组求解前，用于指定“非线性方程组”解的初始值，
+         *              方程组求解后，用于保存最终的待求解变量的值。
+         * @param fvec  用于保存“非线性方程组”计算式的方程计算值，即变量为{@code x}时方程计算值。
+         * @param iflag 一个标记值，要求此值在{@code call}调用期间不应该被改变。
+         * @param p     用于提供其他额外需要的参数。
+         * @return 如果为负值，则可中止“非线性方程组”的求解。
+         */
+        int call(int n, IDoublePointer x, IDoublePointer fvec, int iflag, IPointer... p);
+
+        /**
+         * 获取“非线性方程组计算式”中方程的数量。<p>
+         * 这里缺省设置了{@code getM() == getN()}，
+         * 以便于表征“N个方程组N元非线性方程组”。
+         *
+         * @return “非线性问题计算式”中方程的数量。
+         */
+        @Override
+        default int getM() {
+            return getN();
+        }
     }
 
     /**
-     * The interface {@code IFunctionMNPointer} packages user-supplied function.<p>
-     * It inherits from {@code IFunctionPointer} of
-     * <a href="https://github.com/gxusthjw/JavaPointer">JavaPointer library </a>
-     * for using the facilities provided.<p>
-     * It is used by {@code fdjac2},{@code lmdif} and {@code lmdif1} in
-     * {@code JavaMinpack}.<p>
-     *
-     * @author JiweiHuang
-     * @since 20191023
+     * 接口{@code INNonlinearEquationsJacobi}是一个函数式接口，
+     * 包装了一种“用户提供函数（user-supplied function）”，
+     * 定义了“N个方程组N元非线性方程组”的计算式，与{@code INNonlinearEquations}不同的是，
+     * 此接口所包装的计算式还包含了“雅可比矩阵的计算式”。
+     * <p>
+     * 该接口被{@code hybrj}和{@code hybrj1}等函数作为参数使用，
+     * 用于求解非线性方程组，其中，“非线性方程组”计算式的雅可比矩阵由用户提供。<p>
      */
-    public interface IFunctionMNPointer extends IFunctionPointer {
+    public interface INNonlinearEquationsJacobi extends INonlinearFunctions {
         /**
-         * The user-supplied function.
-         * <p>
-         * Notes: the function signature references which of
-         * <a href ="http://bytedeco.org/"> javacpp</a> api.
+         * 用户提供函数（user-supplied function）。<p>
+         * 函数签名参考了<a href ="http://bytedeco.org/">JavaCPP</a>的API.
+         *
+         * @param n      “非线性方程组”计算式中变量的数量，该值应与{@code getN()}的返回值一致。
+         * @param x      “非线性方程组”计算式中变量的值，长度为n,
+         *               用于指定“非线性方程组”解的初始值。
+         * @param fvec   用于保存“非线性方程组”计算式的方程计算值，即变量为{@code x}时方程计算值。
+         * @param fjac   用于保存“计算式”的雅可比矩阵。注意：雅可比矩阵按列排列，求解会更快。
+         * @param ldfjac 雅可比矩阵的主维数。实际就是“非线性方程组”计算式中方程的个数。
+         * @param iflag  一个标记值，要求此值在{@code call}调用期间不应该被改变。
+         *               如果{@code iflag=1}，则将各方程的计算值更新至fvec，而fjac不变。
+         *               如果{@code iflag=2}，则将方程的雅可比矩阵更新至fjac，而fvec不变。
+         * @param p      用于提供其他额外需要的参数。
+         * @return 如果为负值，则可中止“非线性方程组”的求解。
+         */
+        int call(int n, IDoublePointer x, IDoublePointer fvec, IDoublePointer fjac,
+                 int ldfjac, int iflag, IPointer... p);
+
+        /**
+         * 获取“非线性方程组计算式”中方程的数量。<p>
+         * 这里缺省设置了{@code getM() == getN()}，
+         * 以便于表征“N个方程组N元非线性方程组”。
+         *
+         * @return “非线性问题计算式”中方程的数量。
+         */
+        @Override
+        default int getM() {
+            return getN();
+        }
+    }
+
+    /**
+     * 接口{@code IMNNonlinearLeastSquares}是一个函数式接口，
+     * 包装了一种“用户提供函数（user-supplied function）”，
+     * 定义了“非线性最小二乘问题”的计算式。
+     * <p>
+     * 此接口被{@code fdjac2}，{@code lmdif}和{@code lmdif1}等函数作为参数使用，
+     * 用于求解“非线性最小二乘问题”，雅可比矩阵采用“向前差分法”近似计算而得。<p>
+     */
+    public interface IMNNonlinearLeastSquares extends INonlinearFunctions {
+        /**
+         * 用户提供函数（user-supplied function）。<p>
+         * 函数签名参考了<a href ="http://bytedeco.org/">JavaCPP</a>的API.
+         *
+         * @param m     “非线性最小二乘问题”计算式中方程的数量，该值应与{@code getM()}的返回值一致。
+         * @param n     “非线性最小二乘问题”计算式中变量的数量，该值应与{@code getN()}的返回值一致,
+         *              且要求{@code n <= m}。
+         * @param x     “非线性最小二乘问题”计算式的变量值组，用于指定“非线性最小二乘问题”解的初始值。
+         * @param fvec  “非线性最小二乘问题”计算式的方程计算值组，即变量为{@code x}时方程计算值。
+         * @param iflag 一个标记值，要求此值在{@code call}调用期间不应该被改变。
+         * @param p     用于提供其他额外需要的参数。
+         * @return 如果为负值，则可中止“非线性最小二乘问题”的求解。
          */
         int call(int m, int n, IDoublePointer x, IDoublePointer fvec,
                  int iflag, IPointer... p);
     }
 
     /**
-     * The interface {@code IFunctionDerNNPointer} packages user-supplied function.<p>
-     * It inherits from {@code IFunctionPointer} of
-     * <a href="https://github.com/gxusthjw/JavaPointer">JavaPointer library </a>
-     * for using the facilities provided.<p>
-     * It is used by {@code hybrj} and {@code hybrj1} in {@code JavaMinpack}.<p>
-     *
-     * @author JiweiHuang
-     * @since 20191023
+     * 接口{@code IMNNonlinearLeastSquaresJacobi}是一个函数式接口，
+     * 包装了一种“用户提供函数（user-supplied function）”，
+     * 定义了“非线性最小二乘问题”的计算式。
+     * <p>
+     * 此接口被{@code lmder}和{@code lmder1}等函数作为参数使用，
+     * 用于求解非线性最小二乘问题，但需要提供计算式的雅可比矩阵。<p>
      */
-    public interface IFunctionDerNNPointer extends IFunctionPointer {
+    public interface IMNNonlinearLeastSquaresJacobi extends INonlinearFunctions {
         /**
-         * The user-supplied function.
-         * <p>
-         * Notes: the function signature references which of
-         * <a href ="http://bytedeco.org/"> javacpp</a> api.
-         */
-        int call(int n, IDoublePointer x, IDoublePointer fvec, IDoublePointer fjac,
-                 int ldfjac, int iflag, IPointer... p);
-    }
-
-    /**
-     * The interface {@code IFunctionDerMNPointer} packages a user-supplied function.<p>
-     * It inherits from {@code IFunctionPointer} of
-     * <a href="https://github.com/gxusthjw/JavaPointer">JavaPointer library </a>
-     * for using the facilities provided.<p>
-     * It is used by {@code lmder} and {@code lmder1} in {@code JavaMinpack}.<p>
-     *
-     * @author JiweiHuang
-     * @since 20191023
-     */
-    public interface IFunctionDerMNPointer extends IFunctionPointer {
-        /**
-         * The user-supplied function.
-         * <p>
-         * Notes: the function signature references which of
-         * <a href ="http://bytedeco.org/"> javacpp</a> api.
+         * 用户提供函数（user-supplied function）。<p>
+         * 函数签名参考了<a href ="http://bytedeco.org/">JavaCPP</a>的API。
+         *
+         * @param m      “非线性最小二乘问题”计算式中方程的数量，该值应与{@code getM()}的返回值一致。
+         * @param n      “非线性最小二乘问题”计算式中变量的数量，该值应与{@code getN()}的返回值一致,
+         *               且要求{@code n <= m}。
+         * @param x      “非线性最小二乘问题”计算式的变量值组，包含“非线性最小二乘问题”解的初始值或经求解后则为最终的解值。
+         * @param fvec   “非线性最小二乘问题”计算式的方程计算值组，即变量为{@code x}时方程计算值。
+         * @param fjac   方程的雅可比矩阵。雅可比矩阵按列排列更快。
+         * @param ldfjac 雅可比矩阵的主维数。实际就是“非线性最小二乘问题”计算式中方程的个数。
+         * @param iflag  一个标记值，要求此值在{@code call}调用期间不应该被改变。
+         *               如果iflag=1，则将方程计算值更新至fvec，而fjac不变。
+         *               如果iflag=2，则将方程的雅可比矩阵更新至fjac，而fvec不变。
+         * @param p      用于提供其他额外需要的参数。
+         * @return 如果为负值，则可中止“非线性最小二乘问题”的求解。
          */
         int call(int m, int n, IDoublePointer x, IDoublePointer fvec, IDoublePointer fjac,
                  int ldfjac, int iflag, IPointer... p);
     }
 
     /**
-     * The interface {@code IFunctionDerStrMNPointer} packages user-supplied function.<p>
-     * It inherits from {@code IFunctionPointer} of
-     * <a href="https://github.com/gxusthjw/JavaPointer">JavaPointer library </a>
-     * for using the facilities provided.<p>
-     * It is used by {@code lmstr} and {@code lmstr1} in {@code JavaMinpack}.<p>
-     *
-     * @author JiweiHuang
-     * @since 20191023
+     * 接口{@code IMNNonlinearLeastSquaresConserving}是一个函数式接口，
+     * 包装了一种“用户提供函数（user-supplied function）”，
+     * 定义了“非线性最小二乘问题”计算式。<p>
+     * 此接口被{@code lmstr}和{@code lmstr1}等函数作为参数使用，
+     * 用于求解非线性最小二乘问题，但一次只计算一行雅可比矩阵，所以比较节约内存。<p>
      */
-    public interface IFunctionDerStrMNPointer extends IFunctionPointer {
+    public interface IMNNonlinearLeastSquaresConserving extends INonlinearFunctions {
         /**
-         * The user-supplied function.
-         * <p>
-         * Notes: the function signature references which of
-         * <a href ="http://bytedeco.org/"> javacpp</a> api.
+         * 用户提供函数（user-supplied function）。<p>
+         * 函数签名参考了<a href ="http://bytedeco.org/">JavaCPP</a>的API。
+         *
+         * @param m     “非线性最小二乘问题”计算式中方程的数量，该值应与{@code getM()}的返回值一致。
+         * @param n     “非线性最小二乘问题”计算式中变量的数量，该值应与{@code getN()}的返回值一致,
+         *              且要求{@code n<=m}。
+         * @param x     “非线性最小二乘问题”计算式的变量值组，包含“非线性最小二乘问题”解的初始值或经求解后则为最终的解值。
+         * @param fvec  “非线性最小二乘问题”计算式的方程计算值组，即变量为{@code x}时方程计算值。
+         * @param fjrow 方程的雅可比矩阵。雅可比矩阵中的一行。
+         * @param iflag 一个标记值，要求此值在{@code call}调用期间不应该被改变。
+         *              如果iflag=1，则将方程计算值更新至fvec，而fjac不变。
+         *              如果iflag=i，则将方程的雅可比矩阵第i-1行更新至fjrow，而fvec不变。
+         * @param p     用于提供其他额外需要的参数。
+         * @return 如果为负值，则可中止“非线性最小二乘问题”的求解。
          */
         int call(int m, int n, IDoublePointer x, IDoublePointer fvec,
                  IDoublePointer fjrow, int iflag, IPointer... p);
     }
     //=========================================================================
-//========================== boolean value in c/cpp language ==================================
+
+    //========================== boolean value in c/cpp language ===============
     /**
-     * Not {@code 0} is true in c/cpp language.
+     * 在c/cpp语言中，非{@code 0}是"真"，即{@code true}。
      */
     public static final int TRUE = 1;
+
     /**
-     * {@code 0} is false in c/cpp language.
+     * 在c/cpp语言中，{@code 0}是"假"，即{@code false}。
      */
     public static final int FALSE = 0;
-    //=============================================================================================
+    //===========================================================================
 
-    //========================= machine precision =================================================
+    //========================= machine precision ===============================
     /**
-     * The value {@code 2.220446049250313E-16} is result of doubleEpsilon(),
-     * which is used for representing the precision of the computer's arithmetic.
+     * 值{@code 2.220446049250313E-16}是函数{@code doubleEpsilon()}的计算结果，
+     * 用于表征“计算机运算的精度（the precision of the computer's arithmetic）”。
      */
     public static final double DOUBLE_EPSILON = 2.220446049250313E-16;
 
     /**
-     * The round-off unit is a number {@code R} which is used for representing
-     * the precision of the computer's arithmetic,that means:<p>
-     * {@code 1 < 1 + R}, but {@code 1 = ( 1 + R / 2 )}.
+     * 获取{@code double}型数据的“舍入单位（round-off unit）”，
+     * 舍入单位是一个数字（这里记为{@code R}），用于表征“计算机
+     * 运算的精度（the precision of the computer's arithmetic）”。<p>
+     * 舍入单位{@code R}应同时满足如下两个条件：<p>
+     * （1）{@code 1 < 1 + R} <p>
+     * （2）{@code 1 = ( 1 + R / 2 )} <p>
      *
-     * @return round-off unit of double
+     * @return {@code double}型数据的“舍入单位（round-off unit）”
      */
     public static double doubleEpsilon() {
         double value = 1.0;
@@ -194,56 +300,62 @@ public class JavaMinpack {
         }
         return 2.0 * value;
     }
-    //===============================================================================================
+    //============================================================================
 
-    //========================== dpmpar.c ===========================================================
+    //========================== dpmpar.c =========================================
 
     /**
-     * The value {@code 2.2204460492503131e-16} is used for representing the precision
-     * of the computer's arithmetic which is same with the result of {@code doubleEpsilon()}.
+     * 值{@code 2.2204460492503131e-16}用于表征“计算机
+     * 运算的精度（the precision of the computer's arithmetic）”，
+     * 该值与函数{@code doubleEpsilon()}的计算结果一致。
+     * <p>
+     * 参考自：dpmpar.c
      */
     public static final double DPMPAR1 = 2.2204460492503131e-16;
-    //该值与{@code Precision.doubleEpsilon()的计算结果相同。
 
     /**
-     * The value {@code 2.2250738585072014e-308} is used for representing a very small number
-     * of {@code double} type.<p>
-     * Notes: it more than {@code Double.MIN_VALUE} which is {@code 4.9E-324}.
+     * 值{@code 2.2250738585072014e-308}被用于表征一个非常小的{@code double}型数。 <p>
+     * 该值大于{@code Double.MIN_VALUE}，其中，{@code Double.MIN_VALUE = 4.9E-324}。
+     * <p>
+     * 参考自：dpmpar.c
      */
     public static final double DPMPAR2 = 2.2250738585072014e-308;
-    //该值大于{@code Double.MIN_VALUE}的结果4.9E-324。
 
     /**
-     * The value {@code 1.7976931348623157e+308} is used for representing a very large number
-     * of {@code double} type.<p>
-     * Notes: it equals to {@code Double.MAX_VALUE}.
+     * 值{@code 1.7976931348623157e+308}用于表征一个非常大的{@code double}型值。 <p>
+     * 该值等于{@code Double.MAX_VALUE} 。
+     * <p>
+     * 参考自：dpmpar.c
      */
     public static final double DPMPAR3 = 1.7976931348623157e+308;
-    //该值与{@code Double.MAX_VALUE}的结果相同。
-    //=============================================================================================================
+    //=============================================================================
 
-    //========================== enorm.c ==========================================================================
+    //========================== enorm.c ==========================================
     /**
-     * Reference from enorm.c, it is same with the result of {@code doubleDwarf()}.
+     * 值{@code 1.8269129119256895e-153}参考自enorm.c，它与
+     * 函数{@code doubleDwarf()}的计算结果完全一致。
      */
     public static final double DOUBLE_DWARF = 1.8269129119256895e-153;
-    //该值为{@code doubleDwarf()}的计算结果。
 
     /**
-     * Reference from enorm.c, it is same with the result of {@code doubleGiant()}.
+     * 值{@code 1.3407807929942596e+153}参考自enorm.c，它与
+     * 函数{@code doubleGiant()}的计算结果完全一致。
      */
     public static final double DOUBLE_GIANT = 1.3407807929942596e+153;
-    //该值为{@code doubleGiant()}的计算结果。
 
     /**
-     * Reference from enorm.c, the library "cmpfit-1.2" prososed.
+     * 函数{@code doubleDwarf()}参考自 enorm.c，
+     * 其文档指出该函数是由库<a href="http://www.physics.wisc.edu/~craigm/idl/fitting.html">
+     * cmpfit-1.2</a>所提出。
      */
     public static double doubleDwarf() {
         return Math.sqrt(DPMPAR2 * 1.5) * 10;
     }
 
     /**
-     * Reference from enorm.c, the library "cmpfit-1.2" prososed
+     * 函数{@code doubleGiant()}参考自 enorm.c，
+     * 其文档指出该函数是由库<a href="http://www.physics.wisc.edu/~craigm/idl/fitting.html">
+     * cmpfit-1.2</a>所提出。
      */
     public static double doubleGiant() {
         return Math.sqrt(DPMPAR3) * 0.1;
@@ -334,6 +446,7 @@ public class JavaMinpack {
             throw new IllegalArgumentException();
         }
     }
+
     //=========================================================================
     public static void rwupdt(int n, IDoublePointer r, int ldr, final IDoublePointer w, IDoublePointer b,
                               IDoublePointer alpha, IDoublePointer cos, IDoublePointer sin) {
@@ -1292,7 +1405,7 @@ public class JavaMinpack {
     }
 
 
-    public static int fdjac1(IFunctionNNPointer fcn, int n, IDoublePointer x, final IDoublePointer fvec,
+    public static int fdjac1(INNonlinearEquations fcn, int n, IDoublePointer x, final IDoublePointer fvec,
                              IDoublePointer fjac, int ldfjac, int ml, int mu, double epsfcn,
                              IDoublePointer wa1, IDoublePointer wa2) {
         /* System generated locals */
@@ -1384,7 +1497,7 @@ public class JavaMinpack {
         /* last card of subroutine fdjac1. */
     }
 
-    public static int fdjac2(IFunctionMNPointer fcn, int m, int n, IDoublePointer x,
+    public static int fdjac2(IMNNonlinearLeastSquares fcn, int m, int n, IDoublePointer x,
                              final IDoublePointer fvec, IDoublePointer fjac, int ldfjac,
                              double epsfcn, IDoublePointer wa) {
         /* Local variables */
