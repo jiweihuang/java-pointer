@@ -332,14 +332,14 @@ public class JavaMinpack {
 
     //========================== enorm.c ==========================================
     /**
-     * 值{@code 1.8269129119256895e-153}参考自enorm.c，它与
-     * 函数{@code doubleDwarf()}的计算结果完全一致。
+     * 值{@code 1.8269129119256895e-153}参考自enorm.c，
+     * 它与函数{@code doubleDwarf()}的计算结果完全一致。
      */
     public static final double DOUBLE_DWARF = 1.8269129119256895e-153;
 
     /**
-     * 值{@code 1.3407807929942596e+153}参考自enorm.c，它与
-     * 函数{@code doubleGiant()}的计算结果完全一致。
+     * 值{@code 1.3407807929942596e+153}参考自enorm.c，
+     * 它与函数{@code doubleGiant()}的计算结果完全一致。
      */
     public static final double DOUBLE_GIANT = 1.3407807929942596e+153;
 
@@ -362,8 +362,27 @@ public class JavaMinpack {
     }
 
     /**
-     * Reference from {@code enorm(int n, double[] x, int startIndex)},
-     * The parameter {@code double[] x} is replaced by {@code IDoublePointer}.
+     * 函数{@code enorm}用于计算一个向量的欧几里得范数（euclidean norm），
+     * 一个向量的欧几里得范数实际上是向量内所有元素的平方和的开方。<p>
+     * 函数各参数的含义如下： <p>
+     * （1）参数{@code x}给出了一个向量，但该函数不是直接用向量中所有元素进行计算，
+     * 而是只用向量中的一部分值进行计算，
+     * 即实际上是计算了向量{@code x}中的一个子向量的欧几里得范数。<p>
+     * （2）参数{@code n}指出所需计算的子向量的元素数量。<p>
+     * （3）参数{@code startIndex}指出所需计算的子向量的第一个元素在向量{@code x}中的索引。
+     * 基于以上函数参数的含义可知： <p>
+     * 参数{@code x}给出的向量的长度应大于等于{@code startIndex + n}，否则，
+     * 将抛出{@code ArrayIndexOutOfBoundsException}。
+     * <p>
+     * 函数参考自enorm.c，原程序并没有{@code startIndex}参数，但参数{@code x}是一个指针，
+     * 其可以指向数组中任意元素的位置作为子向量的起点。而Java中没有指针，所以这里添加了一个
+     * 参数{@code startIndex}作为替代方案。
+     *
+     * @param n          一个正整数值，输入型变量，用于指出所需计算子向量的元素个数。
+     * @param x          一个数组，输入型变量，其长度应{@code >= (startIndex + n)}。
+     * @param startIndex 一个非负整数型值，输入型变量，用于指出所需计算子向量的第一个元素在向量
+     *                   {@code x}中的索引。
+     * @return 向量{@code x}或其子向量的欧几里得范数。
      */
     public static double enorm(int n, IDoublePointer x, int startIndex) {
         double s1 = 0.;
@@ -426,16 +445,24 @@ public class JavaMinpack {
     }
 
     /**
-     * Overloaded method {@code enorm(int n, IDoublePointer x, int startIndex)},
-     * and set the parameter {@code startIndex = 0}.
+     * 重载函数{@code enorm(int n, double[] x, int startIndex)}，
+     * 其中，参数{@code startIndex}被设置为{@code 0}。
+     *
+     * @param n 一个正整数值，输入型变量，用于指出所需计算子向量的元素个数。
+     * @param x 一个数组，输入型变量，其长度应{@code >= n}。
+     * @return 向量{@code x}或其子向量的欧几里得范数。
      */
     public static double enorm(int n, IDoublePointer x) {
         return enorm(n, x, 0);
     }
 
     /**
-     * Overloaded method {@code enorm(int n, IDoublePointer x, int startIndex)},
-     * and set the parameter {@code startIndex = 0} and {@code n = x.getCapacity()}.
+     * 重载函数{@code enorm(int n, double[] x, int startIndex)}，
+     * 其中，参数{@code startIndex}被设置为{@code 0}，参数{@code n}
+     * 被设置为{@code x}的长度，即{@code x.length}。
+     *
+     * @param x 一个数组，输入型变量，其长度应{@code >= n}。
+     * @return 向量{@code x}或其子向量的欧几里得范数。
      */
     public static double enorm(IDoublePointer x) {
         if (x.getPoint() <= 0) {
