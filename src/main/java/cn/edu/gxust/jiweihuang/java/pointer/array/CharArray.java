@@ -344,8 +344,12 @@ public class CharArray {
      */
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof CharArray)) return false;
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof CharArray)) {
+            return false;
+        }
         CharArray that = (CharArray) obj;
         if (getCapacity() != that.getCapacity()) {
             return false;

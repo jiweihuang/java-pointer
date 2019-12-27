@@ -344,8 +344,12 @@ public class DoubleArray{
      */
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof DoubleArray)) return false;
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof DoubleArray)) {
+            return false;
+        }
         DoubleArray that = (DoubleArray) obj;
         if (getCapacity() != that.getCapacity()) {
             return false;

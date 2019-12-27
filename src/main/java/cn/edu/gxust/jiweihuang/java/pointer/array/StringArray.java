@@ -349,8 +349,12 @@ public class StringArray {
      */
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof StringArray)) return false;
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof StringArray)) {
+            return false;
+        }
         StringArray that = (StringArray) obj;
         if (getCapacity() != that.getCapacity()) {
             return false;

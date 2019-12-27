@@ -347,8 +347,12 @@ public class IntArray {
      */
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof IntArray)) return false;
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof IntArray)) {
+            return false;
+        }
         IntArray that = (IntArray) obj;
         if (getCapacity() != that.getCapacity()) {
             return false;

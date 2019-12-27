@@ -352,8 +352,12 @@ public class ShortArray implements Serializable {
      */
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof ShortArray)) return false;
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof ShortArray)) {
+            return false;
+        }
         ShortArray that = (ShortArray) obj;
         if (getCapacity() != that.getCapacity()) {
             return false;

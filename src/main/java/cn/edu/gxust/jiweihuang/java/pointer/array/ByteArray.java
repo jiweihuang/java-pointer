@@ -347,8 +347,12 @@ public class ByteArray {
      */
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof ByteArray)) return false;
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof ByteArray)) {
+            return false;
+        }
         ByteArray that = (ByteArray) obj;
         if (getCapacity() != that.getCapacity()) {
             return false;

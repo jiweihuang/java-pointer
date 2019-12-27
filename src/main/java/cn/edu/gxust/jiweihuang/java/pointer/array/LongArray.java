@@ -347,8 +347,12 @@ public class LongArray {
      */
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof LongArray)) return false;
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof LongArray)) {
+            return false;
+        }
         LongArray that = (LongArray) obj;
         if (getCapacity() != that.getCapacity()) {
             return false;

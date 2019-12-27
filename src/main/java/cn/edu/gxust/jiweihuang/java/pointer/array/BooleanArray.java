@@ -76,7 +76,8 @@ public class BooleanArray {
      * @param capacity 数组的容量。
      */
     public BooleanArray(final int capacity) {
-        this.capacity = capacity; //必须大于等于0
+        //必须大于等于0
+        this.capacity = capacity;
         this.values = new boolean[capacity];
     }
 
@@ -348,8 +349,12 @@ public class BooleanArray {
      */
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof BooleanArray)) return false;
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof BooleanArray)) {
+            return false;
+        }
         BooleanArray that = (BooleanArray) obj;
         if (getCapacity() != that.getCapacity()) {
             return false;
