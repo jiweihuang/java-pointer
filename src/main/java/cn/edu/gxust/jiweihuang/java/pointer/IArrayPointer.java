@@ -113,4 +113,18 @@ public interface IArrayPointer extends IPointer {
     default boolean isPointRightBounds() {
         return getPoint() == (getCapacity() - 1);
     }
+
+    /**
+     * 移动指针的指向后返回该指针，
+     * 内部实现为 {@code point = getPoint() + offset}。
+     *
+     * @param offset 指针指向的移动量。
+     */
+    void move(int offset);
+
+    /**
+     * 将指针的指向重置为{@code 0}。
+     */
+    void reset();
+
 }

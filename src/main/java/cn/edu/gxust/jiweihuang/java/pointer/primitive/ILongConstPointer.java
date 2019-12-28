@@ -37,6 +37,7 @@
 package cn.edu.gxust.jiweihuang.java.pointer.primitive;
 
 import cn.edu.gxust.jiweihuang.java.pointer.IArrayPointer;
+import cn.edu.gxust.jiweihuang.java.pointer.array.LongArray;
 
 /**
  * 接口{@code ILongPointer}用于表征一个指向{@code long}型数组的指针。<p>
@@ -77,50 +78,5 @@ public interface ILongConstPointer extends IArrayPointer {
         return get(0);
     }
 
-
-    /**
-     * 移动指针的指向后返回该指针，
-     * 内部实现为 {@code point = getPoint() + offset}。
-     *
-     * @param offset 指针指向的移动量。
-     * @return 指针指向移动后的指针。
-     */
-    ILongConstPointer move(int offset);
-
-    /**
-     * 通过拷贝的方式创建新指针，拷贝后的指向与原指针的指向相同，
-     * 但两者随后的移动将彼此分离，互补相关。
-     *
-     * @return 拷贝后得到的新指针。
-     */
-    ILongConstPointer copy();
-
-    /**
-     * 通过拷贝的方式创建新指针，并移动该指针指向新的索引。
-     *
-     * @param offset 指针指向的偏移量。
-     * @return 拷贝并移动后的新指针。
-     */
-    default ILongConstPointer copy(int offset) {
-        return copy().move(offset);
-    }
-
-    /**
-     * 将指针的指向重置为{@code 0}。
-     *
-     * @return 指针指向重置后的指针。
-     */
-    ILongConstPointer reset();
-
-    /**
-     * 将指针的指向重置为{@code offset}。<p>
-     * 内部实现为先将指针指向重置为{@code 0}，
-     * 然后移动至 {@code offset}。
-     *
-     * @param offset 重置后指针指向。
-     * @return 指针指向重置至指定索引后的指针。
-     */
-    default ILongConstPointer reset(int offset) {
-        return reset().move(offset);
-    }
+    LongArray getBase();
 }
