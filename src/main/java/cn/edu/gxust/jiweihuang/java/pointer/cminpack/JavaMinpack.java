@@ -1479,7 +1479,8 @@ public class JavaMinpack {
                calls made to compute the function from calls made to compute
                the Jacobian (see fcn() in examples/hybdrv.c, and how njev
                is used to compute the number of Jacobian evaluations) */
-                iflag = fcn.call(n, x.copy(1), wa1.copy(1), 2);
+                iflag = fcn.call(n, x.getBase().createPointer().move(1),
+                        wa1.getBase().createPointer().move(1), 2);
                 if (iflag < 0) {
                     return iflag;
                 }
