@@ -36,7 +36,7 @@
  */
 package cn.edu.gxust.jiweihuang.java.pointer.array;
 
-import cn.edu.gxust.jiweihuang.java.pointer.primitive.ICharPointer;
+import cn.edu.gxust.jiweihuang.java.pointer.primitive.ICharConstPointer;
 import cn.edu.gxust.jiweihuang.java.pointer.IFunctionPointer;
 
 import java.util.Arrays;
@@ -215,7 +215,7 @@ public class CharArray {
      *
      * @return 一个指向该数据区域的指针。
      */
-    public ICharPointer createPointer() {
+    public ICharConstPointer createPointer() {
         return new CharPointer();
     }
 
@@ -225,7 +225,7 @@ public class CharArray {
      * @param offset 指针指向的移动量。
      * @return 一个指向数组的指针。
      */
-    public ICharPointer createPointer(int offset) {
+    public ICharConstPointer createPointer(int offset) {
         return createPointer().move(offset);
     }
 
@@ -241,7 +241,7 @@ public class CharArray {
         Objects.requireNonNull(values, "Expected the parameter {values != null}.");
         int len = values.length;
         CharArray data = new CharArray(len);
-        ICharPointer pointer = data.createPointer();
+        ICharConstPointer pointer = data.createPointer();
         for (int i = 0; i < len; i++) {
             pointer.set(i, values[i]);
         }
@@ -254,7 +254,7 @@ public class CharArray {
      * 因为是私有类，所以此类的外部无法访问该类，
      * 因为是内部类，故其拥有对其外部类数据的引用。
      */
-    private class CharPointer implements ICharPointer {
+    private class CharPointer implements ICharConstPointer {
         //指向
         private int point;
 
@@ -354,7 +354,7 @@ public class CharArray {
         if (getCapacity() != that.getCapacity()) {
             return false;
         }
-        ICharPointer thatPointer = that.createPointer();
+        ICharConstPointer thatPointer = that.createPointer();
         for (int i = 0; i < getCapacity(); i++) {
             if (values[i] != thatPointer.get(i)) {
                 return false;

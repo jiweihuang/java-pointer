@@ -37,7 +37,7 @@
 package cn.edu.gxust.jiweihuang.java.pointer.array;
 
 import cn.edu.gxust.jiweihuang.java.pointer.IFunctionPointer;
-import cn.edu.gxust.jiweihuang.java.pointer.primitive.ILongPointer;
+import cn.edu.gxust.jiweihuang.java.pointer.primitive.ILongConstPointer;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -214,7 +214,7 @@ public class LongArray {
      *
      * @return 一个指向该数据区域的指针。
      */
-    public ILongPointer createPointer() {
+    public ILongConstPointer createPointer() {
         return new LongPointer();
     }
 
@@ -224,7 +224,7 @@ public class LongArray {
      * @param offset 指针指向的移动量。
      * @return 一个指向数组的指针。
      */
-    public ILongPointer createPointer(int offset) {
+    public ILongConstPointer createPointer(int offset) {
         return createPointer().move(offset);
     }
 
@@ -240,7 +240,7 @@ public class LongArray {
         Objects.requireNonNull(values, "Expected the parameter {values != null}.");
         int len = values.length;
         LongArray data = new LongArray(len);
-        ILongPointer pointer = data.createPointer();
+        ILongConstPointer pointer = data.createPointer();
         for (int i = 0; i < len; i++) {
             pointer.set(i, values[i]);
         }
@@ -253,7 +253,7 @@ public class LongArray {
      * 因为是私有类，所以此类的外部无法访问该类，
      * 因为是内部类，故其拥有对其外部类数据的引用。
      */
-    private class LongPointer implements ILongPointer {
+    private class LongPointer implements ILongConstPointer {
 
         /**
          * 指针的指向。
@@ -357,7 +357,7 @@ public class LongArray {
         if (getCapacity() != that.getCapacity()) {
             return false;
         }
-        ILongPointer thatPointer = that.createPointer();
+        ILongConstPointer thatPointer = that.createPointer();
         for (int i = 0; i < getCapacity(); i++) {
             if (values[i] != thatPointer.get(i)) {
                 return false;

@@ -38,7 +38,7 @@ package cn.edu.gxust.jiweihuang.java.pointer.cminpack;
 
 import cn.edu.gxust.jiweihuang.java.pointer.primitive.IDoublePointer;
 import cn.edu.gxust.jiweihuang.java.pointer.IFunctionPointer;
-import cn.edu.gxust.jiweihuang.java.pointer.primitive.IIntPointer;
+import cn.edu.gxust.jiweihuang.java.pointer.primitive.IIntConstPointer;
 import cn.edu.gxust.jiweihuang.java.pointer.IPointer;
 
 import static java.lang.Math.*;
@@ -538,7 +538,7 @@ public class JavaMinpack {
     }
 
     public static void r1updt(int m, int n, IDoublePointer s, int ls, final IDoublePointer u,
-                              IDoublePointer v, IDoublePointer w, IIntPointer sing) {
+                              IDoublePointer v, IDoublePointer w, IIntConstPointer sing) {
 
         /* Initialized data */
         double p5 = .5;
@@ -754,7 +754,7 @@ public class JavaMinpack {
         /* last card of subroutine r1mpyq. */
     }
 
-    public static void qrsolv(int n, IDoublePointer r, int ldr, final IIntPointer ipvt,
+    public static void qrsolv(int n, IDoublePointer r, int ldr, final IIntConstPointer ipvt,
                               final IDoublePointer diag, final IDoublePointer qtb,
                               IDoublePointer x, IDoublePointer sdiag, IDoublePointer wa) {
 
@@ -877,7 +877,7 @@ public class JavaMinpack {
     }
 
     public static void qrfac(int m, int n, IDoublePointer a, int lda, int pivot,
-                             IIntPointer ipvt, int lipvt, IDoublePointer rdiag,
+                             IIntConstPointer ipvt, int lipvt, IDoublePointer rdiag,
                              IDoublePointer acnorm, IDoublePointer wa) {
         /* Initialized data */
         double p05 = .05;
@@ -1113,7 +1113,7 @@ public class JavaMinpack {
         /*last card of subroutine chkder. */
     }
 
-    public static void covar(int n, IDoublePointer r, int ldr, final IIntPointer ipvt,
+    public static void covar(int n, IDoublePointer r, int ldr, final IIntConstPointer ipvt,
                              double tol, IDoublePointer wa) {
         /* Local variables */
         int i, j, k, l, ii, jj;
@@ -1195,7 +1195,7 @@ public class JavaMinpack {
     }
 
     public static int covar1(int m, int n, double fsumsq, IDoublePointer r, int ldr,
-                             final IIntPointer ipvt, double tol, IDoublePointer wa) {
+                             final IIntConstPointer ipvt, double tol, IDoublePointer wa) {
 
         /* Local variables */
         int i, j, k, l, ii, jj;
@@ -1583,7 +1583,7 @@ public class JavaMinpack {
      * 此方法中，参数 ipvt,diag,qtb三个指针都是常量指针，意味着这些指针指向的值是不可修改的。
      */
     public static void lmpar(final int n, IDoublePointer r, final int ldr,
-                             final IIntPointer ipvt, final IDoublePointer diag,
+                             final IIntConstPointer ipvt, final IDoublePointer diag,
                              final IDoublePointer qtb, final double delta,
                              final IDoublePointer par, final IDoublePointer x,
                              final IDoublePointer sdiag, final IDoublePointer wa1,

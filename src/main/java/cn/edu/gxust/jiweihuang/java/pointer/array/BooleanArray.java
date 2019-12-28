@@ -36,7 +36,7 @@
  */
 package cn.edu.gxust.jiweihuang.java.pointer.array;
 
-import cn.edu.gxust.jiweihuang.java.pointer.primitive.IBooleanPointer;
+import cn.edu.gxust.jiweihuang.java.pointer.primitive.IBooleanConstPointer;
 import cn.edu.gxust.jiweihuang.java.pointer.IFunctionPointer;
 
 import java.util.Arrays;
@@ -219,7 +219,7 @@ public class BooleanArray {
      * 指针的初始指向为0。
      * @return 一个指向该数据区域的指针。
      */
-    public IBooleanPointer createPointer() {
+    public IBooleanConstPointer createPointer() {
         return new BooleanPointer();
     }
 
@@ -230,7 +230,7 @@ public class BooleanArray {
      * @param offset 指针指向的移动量。
      * @return 一个指向数组的指针。
      */
-    public IBooleanPointer createPointer(int offset) {
+    public IBooleanConstPointer createPointer(int offset) {
         return createPointer().move(offset);
     }
 
@@ -246,7 +246,7 @@ public class BooleanArray {
         Objects.requireNonNull(values, "Expected the parameter {values != null}.");
         int len = values.length;
         BooleanArray data = new BooleanArray(len);
-        IBooleanPointer pointer = data.createPointer();
+        IBooleanConstPointer pointer = data.createPointer();
         for (int i = 0; i < len; i++) {
             pointer.set(i, values[i]);
         }
@@ -259,7 +259,7 @@ public class BooleanArray {
      * 因为是私有类，所以此类的外部无法访问该类，
      * 因为是内部类，故其拥有对其外部类数据的引用。
      */
-    private class BooleanPointer implements IBooleanPointer {
+    private class BooleanPointer implements IBooleanConstPointer {
 
         /**
          * 指针的指向。
@@ -363,7 +363,7 @@ public class BooleanArray {
         if (getCapacity() != that.getCapacity()) {
             return false;
         }
-        IBooleanPointer thatPointer = that.createPointer();
+        IBooleanConstPointer thatPointer = that.createPointer();
         for (int i = 0; i < getCapacity(); i++) {
             if (values[i] != thatPointer.get(i)) {
                 return false;

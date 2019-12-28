@@ -36,7 +36,7 @@
  */
 package cn.edu.gxust.jiweihuang.java.pointer.array;
 
-import cn.edu.gxust.jiweihuang.java.pointer.primitive.IBooleanPointer;
+import cn.edu.gxust.jiweihuang.java.pointer.primitive.IBooleanConstPointer;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -54,10 +54,10 @@ class BooleanArrayTest {
     BooleanArray booleanArray4;
 
     //创建指针对象
-    IBooleanPointer booleanPointer1;
-    IBooleanPointer booleanPointer2;
-    IBooleanPointer booleanPointer3;
-    IBooleanPointer booleanPointer4;
+    IBooleanConstPointer booleanPointer1;
+    IBooleanConstPointer booleanPointer2;
+    IBooleanConstPointer booleanPointer3;
+    IBooleanConstPointer booleanPointer4;
 
     @BeforeEach
     void setUp() {

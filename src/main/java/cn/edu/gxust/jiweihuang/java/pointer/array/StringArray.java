@@ -37,7 +37,7 @@
 package cn.edu.gxust.jiweihuang.java.pointer.array;
 
 import cn.edu.gxust.jiweihuang.java.pointer.IFunctionPointer;
-import cn.edu.gxust.jiweihuang.java.pointer.primitive.IStringPointer;
+import cn.edu.gxust.jiweihuang.java.pointer.primitive.IStringConstPointer;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -216,7 +216,7 @@ public class StringArray {
      *
      * @return 一个指向该数据区域的指针。
      */
-    public IStringPointer createPointer() {
+    public IStringConstPointer createPointer() {
         return new StringPointer();
     }
 
@@ -226,7 +226,7 @@ public class StringArray {
      * @param offset 指针指向的移动量。
      * @return 一个指向数组的指针。
      */
-    public IStringPointer createPointer(int offset) {
+    public IStringConstPointer createPointer(int offset) {
         return createPointer().move(offset);
     }
 
@@ -242,7 +242,7 @@ public class StringArray {
         Objects.requireNonNull(values, "Expected the parameter {values != null}.");
         int len = values.length;
         StringArray array = new StringArray(len);
-        IStringPointer pointer = array.createPointer();
+        IStringConstPointer pointer = array.createPointer();
         for (int i = 0; i < len; i++) {
             pointer.set(i, values[i]);
         }
@@ -255,7 +255,7 @@ public class StringArray {
      * 因为是私有类，所以此类的外部无法访问，
      * 因为是内部类，故其拥有对其外部类数据的引用。
      */
-    private class StringPointer implements IStringPointer {
+    private class StringPointer implements IStringConstPointer {
 
         /**
          * 指针的指向。
@@ -359,7 +359,7 @@ public class StringArray {
         if (getCapacity() != that.getCapacity()) {
             return false;
         }
-        IStringPointer thatPointer = that.createPointer();
+        IStringConstPointer thatPointer = that.createPointer();
         for (int i = 0; i < getCapacity(); i++) {
             if (!Objects.equals(values[i], thatPointer.get(i))) {
                 return false;

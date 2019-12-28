@@ -37,7 +37,7 @@
 package cn.edu.gxust.jiweihuang.java.pointer.array;
 
 import cn.edu.gxust.jiweihuang.java.pointer.IFunctionPointer;
-import cn.edu.gxust.jiweihuang.java.pointer.primitive.IIntPointer;
+import cn.edu.gxust.jiweihuang.java.pointer.primitive.IIntConstPointer;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -214,7 +214,7 @@ public class IntArray {
      *
      * @return 一个指向该数据区域的指针。
      */
-    public IIntPointer createPointer() {
+    public IIntConstPointer createPointer() {
         return new IntPointer();
     }
 
@@ -224,7 +224,7 @@ public class IntArray {
      * @param offset 指针指向的移动量。
      * @return 一个指向数组的指针。
      */
-    public IIntPointer createPointer(int offset) {
+    public IIntConstPointer createPointer(int offset) {
         return createPointer().move(offset);
     }
 
@@ -240,7 +240,7 @@ public class IntArray {
         Objects.requireNonNull(values, "Expected the parameter {values != null}.");
         int len = values.length;
         IntArray data = new IntArray(len);
-        IIntPointer pointer = data.createPointer();
+        IIntConstPointer pointer = data.createPointer();
         for (int i = 0; i < len; i++) {
             pointer.set(i, values[i]);
         }
@@ -253,7 +253,7 @@ public class IntArray {
      * 因为是私有类，所以此类的外部无法访问该类，
      * 因为是内部类，故其拥有对其外部类数据的引用。
      */
-    private class IntPointer implements IIntPointer {
+    private class IntPointer implements IIntConstPointer {
 
         /**
          * 指针的指向。
@@ -357,7 +357,7 @@ public class IntArray {
         if (getCapacity() != that.getCapacity()) {
             return false;
         }
-        IIntPointer thatPointer = that.createPointer();
+        IIntConstPointer thatPointer = that.createPointer();
         for (int i = 0; i < getCapacity(); i++) {
             if (values[i] != thatPointer.get(i)) {
                 return false;

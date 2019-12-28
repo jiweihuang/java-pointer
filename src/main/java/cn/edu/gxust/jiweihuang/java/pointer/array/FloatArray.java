@@ -36,7 +36,7 @@
  */
 package cn.edu.gxust.jiweihuang.java.pointer.array;
 
-import cn.edu.gxust.jiweihuang.java.pointer.primitive.IFloatPointer;
+import cn.edu.gxust.jiweihuang.java.pointer.primitive.IFloatConstPointer;
 import cn.edu.gxust.jiweihuang.java.pointer.IFunctionPointer;
 
 import java.util.Arrays;
@@ -212,7 +212,7 @@ public class FloatArray {
      *
      * @return 一个指向该数据区域的指针。
      */
-    public IFloatPointer createPointer() {
+    public IFloatConstPointer createPointer() {
         return new FloatPointer();
     }
     /**
@@ -221,7 +221,7 @@ public class FloatArray {
      * @param offset 指针指向的移动量。
      * @return 一个指向数组的指针。
      */
-    public IFloatPointer createPointer(int offset) {
+    public IFloatConstPointer createPointer(int offset) {
         return createPointer().move(offset);
     }
     /**
@@ -236,7 +236,7 @@ public class FloatArray {
         Objects.requireNonNull(values, "Expected the parameter {values != null}.");
         int len = values.length;
         FloatArray data = new FloatArray(len);
-        IFloatPointer pointer = data.createPointer();
+        IFloatConstPointer pointer = data.createPointer();
         for (int i = 0; i < len; i++) {
             pointer.set(i, values[i]);
         }
@@ -249,7 +249,7 @@ public class FloatArray {
      * 因为是私有类，所以此类的外部无法访问该类，
      * 因为是内部类，故其拥有对其外部类数据的引用。
      */
-    private class FloatPointer implements IFloatPointer {
+    private class FloatPointer implements IFloatConstPointer {
 
         /**
          * 指针的指向。
@@ -351,7 +351,7 @@ public class FloatArray {
         if (getCapacity() != that.getCapacity()) {
             return false;
         }
-        IFloatPointer thatPointer = that.createPointer();
+        IFloatConstPointer thatPointer = that.createPointer();
         for (int i = 0; i < getCapacity(); i++) {
             if (values[i] != thatPointer.get(i)) {
                 return false;

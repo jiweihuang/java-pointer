@@ -37,7 +37,7 @@
 package cn.edu.gxust.jiweihuang.java.pointer.array;
 
 import cn.edu.gxust.jiweihuang.java.pointer.IFunctionPointer;
-import cn.edu.gxust.jiweihuang.java.pointer.primitive.IShortPointer;
+import cn.edu.gxust.jiweihuang.java.pointer.primitive.IShortConstPointer;
 
 import java.io.Serializable;
 import java.util.Arrays;
@@ -219,7 +219,7 @@ public class ShortArray implements Serializable {
      *
      * @return 一个指向该数据区域的指针。
      */
-    public IShortPointer createPointer() {
+    public IShortConstPointer createPointer() {
         return new ShortPointer();
     }
 
@@ -229,7 +229,7 @@ public class ShortArray implements Serializable {
      * @param offset 指针指向的移动量。
      * @return 一个指向数组的指针。
      */
-    public IShortPointer createPointer(int offset) {
+    public IShortConstPointer createPointer(int offset) {
         return createPointer().move(offset);
     }
 
@@ -245,7 +245,7 @@ public class ShortArray implements Serializable {
         Objects.requireNonNull(values, "Expected the parameter {values != null}.");
         int len = values.length;
         ShortArray data = new ShortArray(len);
-        IShortPointer pointer = data.createPointer();
+        IShortConstPointer pointer = data.createPointer();
         for (int i = 0; i < len; i++) {
             pointer.set(i, values[i]);
         }
@@ -258,7 +258,7 @@ public class ShortArray implements Serializable {
      * 因为是私有类，所以此类的外部无法访问该类，
      * 因为是内部类，故其拥有对其外部类数据的引用。
      */
-    private class ShortPointer implements IShortPointer {
+    private class ShortPointer implements IShortConstPointer {
 
         /**
          * 指针的指向。
@@ -362,7 +362,7 @@ public class ShortArray implements Serializable {
         if (getCapacity() != that.getCapacity()) {
             return false;
         }
-        IShortPointer thatPointer = that.createPointer();
+        IShortConstPointer thatPointer = that.createPointer();
         for (int i = 0; i < getCapacity(); i++) {
             if (values[i] != thatPointer.get(i)) {
                 return false;

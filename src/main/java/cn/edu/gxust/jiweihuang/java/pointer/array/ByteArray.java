@@ -36,7 +36,7 @@
  */
 package cn.edu.gxust.jiweihuang.java.pointer.array;
 
-import cn.edu.gxust.jiweihuang.java.pointer.primitive.IBytePointer;
+import cn.edu.gxust.jiweihuang.java.pointer.primitive.IByteConstPointer;
 import cn.edu.gxust.jiweihuang.java.pointer.IFunctionPointer;
 
 import java.util.Arrays;
@@ -215,7 +215,7 @@ public class ByteArray {
      *
      * @return 一个指向该数据区域的指针。
      */
-    public IBytePointer createPointer() {
+    public IByteConstPointer createPointer() {
         return new BytePointer();
     }
 
@@ -225,7 +225,7 @@ public class ByteArray {
      * @param offset 指针指向的移动量。
      * @return 一个指向数组的指针。
      */
-    public IBytePointer createPointer(int offset) {
+    public IByteConstPointer createPointer(int offset) {
         return createPointer().move(offset);
     }
 
@@ -241,7 +241,7 @@ public class ByteArray {
         Objects.requireNonNull(values, "Expected the parameter {values != null}.");
         int len = values.length;
         ByteArray data = new ByteArray(len);
-        IBytePointer pointer = data.createPointer();
+        IByteConstPointer pointer = data.createPointer();
         for (int i = 0; i < len; i++) {
             pointer.set(i, values[i]);
         }
@@ -254,7 +254,7 @@ public class ByteArray {
      * 因为是私有类，所以此类的外部无法访问该类，
      * 因为是内部类，故其拥有对其外部类数据的引用。
      */
-    private class BytePointer implements IBytePointer {
+    private class BytePointer implements IByteConstPointer {
         /**
          * 指针的指向。
          */
@@ -357,7 +357,7 @@ public class ByteArray {
         if (getCapacity() != that.getCapacity()) {
             return false;
         }
-        IBytePointer thatPointer = that.createPointer();
+        IByteConstPointer thatPointer = that.createPointer();
         for (int i = 0; i < getCapacity(); i++) {
             if (values[i] != thatPointer.get(i)) {
                 return false;
