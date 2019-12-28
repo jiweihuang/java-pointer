@@ -386,7 +386,9 @@ public class JavaMinpack {
      *                   {@code x}中的索引。
      * @return 向量{@code x}或其子向量的欧几里得范数。
      */
-    public static double enorm(int n, IDoublePointer x, int startIndex) {
+    public static double enorm(final int n,
+                               final IDoublePointer x,
+                               final int startIndex) {
         double s1 = 0.;
         double s2 = 0.;
         double s3 = 0.;
@@ -454,7 +456,8 @@ public class JavaMinpack {
      * @param x 一个数组，输入型变量，其长度应{@code >= n}。
      * @return 向量{@code x}或其子向量的欧几里得范数。
      */
-    public static double enorm(int n, IDoublePointer x) {
+    public static double enorm(final int n,
+                               final IDoublePointer x) {
         return enorm(n, x, 0);
     }
 
@@ -466,14 +469,18 @@ public class JavaMinpack {
      * @param x 一个数组，输入型变量，其长度应{@code >= n}。
      * @return 向量{@code x}或其子向量的欧几里得范数。
      */
-    public static double enorm(IDoublePointer x) {
+    public static double enorm(final IDoublePointer x) {
         return enorm(x.getCapacity() - x.getPoint(), x, 0);
     }
 
     //=========================================================================
-    public static void rwupdt(final int n, final IDoublePointer r, final int ldr,
-                              final IDoubleConstPointer w, final IDoublePointer b,
-                              final IDoublePointer alpha, final IDoublePointer cos,
+    public static void rwupdt(final int n,
+                              final IDoublePointer r,
+                              final int ldr,
+                              final IDoubleConstPointer w,
+                              final IDoublePointer b,
+                              final IDoublePointer alpha,
+                              final IDoublePointer cos,
                               final IDoublePointer sin) {
 
         /* Initialized data */
@@ -540,9 +547,14 @@ public class JavaMinpack {
         /* last card of subroutine rwupdt. */
     }
 
-    public static void r1updt(final int m, final int n, final IDoublePointer s, final int ls,
-                              final IDoubleConstPointer u, final IDoublePointer v,
-                              final IDoublePointer w, final IIntPointer sing) {
+    public static void r1updt(final int m,
+                              final int n,
+                              final IDoublePointer s,
+                              final int ls,
+                              final IDoubleConstPointer u,
+                              final IDoublePointer v,
+                              final IDoublePointer w,
+                              final IIntPointer sing) {
 
         /* Initialized data */
         double p5 = .5;
@@ -702,8 +714,11 @@ public class JavaMinpack {
         /* last card of subroutine r1updt. */
     }
 
-    public static void r1mpyq(final int m, final int n, final IDoublePointer a,
-                              final int lda, final IDoubleConstPointer v,
+    public static void r1mpyq(final int m,
+                              final int n,
+                              final IDoublePointer a,
+                              final int lda,
+                              final IDoubleConstPointer v,
                               final IDoubleConstPointer w) {
         /* System generated locals */
         int a_dim1, a_offset;
@@ -765,10 +780,15 @@ public class JavaMinpack {
         /* last card of subroutine r1mpyq. */
     }
 
-    public static void qrsolv(final int n, final IDoublePointer r, final int ldr,
-                              final IIntConstPointer ipvt, final IDoubleConstPointer diag,
-                              final IDoubleConstPointer qtb, final IDoublePointer x,
-                              final IDoublePointer sdiag, final IDoublePointer wa) {
+    public static void qrsolv(final int n,
+                              final IDoublePointer r,
+                              final int ldr,
+                              final IIntConstPointer ipvt,
+                              final IDoubleConstPointer diag,
+                              final IDoubleConstPointer qtb,
+                              final IDoublePointer x,
+                              final IDoublePointer sdiag,
+                              final IDoublePointer wa) {
 
         /* Initialized data */
         double p5 = .5;
@@ -888,10 +908,16 @@ public class JavaMinpack {
         /* last card of subroutine qrsolv. */
     }
 
-    public static void qrfac(final int m, final int n, final IDoublePointer a,
-                             final int lda, final int pivot, final IIntPointer ipvt,
-                             final int lipvt, final IDoublePointer rdiag,
-                             final IDoublePointer acnorm, final IDoublePointer wa) {
+    public static void qrfac(final int m,
+                             final int n,
+                             final IDoublePointer a,
+                             final int lda,
+                             final int pivot,
+                             final IIntPointer ipvt,
+                             final int lipvt,
+                             final IDoublePointer rdiag,
+                             final IDoublePointer acnorm,
+                             final IDoublePointer wa) {
         /* Initialized data */
         double p05 = .05;
 
@@ -1001,8 +1027,11 @@ public class JavaMinpack {
     }
 
 
-    public static void qform(final int m, final int n, final IDoublePointer q,
-                             final int ldq, final IDoublePointer wa) {
+    public static void qform(final int m,
+                             final int n,
+                             final IDoublePointer q,
+                             final int ldq,
+                             final IDoublePointer wa) {
         /* System generated locals */
         int q_dim1, q_offset;
 
@@ -1069,10 +1098,14 @@ public class JavaMinpack {
         /* last card of subroutine qform. */
     }
 
-    public static void chkder(final int m, final int n, final IDoubleConstPointer x,
-                              final IDoublePointer fvec, final IDoublePointer fjac,
-                              final int ldfjac, final IDoublePointer xp,
-                              final IDoublePointer fvecp, final int mode,
+    public static void chkder(final int m, final int n,
+                              final IDoubleConstPointer x,
+                              final IDoublePointer fvec,
+                              final IDoublePointer fjac,
+                              final int ldfjac,
+                              final IDoublePointer xp,
+                              final IDoublePointer fvecp,
+                              final int mode,
                               final IDoublePointer err) {
 
         double log10e = 0.43429448190325182765;
@@ -1134,9 +1167,12 @@ public class JavaMinpack {
         /*last card of subroutine chkder. */
     }
 
-    public static void covar(final int n, final IDoublePointer r, final int ldr,
+    public static void covar(final int n,
+                             final IDoublePointer r,
+                             final int ldr,
                              final IIntConstPointer ipvt,
-                             final double tol, final IDoublePointer wa) {
+                             final double tol,
+                             final IDoublePointer wa) {
         /* Local variables */
         int i, j, k, l, ii, jj;
         boolean sing;
@@ -1216,9 +1252,13 @@ public class JavaMinpack {
         /* last card of subroutine covar. */
     }
 
-    public static int covar1(final int m, final int n, final double fsumsq,
-                             final IDoublePointer r, final int ldr,
-                             final IIntConstPointer ipvt, final double tol,
+    public static int covar1(final int m,
+                             final int n,
+                             final double fsumsq,
+                             final IDoublePointer r,
+                             final int ldr,
+                             final IIntConstPointer ipvt,
+                             final double tol,
                              final IDoublePointer wa) {
 
         /* Local variables */
@@ -1308,10 +1348,14 @@ public class JavaMinpack {
         return l + 1;
     }
 
-    public static void dogleg(final int n, final IDoubleConstPointer r, final int lr,
+    public static void dogleg(final int n,
+                              final IDoubleConstPointer r,
+                              final int lr,
                               final IDoubleConstPointer diag,
-                              final IDoubleConstPointer qtb, final double delta,
-                              final IDoublePointer x, final IDoublePointer wa1,
+                              final IDoubleConstPointer qtb,
+                              final double delta,
+                              final IDoublePointer x,
+                              final IDoublePointer wa1,
                               final IDoublePointer wa2) {
         /* System generated locals */
         double d1, d2, d3, d4;
@@ -1470,10 +1514,17 @@ public class JavaMinpack {
     }
 
 
-    public static int fdjac1(final INNonlinearEquations fcn, final int n, final IDoublePointer x,
-                             final IDoubleConstPointer fvec, final IDoublePointer fjac,
-                             final int ldfjac, final int ml, final int mu, final double epsfcn,
-                             final IDoublePointer wa1, final IDoublePointer wa2) {
+    public static int fdjac1(final INNonlinearEquations fcn,
+                             final int n,
+                             final IDoublePointer x,
+                             final IDoubleConstPointer fvec,
+                             final IDoublePointer fjac,
+                             final int ldfjac,
+                             final int ml,
+                             final int mu,
+                             final double epsfcn,
+                             final IDoublePointer wa1,
+                             final IDoublePointer wa2) {
 
         /* System generated locals */
         int fjac_dim1, fjac_offset;
@@ -1576,10 +1627,15 @@ public class JavaMinpack {
         /* last card of subroutine fdjac1. */
     }
 
-    public static int fdjac2(final IMNNonlinearLeastSquares fcn, final int m, final int n,
-                             final IDoublePointer x, final IDoubleConstPointer fvec,
-                             final IDoublePointer fjac, final int ldfjac,
-                             final double epsfcn, final IDoublePointer wa) {
+    public static int fdjac2(final IMNNonlinearLeastSquares fcn,
+                             final int m,
+                             final int n,
+                             final IDoublePointer x,
+                             final IDoubleConstPointer fvec,
+                             final IDoublePointer fjac,
+                             final int ldfjac,
+                             final double epsfcn,
+                             final IDoublePointer wa) {
         /* Local variables */
         double h;
         int i, j;
@@ -1635,11 +1691,17 @@ public class JavaMinpack {
      * <p>
      * 此方法中，参数 ipvt,diag,qtb三个指针都是常量指针，意味着这些指针指向的值是不可修改的。
      */
-    public static void lmpar(final int n, IDoublePointer r, final int ldr,
-                             final IIntConstPointer ipvt, final IDoubleConstPointer diag,
-                             final IDoubleConstPointer qtb, final double delta,
-                             final IDoublePointer par, final IDoublePointer x,
-                             final IDoublePointer sdiag, final IDoublePointer wa1,
+    public static void lmpar(final int n,
+                             final IDoublePointer r,
+                             final int ldr,
+                             final IIntConstPointer ipvt,
+                             final IDoubleConstPointer diag,
+                             final IDoubleConstPointer qtb,
+                             final double delta,
+                             final IDoublePointer par,
+                             final IDoublePointer x,
+                             final IDoublePointer sdiag,
+                             final IDoublePointer wa1,
                              final IDoublePointer wa2) {
 
         /* Initialized data */
@@ -1779,7 +1841,7 @@ public class JavaMinpack {
             /* is zero or the number of iterations has reached 10. */
             if (abs(fp) <= p1 * delta || (parl == 0. && fp <= temp && temp < 0.) || iter == 10) {
                 /*iter == 10的条件，使这一句永远无法执行到。
-                // goto TERMINATE;
+                goto TERMINATE;
                 if (iter == 0) {
                     par.set(0.);
                 }
@@ -1832,5 +1894,193 @@ public class JavaMinpack {
         /* last card of subroutine lmpar. */
     }
 
+    public static int hybrd(final INNonlinearEquations fcn,
+                            final int n,
+                            final IDoublePointer x,
+                            final IDoublePointer fvec,
+                            final double xtol,
+                            final int maxfev,
+                            final int ml,
+                            final int mu,
+                            final double epsfcn,
+                            final IDoublePointer diag,
+                            final int mode,
+                            final double factor,
+                            final int nprint,
+                            final IIntPointer nfev,
+                            final IDoublePointer fjac,
+                            final int ldfjac,
+                            final IDoublePointer r,
+                            final int lr,
+                            final IDoublePointer qtf,
+                            final IDoublePointer wa1,
+                            final IDoublePointer wa2,
+                            final IDoublePointer wa3,
+                            final IDoublePointer wa4) {
+        return 0;
+    }
 
+    public static int hybrd1(final INNonlinearEquations fcn,
+                             final int n,
+                             final IDoublePointer x,
+                             final IDoublePointer fvec,
+                             final double tol,
+                             final IDoublePointer wa,
+                             final int lwa) {
+        return 0;
+    }
+
+    public static int hybrj(final INNonlinearEquationsJacobi fcn,
+                            final int n,
+                            final IDoublePointer x,
+                            final IDoublePointer fvec,
+                            final IDoublePointer fjac,
+                            final int ldfjac,
+                            final double xtol,
+                            final int maxfev,
+                            final IDoublePointer diag,
+                            final int mode,
+                            final double factor,
+                            final int nprint,
+                            final IIntPointer nfev,
+                            final IIntPointer njev,
+                            final IDoublePointer r,
+                            final int lr,
+                            final IDoublePointer qtf,
+                            final IDoublePointer wa1,
+                            final IDoublePointer wa2,
+                            final IDoublePointer wa3,
+                            final IDoublePointer wa4) {
+        return 0;
+    }
+
+    public static int hybrj1(final INNonlinearEquationsJacobi fcn,
+                             final int n,
+                             final IDoublePointer x,
+                             final IDoublePointer fvec,
+                             final IDoublePointer fjac,
+                             final int ldfjac,
+                             final double tol,
+                             final IDoublePointer wa,
+                             final int lwa) {
+        return 0;
+    }
+
+    public static int lmder(final IMNNonlinearLeastSquares fcn,
+                            final int m,
+                            final int n,
+                            final IDoublePointer x,
+                            final IDoublePointer fvec,
+                            final IDoublePointer fjac,
+                            final int ldfjac,
+                            final double ftol,
+                            final double xtol,
+                            final double gtol,
+                            final int maxfev,
+                            final IDoublePointer diag,
+                            final int mode,
+                            final double factor,
+                            final int nprint,
+                            final IIntPointer nfev,
+                            final IIntPointer njev,
+                            final IIntPointer ipvt,
+                            final IDoublePointer qtf,
+                            final IDoublePointer wa1,
+                            final IDoublePointer wa2,
+                            final IDoublePointer wa3,
+                            final IDoublePointer wa4) {
+        return 0;
+    }
+
+    public static int lmder1(final IMNNonlinearLeastSquares fcn,
+                             final int m,
+                             final int n,
+                             final IDoublePointer x,
+                             final IDoublePointer fvec,
+                             final IDoublePointer fjac,
+                             final int ldfjac,
+                             final double tol,
+                             final IIntPointer ipvt,
+                             final IDoublePointer wa,
+                             final int lwa) {
+        return 0;
+    }
+
+    public static int lmdif(final IMNNonlinearLeastSquaresJacobi fcn,
+                            final int m,
+                            final int n,
+                            final IDoublePointer x,
+                            final IDoublePointer fvec,
+                            double ftol,
+                            double xtol,
+                            double gtol,
+                            final int maxfev,
+                            final double epsfcn,
+                            final IDoublePointer diag,
+                            final int mode,
+                            final double factor,
+                            final int nprint,
+                            final IIntPointer nfev,
+                            final IDoublePointer fjac,
+                            final int ldfjac,
+                            final IIntPointer ipvt,
+                            final IDoublePointer qtf,
+                            final IDoublePointer wa1,
+                            final IDoublePointer wa2,
+                            final IDoublePointer wa3,
+                            final IDoublePointer wa4) {
+        return 0;
+    }
+
+    public static int lmdif1(final IMNNonlinearLeastSquaresJacobi fcn,
+                             final int m,
+                             final int n,
+                             final IDoublePointer x,
+                             final IDoublePointer fvec,
+                             final double tol,
+                             final IIntPointer iwa,
+                             final IDoublePointer wa,
+                             final int lwa) {
+        return 0;
+    }
+
+    public static int lmstr(final IMNNonlinearLeastSquaresConserving fcn,
+                            final int m,
+                            final int n,
+                            final IDoublePointer x,
+                            final IDoublePointer fvec,
+                            final IDoublePointer fjac,
+                            final int ldfjac,
+                            final double ftol,
+                            final double xtol,
+                            final double gtol,
+                            final int maxfev,
+                            final IDoublePointer diag,
+                            final int mode,
+                            final double factor,
+                            final int nprint,
+                            final IIntPointer nfev,
+                            final IIntPointer njev,
+                            final IIntPointer ipvt,
+                            final IDoublePointer qtf,
+                            final IDoublePointer wa1,
+                            final IDoublePointer wa2,
+                            final IDoublePointer wa3,
+                            final IDoublePointer wa4) {
+        return 0;
+    }
+
+    public static int lmstr1(final IMNNonlinearLeastSquaresConserving fcn,
+                             final int m,
+                             final int n,
+                             final IDoublePointer x,
+                             final IDoublePointer fvec,
+                             final IDoublePointer fjac,
+                             final int ldfjac,
+                             final double tol,
+                             final IIntPointer ipvt,
+                             final IDoublePointer wa,
+                             final int lwa) {
+        return 0;
+    }
 }

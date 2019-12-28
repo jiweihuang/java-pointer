@@ -14,8 +14,10 @@
       <w>fdjac</w>
       <w>fjac</w>
       <w>fjrow</w>
+      <w>ftol</w>
       <w>fvec</w>
       <w>fvecp</w>
+      <w>gtol</w>
       <w>guangxi</w>
       <w>hybrd</w>
       <w>hybrj</w>
@@ -27,14 +29,19 @@
       <w>liuzhou</w>
       <w>lmdif</w>
       <w>lmpar</w>
+      <w>maxfev</w>
       <w>minpack</w>
       <w>msum</w>
+      <w>nfev</w>
+      <w>njev</w>
       <w>noninfringement</w>
+      <w>nprint</w>
       <w>nsing</w>
       <w>parl</w>
       <w>paru</w>
       <w>sdiag</w>
       <w>updt</w>
+      <w>xtol</w>
     </words>
   </dictionary>
 </component>
