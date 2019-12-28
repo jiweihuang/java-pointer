@@ -36,8 +36,9 @@
  */
 package cn.edu.gxust.jiweihuang.java.pointer.array;
 
-import cn.edu.gxust.jiweihuang.java.pointer.primitive.IBooleanConstPointer;
 import cn.edu.gxust.jiweihuang.java.pointer.IFunctionPointer;
+import cn.edu.gxust.jiweihuang.java.pointer.primitive.IBooleanConstPointer;
+import cn.edu.gxust.jiweihuang.java.pointer.primitive.IBooleanPointer;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -48,7 +49,7 @@ import java.util.Objects;
  * Development status：Finished     # Developing, Finished  <p>
  * Javadoc status: Finished         # Missing, Developing, Finished  <p>
  * Test status: None                # None, Missing, Developing, Finished  <p>
- * Last revision date: 2019-12-25 <p>
+ * Last revision date: 2019-12-28 <p>
  *
  * @author JiweiHuang
  * @since 20191205
@@ -71,7 +72,7 @@ public class BooleanArray {
      * 并将数组内所有元素的值设置为 {@code false}。
      * <p>
      * 注意：参数 {@code capacity}必须大于等于{@code 0}，
-     * 否则，抛出{@code java.lang.NegativeArraySizeException} 异常。
+     * 否则，抛出{@code java.lang.NegativeArraySizeException}异常。
      *
      * @param capacity 数组的容量。
      */
@@ -87,7 +88,7 @@ public class BooleanArray {
      * 然后，将数组内所有元素的值设置为参数{@code value}的值。
      * <p>
      * 注意：参数 {@code capacity}必须大于等于{@code 0}，
-     * 否则，抛出{@code java.lang.NegativeArraySizeException} 异常。
+     * 否则，抛出{@code java.lang.NegativeArraySizeException}异常。
      *
      * @param capacity 数组的容量。
      * @param value    用于初始化数组的值。
@@ -217,21 +218,15 @@ public class BooleanArray {
     /**
      * 创建一个指向该数组的指针。
      * 指针的初始指向为0。
+     *
      * @return 一个指向该数据区域的指针。
      */
-    public IBooleanConstPointer createPointer() {
-        return new BooleanPointer();
+    public IBooleanConstPointer createConstPointer() {
+        return new BooleanConstPointer();
     }
 
-    /**
-     * 创建一个指向该数组的指针，
-     * 并使指针指向 {@code offset}。
-     *
-     * @param offset 指针指向的移动量。
-     * @return 一个指向数组的指针。
-     */
-    public IBooleanConstPointer createPointer(int offset) {
-        return createPointer().move(offset);
+    public IBooleanPointer createPointer() {
+        return new BooleanPointer();
     }
 
     /**
@@ -246,7 +241,7 @@ public class BooleanArray {
         Objects.requireNonNull(values, "Expected the parameter {values != null}.");
         int len = values.length;
         BooleanArray data = new BooleanArray(len);
-        IBooleanConstPointer pointer = data.createPointer();
+        IBooleanPointer pointer = data.createPointer();
         for (int i = 0; i < len; i++) {
             pointer.set(i, values[i]);
         }
@@ -254,12 +249,12 @@ public class BooleanArray {
     }
 
     /**
-     * 类{@code BooleanPointer}是{@code IBooleanPointer}的实现，
+     * 类{@code BooleanConstPointer}是{@code IBooleanConstPointer}的实现，
      * 用于表征一个指向{@code boolean}型数组的指针。<p>
      * 因为是私有类，所以此类的外部无法访问该类，
      * 因为是内部类，故其拥有对其外部类数据的引用。
      */
-    private class BooleanPointer implements IBooleanConstPointer {
+    private class BooleanConstPointer implements IBooleanConstPointer {
 
         /**
          * 指针的指向。
@@ -271,7 +266,7 @@ public class BooleanArray {
          * 该构造器将指针的指向设置为0，
          * 构造器是私有的，意味着该类不能被外部实例化。
          */
-        private BooleanPointer() {
+        private BooleanConstPointer() {
             this.point = 0;
         }
 
@@ -294,15 +289,8 @@ public class BooleanArray {
          * {@inheritDoc}
          */
         @Override
-        public void set(int index, boolean value) {
-            int i = index + getPoint();
-            if (i >= 0 && i < getCapacity()) {
-                values[i] = value;
-            } else {
-                throw new ArrayIndexOutOfBoundsException(String.format(
-                        "Expected parameters {%d <= index < %d}.", -getPoint(),
-                        getCapacity() - getPoint()));
-            }
+        public BooleanArray getBase() {
+            return BooleanArray.this;
         }
 
         /**
@@ -325,26 +313,45 @@ public class BooleanArray {
          * {@inheritDoc}
          */
         @Override
-        public BooleanPointer move(int offset) {
+        public void move(int offset) {
             this.point = this.point + offset;
-            return this;
         }
 
         /**
          * {@inheritDoc}
          */
         @Override
-        public BooleanPointer copy() {
-            return new BooleanPointer().move(getPoint());
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public BooleanPointer reset() {
+        public void reset() {
             this.point = 0;
-            return this;
+        }
+    }
+
+    private class BooleanPointer extends BooleanConstPointer implements IBooleanPointer {
+        private BooleanPointer() {
+            super();
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void set(int index, boolean value) {
+            int i = index + getPoint();
+            if (i >= 0 && i < getCapacity()) {
+                values[i] = value;
+            } else {
+                throw new ArrayIndexOutOfBoundsException(String.format(
+                        "Expected parameters {%d <= index < %d}.", -getPoint(),
+                        getCapacity() - getPoint()));
+            }
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public BooleanArray getBase() {
+            return BooleanArray.this;
         }
     }
 

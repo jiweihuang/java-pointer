@@ -3,24 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="8f2a6236-5f9b-4785-a868-1556f3908bef" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/IBooleanConstPointer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/IBooleanConstPointer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/IBooleanPointer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/IBooleanPointer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/IByteConstPointer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/IByteConstPointer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/IBytePointer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/IBytePointer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/ICharConstPointer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/ICharConstPointer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/ICharPointer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/ICharPointer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/IDoubleConstPointer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/IDoubleConstPointer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/IDoublePointer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/IDoublePointer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/IFloatConstPointer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/IFloatConstPointer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/IFloatPointer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/IFloatPointer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/IIntConstPointer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/IIntConstPointer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/IIntPointer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/IIntPointer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/ILongConstPointer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/ILongConstPointer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/ILongPointer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/ILongPointer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/IShortConstPointer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/IShortConstPointer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/IShortPointer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/IShortPointer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/IStringConstPointer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/IStringConstPointer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/IStringPointer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/IStringPointer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/array/BooleanArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/array/BooleanArray.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -195,7 +178,7 @@
       <workItem from="1577406547212" duration="1869000" />
       <workItem from="1577450557283" duration="453000" />
       <workItem from="1577451098202" duration="5220000" />
-      <workItem from="1577506700301" duration="9389000" />
+      <workItem from="1577506700301" duration="10240000" />
     </task>
     <task id="LOCAL-00001" summary="Create Projects 2019-12-05">
       <created>1575636461895</created>
@@ -386,7 +369,14 @@
       <option name="project" value="LOCAL" />
       <updated>1577514904553</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="update projects 2019-12-25">
+      <created>1577516653395</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1577516653395</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -404,10 +394,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="261" y="0" key="#Project_Structure/0.0.1536.824@0.0.1536.824" timestamp="1577321975549" />
-    <state x="530" y="55" key="#com.intellij.ide.util.MemberChooser" timestamp="1577513110574">
+    <state x="530" y="55" key="#com.intellij.ide.util.MemberChooser" timestamp="1577517424174">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="530" y="55" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1577513110574" />
+    <state x="530" y="55" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1577517424174" />
     <state x="449" y="129" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1577341374807">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -420,10 +410,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="436" y="101" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1577325713923" />
-    <state x="0" y="0" key="CommitChangelistDialog2" timestamp="1577514902436">
+    <state x="0" y="0" key="CommitChangelistDialog2" timestamp="1577516651748">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="0" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1577514902436" />
+    <state x="0" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1577516651748" />
     <state x="499" y="85" key="FileChooserDialogImpl" timestamp="1577453272117">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -460,10 +450,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="154" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1577366430584" />
-    <state x="261" y="73" key="Vcs.Push.Dialog.v2" timestamp="1577514910310">
+    <state x="261" y="73" key="Vcs.Push.Dialog.v2" timestamp="1577516659343">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="261" y="73" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1577514910310" />
+    <state x="261" y="73" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1577516659343" />
     <state x="462" y="64" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1577407205738">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
