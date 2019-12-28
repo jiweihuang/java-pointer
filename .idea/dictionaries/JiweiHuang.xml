@@ -17,12 +17,20 @@
       <w>hybrd</w>
       <w>hybrj</w>
       <w>iflag</w>
+      <w>ipvt</w>
+      <w>jacobian</w>
       <w>jiwei</w>
       <w>ldfjac</w>
       <w>liuzhou</w>
       <w>lmdif</w>
+      <w>lmpar</w>
       <w>minpack</w>
       <w>noninfringement</w>
+      <w>nsing</w>
+      <w>parl</w>
+      <w>paru</w>
+      <w>sdiag</w>
+      <w>updt</w>
     </words>
   </dictionary>
 </component>

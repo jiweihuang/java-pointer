@@ -1561,9 +1561,33 @@ public class JavaMinpack {
         /* last card of subroutine fdjac2. */
     }
 
-    public static void lmpar(int n, IDoublePointer r, int ldr, final IIntPointer ipvt, final IDoublePointer diag,
-                             final IDoublePointer qtb, double delta, IDoublePointer par, IDoublePointer x,
-                             IDoublePointer sdiag, IDoublePointer wa1, IDoublePointer wa2) {
+    /**
+     * 常量指针：指针指向的内容是常量，不能通过这个指针改变变量的值，
+     * 当然，如果有其他非指针常量的指针也指向该变量，则其他指针可改变该变量的值。<p>
+     * 指针常量有两种写法：<p>
+     * （1）const int *p <p>
+     * （2）int const *p <p>
+     * 虽然常量指针指向的的值不能改变，但是该指针却可以指向其他的变量地址。
+     * <p>
+     * 指针常量：是指指针本身是个常量，不能再指向其他的地址。<p>
+     * 指针常量的写法如下：int *const p <p>
+     * 指针常量指向的地址不能改变，但是地址中保存的数值是可以改变的。
+     * <p>
+     * 区分常量指针和指针常量的关键就在于星号的位置，我们以星号为分界线，
+     * 如果const在星号的左边，则为常量指针，如果const在星号的右边则为指针常量。
+     * 如果我们将星号读作‘指针’，将const读作‘常量’的话，内容正好符合。
+     * int const *p；是常量指针，int *const p；是指针常量。
+     * <p>
+     * 还有上述常量指针和指针常量的结合：const int* const p
+     * <p>
+     * 此方法中，参数 ipvt,diag,qtb三个指针都是常量指针，意味着这些指针指向的值是不可修改的。
+     */
+    public static void lmpar(final int n, IDoublePointer r, final int ldr,
+                             final IIntPointer ipvt, final IDoublePointer diag,
+                             final IDoublePointer qtb, final double delta,
+                             final IDoublePointer par, final IDoublePointer x,
+                             final IDoublePointer sdiag, final IDoublePointer wa1,
+                             final IDoublePointer wa2) {
 
         /* Initialized data */
         double p1 = .1;
@@ -1583,12 +1607,10 @@ public class JavaMinpack {
         double dxnorm;
 
         /* dwarf is the smallest positive magnitude. */
-
         dwarf = DPMPAR2;
 
         /* compute and store in x the gauss-newton direction. if the */
         /* jacobian is rank-deficient, obtain a least squares solution. */
-
         nsing = n;
         for (j = 0; j < n; ++j) {
             wa1.set(j, qtb.get(j));
@@ -1619,7 +1641,6 @@ public class JavaMinpack {
         /* initialize the iteration counter. */
         /* evaluate the function at the origin, and test */
         /* for acceptance of the gauss-newton direction. */
-
         iter = 0;
         for (j = 0; j < n; ++j) {
             wa2.set(j, diag.get(j) * x.get(j));
@@ -1627,6 +1648,8 @@ public class JavaMinpack {
         dxnorm = enorm(n, wa2);
         fp = dxnorm - delta;
         if (fp <= p1 * delta) {
+            //iter==0，所以这里不用判断，一定执行：par.set(0, 0.);
+            // goto TERMINATE;
             par.set(0, 0.);
             return;
         }
@@ -1634,7 +1657,6 @@ public class JavaMinpack {
         /* if the jacobian is not rank deficient, the newton */
         /* step provides a lower bound, parl, for the zero of */
         /* the function. otherwise set this bound to zero. */
-
         parl = 0.;
         if (nsing >= n) {
             for (j = 0; j < n; ++j) {
@@ -1644,26 +1666,20 @@ public class JavaMinpack {
             for (j = 0; j < n; ++j) {
                 double sum = 0.;
                 if (j >= 1) {
-                    int i;
-                    for (i = 0; i < j; ++i) {
+                    for (int i = 0; i < j; ++i) {
                         sum += r.get(i + j * ldr) * wa1.get(i);
                     }
                 }
                 wa1.set(j, (wa1.get(j) - sum) / r.get(j + j * ldr));
             }
-
             temp = enorm(n, wa1);
             parl = fp / delta / temp / temp;
         }
 
         /* calculate an upper bound, paru, for the zero of the function. */
-
         for (j = 0; j < n; ++j) {
-            double sum;
-
-            int i;
-            sum = 0.;
-            for (i = 0; i <= j; ++i) {
+            double sum = 0.;
+            for (int i = 0; i <= j; ++i) {
                 sum += r.get(i + j * ldr) * qtb.get(i);
             }
             l = ipvt.get(j) - 1;
@@ -1672,12 +1688,11 @@ public class JavaMinpack {
         gnorm = enorm(n, wa1);
         paru = gnorm / delta;
         if (paru == 0.) {
-            paru = dwarf / min(delta, p1) /* / p001 ??? */;
+            paru = dwarf / min(delta, p1);
         }
 
         /* if the input par lies outside of the interval (parl,paru), */
         /* set par to the closer endpoint. */
-
         par.set(max(par.get(), parl));
         par.set(min(par.get(), paru));
         if (par.get() == 0.) {
@@ -1685,12 +1700,9 @@ public class JavaMinpack {
         }
 
         /* beginning of an iteration. */
-
         for (; ; ) {
             ++iter;
-
             /* evaluate the function at the current value of par. */
-
             if (par.get() == 0.) {
                 /* Computing MAX */
                 d1 = dwarf;
@@ -1712,11 +1724,13 @@ public class JavaMinpack {
             /* if the function is small enough, accept the current value */
             /* of par. also test for the exceptional cases where parl */
             /* is zero or the number of iterations has reached 10. */
-
             if (abs(fp) <= p1 * delta || (parl == 0. && fp <= temp && temp < 0.) || iter == 10) {
+                /*iter == 10的条件，使这一句永远无法执行到。
+                // goto TERMINATE;
                 if (iter == 0) {
                     par.set(0.);
                 }
+                */
                 return;
             }
 
@@ -1729,18 +1743,15 @@ public class JavaMinpack {
                 wa1.set(j, wa1.get(j) / sdiag.get(j));
                 temp = wa1.get(j);
                 if (n > j + 1) {
-                    int i;
-                    for (i = j + 1; i < n; ++i) {
+                    for (int i = j + 1; i < n; ++i) {
                         wa1.set(i, wa1.get(i) - r.get(i + j * ldr) * temp);
                     }
                 }
             }
-
             temp = enorm(n, wa1);
             parc = fp / delta / temp / temp;
 
             /* depending on the sign of the function, update parl or paru. */
-
             if (fp > 0.) {
                 parl = max(parl, par.get());
             }
@@ -1749,7 +1760,6 @@ public class JavaMinpack {
             }
 
             /* compute an improved estimate for par. */
-
             /* Computing MAX */
             d1 = parl;
             d2 = par.get() + parc;
@@ -1757,6 +1767,15 @@ public class JavaMinpack {
 
             /* end of an iteration. */
         }
+
+        /*
+        因为iter始终不等于0，所以，这一句始终无法执行。
+        TERMINATE:
+        if(iter == 0){
+            par.set(0.);
+        }
+        */
+
         /* last card of subroutine lmpar. */
     }
 }
