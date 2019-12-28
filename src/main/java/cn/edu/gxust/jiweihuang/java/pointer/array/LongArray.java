@@ -38,6 +38,7 @@ package cn.edu.gxust.jiweihuang.java.pointer.array;
 
 import cn.edu.gxust.jiweihuang.java.pointer.IFunctionPointer;
 import cn.edu.gxust.jiweihuang.java.pointer.primitive.ILongConstPointer;
+import cn.edu.gxust.jiweihuang.java.pointer.primitive.ILongPointer;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -214,7 +215,7 @@ public class LongArray {
      *
      * @return 一个指向该数据区域的指针。
      */
-    public ILongConstPointer createPointer() {
+    public ILongPointer createPointer() {
         return new LongPointer();
     }
 
@@ -224,8 +225,8 @@ public class LongArray {
      * @param offset 指针指向的移动量。
      * @return 一个指向数组的指针。
      */
-    public ILongConstPointer createPointer(int offset) {
-        return createPointer().move(offset);
+    public ILongConstPointer createConstPointer(int offset) {
+        return new LongConstPointer();
     }
 
     /**
@@ -240,7 +241,7 @@ public class LongArray {
         Objects.requireNonNull(values, "Expected the parameter {values != null}.");
         int len = values.length;
         LongArray data = new LongArray(len);
-        ILongConstPointer pointer = data.createPointer();
+        ILongPointer pointer = data.createPointer();
         for (int i = 0; i < len; i++) {
             pointer.set(i, values[i]);
         }
@@ -253,7 +254,7 @@ public class LongArray {
      * 因为是私有类，所以此类的外部无法访问该类，
      * 因为是内部类，故其拥有对其外部类数据的引用。
      */
-    private class LongPointer implements ILongConstPointer {
+    private class LongConstPointer implements ILongConstPointer {
 
         /**
          * 指针的指向。
@@ -265,7 +266,7 @@ public class LongArray {
          * 该构造器将指针的指向设置为0，
          * 构造器是私有的，意味着该类不能被外部初始化。
          */
-        private LongPointer() {
+        private LongConstPointer() {
             this.point = 0;
         }
 
@@ -284,20 +285,11 @@ public class LongArray {
             }
         }
 
-        /**
-         * {@inheritDoc}
-         */
         @Override
-        public void set(int index, long value) {
-            int i = index + getPoint();
-            if (i >= 0 && i < getCapacity()) {
-                values[i] = value;
-            } else {
-                throw new ArrayIndexOutOfBoundsException(String.format(
-                        "Expected parameters {%d <= index < %d}", -getPoint(),
-                        getCapacity() - getPoint()));
-            }
+        public LongArray getBase() {
+            return LongArray.this;
         }
+
 
         /**
          * {@inheritDoc}
@@ -319,26 +311,38 @@ public class LongArray {
          * {@inheritDoc}
          */
         @Override
-        public LongPointer move(int offset) {
+        public void move(int offset) {
             this.point = this.point + offset;
-            return this;
         }
+
 
         /**
          * {@inheritDoc}
          */
         @Override
-        public LongPointer copy() {
-            return new LongPointer().move(getPoint());
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public LongPointer reset() {
+        public void reset() {
             this.point = 0;
-            return this;
+        }
+    }
+
+    private final class LongPointer extends LongConstPointer implements ILongPointer {
+        private LongPointer() {
+            super();
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void set(int index, long value) {
+            int i = index + getPoint();
+            if (i >= 0 && i < getCapacity()) {
+                values[i] = value;
+            } else {
+                throw new ArrayIndexOutOfBoundsException(String.format(
+                        "Expected parameters {%d <= index < %d}", -getPoint(),
+                        getCapacity() - getPoint()));
+            }
         }
     }
 

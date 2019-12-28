@@ -47,7 +47,7 @@ package cn.edu.gxust.jiweihuang.java.pointer.primitive;
  * @author JiweiHuang
  * @since 20191205
  */
-public interface IStringPointer extends IShortConstPointer {
+public interface IStringPointer extends IStringConstPointer {
     /**
      * 设置指定索引处的数据。
      *

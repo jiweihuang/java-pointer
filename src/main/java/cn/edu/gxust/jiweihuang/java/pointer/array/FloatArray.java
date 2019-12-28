@@ -36,8 +36,9 @@
  */
 package cn.edu.gxust.jiweihuang.java.pointer.array;
 
-import cn.edu.gxust.jiweihuang.java.pointer.primitive.IFloatConstPointer;
 import cn.edu.gxust.jiweihuang.java.pointer.IFunctionPointer;
+import cn.edu.gxust.jiweihuang.java.pointer.primitive.IFloatConstPointer;
+import cn.edu.gxust.jiweihuang.java.pointer.primitive.IFloatPointer;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -188,6 +189,7 @@ public class FloatArray {
     public FloatArray copy(int from, int to) {
         return of(Arrays.copyOfRange(this.values, from, to));
     }
+
     /**
      * 通过拷贝创建一个新的数组对象。
      *
@@ -212,18 +214,19 @@ public class FloatArray {
      *
      * @return 一个指向该数据区域的指针。
      */
-    public IFloatConstPointer createPointer() {
+    public IFloatPointer createPointer() {
         return new FloatPointer();
     }
+
     /**
      * 创建一个指向该数组的指针，并使指针指向 {@code offset}。
      *
-     * @param offset 指针指向的移动量。
      * @return 一个指向数组的指针。
      */
-    public IFloatConstPointer createPointer(int offset) {
-        return createPointer().move(offset);
+    public IFloatConstPointer createConstPointer() {
+        return new FloatConstPointer();
     }
+
     /**
      * 通过指定值组的方式创建数组对象，该方法可能并不高效，因为先创建了数组对象，
      * 接着创建了该数组对象的指针，最后利用该指针初始化了数组对象内元素的值，
@@ -236,7 +239,7 @@ public class FloatArray {
         Objects.requireNonNull(values, "Expected the parameter {values != null}.");
         int len = values.length;
         FloatArray data = new FloatArray(len);
-        IFloatConstPointer pointer = data.createPointer();
+        IFloatPointer pointer = data.createPointer();
         for (int i = 0; i < len; i++) {
             pointer.set(i, values[i]);
         }
@@ -249,7 +252,7 @@ public class FloatArray {
      * 因为是私有类，所以此类的外部无法访问该类，
      * 因为是内部类，故其拥有对其外部类数据的引用。
      */
-    private class FloatPointer implements IFloatConstPointer {
+    private class FloatConstPointer implements IFloatConstPointer {
 
         /**
          * 指针的指向。
@@ -261,9 +264,10 @@ public class FloatArray {
          * 该构造器将指针的指向设置为0，
          * 构造器是私有的，意味着该类不能被外部初始化。
          */
-        private FloatPointer() {
+        private FloatConstPointer() {
             this.point = 0;
         }
+
         /**
          * {@inheritDoc}
          */
@@ -278,19 +282,10 @@ public class FloatArray {
                         getCapacity() - getPoint()));
             }
         }
-        /**
-         * {@inheritDoc}
-         */
+
         @Override
-        public void set(int index, float value) {
-            int i = index + getPoint();
-            if (i >= 0 && i < getCapacity()) {
-                values[i] = value;
-            } else {
-                throw new ArrayIndexOutOfBoundsException(String.format(
-                        "Expected parameters {%d <= index < %d}", -getPoint(),
-                        getCapacity() - getPoint()));
-            }
+        public FloatArray getBase() {
+            return FloatArray.this;
         }
 
         /**
@@ -313,26 +308,37 @@ public class FloatArray {
          * {@inheritDoc}
          */
         @Override
-        public FloatPointer move(int offset) {
+        public void move(int offset) {
             this.point = this.point + offset;
-            return this;
         }
 
         /**
          * {@inheritDoc}
          */
         @Override
-        public FloatPointer copy() {
-            return new FloatPointer().move(getPoint());
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public FloatPointer reset() {
+        public void reset() {
             this.point = 0;
-            return this;
+        }
+    }
+
+    private final class FloatPointer extends FloatConstPointer implements IFloatPointer {
+        private FloatPointer() {
+            super();
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void set(int index, float value) {
+            int i = index + getPoint();
+            if (i >= 0 && i < getCapacity()) {
+                values[i] = value;
+            } else {
+                throw new ArrayIndexOutOfBoundsException(String.format(
+                        "Expected parameters {%d <= index < %d}", -getPoint(),
+                        getCapacity() - getPoint()));
+            }
         }
     }
 

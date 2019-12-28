@@ -38,6 +38,7 @@ package cn.edu.gxust.jiweihuang.java.pointer.array;
 
 import cn.edu.gxust.jiweihuang.java.pointer.IFunctionPointer;
 import cn.edu.gxust.jiweihuang.java.pointer.primitive.IIntConstPointer;
+import cn.edu.gxust.jiweihuang.java.pointer.primitive.IIntPointer;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -214,18 +215,17 @@ public class IntArray {
      *
      * @return 一个指向该数据区域的指针。
      */
-    public IIntConstPointer createPointer() {
+    public IIntPointer createPointer() {
         return new IntPointer();
     }
 
     /**
      * 创建一个指向该数组的指针，并使指针指向 {@code offset}。
      *
-     * @param offset 指针指向的移动量。
      * @return 一个指向数组的指针。
      */
-    public IIntConstPointer createPointer(int offset) {
-        return createPointer().move(offset);
+    public IIntConstPointer createConstPointer() {
+        return new IntConstPointer();
     }
 
     /**
@@ -240,7 +240,7 @@ public class IntArray {
         Objects.requireNonNull(values, "Expected the parameter {values != null}.");
         int len = values.length;
         IntArray data = new IntArray(len);
-        IIntConstPointer pointer = data.createPointer();
+        IIntPointer pointer = data.createPointer();
         for (int i = 0; i < len; i++) {
             pointer.set(i, values[i]);
         }
@@ -253,7 +253,7 @@ public class IntArray {
      * 因为是私有类，所以此类的外部无法访问该类，
      * 因为是内部类，故其拥有对其外部类数据的引用。
      */
-    private class IntPointer implements IIntConstPointer {
+    private class IntConstPointer implements IIntConstPointer {
 
         /**
          * 指针的指向。
@@ -265,7 +265,7 @@ public class IntArray {
          * 该构造器将指针的指向设置为0，
          * 构造器是私有的，意味着该类不能被外部初始化。
          */
-        private IntPointer() {
+        private IntConstPointer() {
             this.point = 0;
         }
 
@@ -284,20 +284,11 @@ public class IntArray {
             }
         }
 
-        /**
-         * {@inheritDoc}
-         */
         @Override
-        public void set(int index, int value) {
-            int i = index + getPoint();
-            if (i >= 0 && i < getCapacity()) {
-                values[i] = value;
-            } else {
-                throw new ArrayIndexOutOfBoundsException(String.format(
-                        "Expected parameters {%d <= index < %d}", -getPoint(),
-                        getCapacity() - getPoint()));
-            }
+        public IntArray getBase() {
+            return IntArray.this;
         }
+
 
         /**
          * {@inheritDoc}
@@ -319,26 +310,37 @@ public class IntArray {
          * {@inheritDoc}
          */
         @Override
-        public IntPointer move(int offset) {
+        public void move(int offset) {
             this.point = this.point + offset;
-            return this;
         }
 
         /**
          * {@inheritDoc}
          */
         @Override
-        public IntPointer copy() {
-            return new IntPointer().move(getPoint());
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public IntPointer reset() {
+        public void reset() {
             this.point = 0;
-            return this;
+        }
+    }
+
+    private final class IntPointer extends IntConstPointer implements IIntPointer {
+        private IntPointer() {
+            super();
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void set(int index, int value) {
+            int i = index + getPoint();
+            if (i >= 0 && i < getCapacity()) {
+                values[i] = value;
+            } else {
+                throw new ArrayIndexOutOfBoundsException(String.format(
+                        "Expected parameters {%d <= index < %d}", -getPoint(),
+                        getCapacity() - getPoint()));
+            }
         }
     }
 

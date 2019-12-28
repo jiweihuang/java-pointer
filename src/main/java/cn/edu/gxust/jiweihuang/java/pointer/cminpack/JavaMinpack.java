@@ -755,7 +755,7 @@ public class JavaMinpack {
         /* last card of subroutine r1mpyq. */
     }
 
-    public static void qrsolv(int n, IDoublePointer r, int ldr, final IIntConstPointer ipvt,
+    public static void qrsolv(int n, IDoublePointer r, int ldr, final IIntPointer ipvt,
                               final IDoublePointer diag, final IDoublePointer qtb,
                               IDoublePointer x, IDoublePointer sdiag, IDoublePointer wa) {
 
@@ -878,7 +878,7 @@ public class JavaMinpack {
     }
 
     public static void qrfac(int m, int n, IDoublePointer a, int lda, int pivot,
-                             IIntConstPointer ipvt, int lipvt, IDoublePointer rdiag,
+                             IIntPointer ipvt, int lipvt, IDoublePointer rdiag,
                              IDoublePointer acnorm, IDoublePointer wa) {
         /* Initialized data */
         double p05 = .05;
@@ -1584,7 +1584,7 @@ public class JavaMinpack {
      * 此方法中，参数 ipvt,diag,qtb三个指针都是常量指针，意味着这些指针指向的值是不可修改的。
      */
     public static void lmpar(final int n, IDoublePointer r, final int ldr,
-                             final IIntConstPointer ipvt, final IDoublePointer diag,
+                             final IIntPointer ipvt, final IDoublePointer diag,
                              final IDoublePointer qtb, final double delta,
                              final IDoublePointer par, final IDoublePointer x,
                              final IDoublePointer sdiag, final IDoublePointer wa1,

@@ -36,8 +36,9 @@
  */
 package cn.edu.gxust.jiweihuang.java.pointer.array;
 
-import cn.edu.gxust.jiweihuang.java.pointer.primitive.ICharConstPointer;
 import cn.edu.gxust.jiweihuang.java.pointer.IFunctionPointer;
+import cn.edu.gxust.jiweihuang.java.pointer.primitive.ICharConstPointer;
+import cn.edu.gxust.jiweihuang.java.pointer.primitive.ICharPointer;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -215,18 +216,12 @@ public class CharArray {
      *
      * @return 一个指向该数据区域的指针。
      */
-    public ICharConstPointer createPointer() {
+    public ICharPointer createPointer() {
         return new CharPointer();
     }
 
-    /**
-     * 创建一个指向该数组的指针，并使指针指向 {@code offset}。
-     *
-     * @param offset 指针指向的移动量。
-     * @return 一个指向数组的指针。
-     */
-    public ICharConstPointer createPointer(int offset) {
-        return createPointer().move(offset);
+    public ICharConstPointer createConstPointer() {
+        return createPointer();
     }
 
     /**
@@ -241,7 +236,7 @@ public class CharArray {
         Objects.requireNonNull(values, "Expected the parameter {values != null}.");
         int len = values.length;
         CharArray data = new CharArray(len);
-        ICharConstPointer pointer = data.createPointer();
+        ICharPointer pointer = data.createPointer();
         for (int i = 0; i < len; i++) {
             pointer.set(i, values[i]);
         }
@@ -254,7 +249,7 @@ public class CharArray {
      * 因为是私有类，所以此类的外部无法访问该类，
      * 因为是内部类，故其拥有对其外部类数据的引用。
      */
-    private class CharPointer implements ICharConstPointer {
+    private class CharConstPointer implements ICharConstPointer {
         //指向
         private int point;
 
@@ -263,9 +258,10 @@ public class CharArray {
          * 该构造器将指针的指向设置为0，
          * 构造器是私有的，意味着该类不能被外部初始化。
          */
-        private CharPointer() {
+        private CharConstPointer() {
             this.point = 0;
         }
+
         /**
          * {@inheritDoc}
          */
@@ -281,20 +277,11 @@ public class CharArray {
             }
         }
 
-        /**
-         * {@inheritDoc}
-         */
         @Override
-        public void set(int index, char value) {
-            int i = index + getPoint();
-            if (i >= 0 && i < CharArray.this.getCapacity()) {
-                values[i] = value;
-            } else {
-                throw new ArrayIndexOutOfBoundsException(String.format(
-                        "Expected parameters {%d <= index < %d}", -getPoint(),
-                        getCapacity() - getPoint()));
-            }
+        public CharArray getBase() {
+            return CharArray.this;
         }
+
 
         /**
          * {@inheritDoc}
@@ -316,26 +303,38 @@ public class CharArray {
          * {@inheritDoc}
          */
         @Override
-        public CharPointer move(int offset) {
+        public void move(int offset) {
             this.point = this.point + offset;
-            return this;
         }
 
         /**
          * {@inheritDoc}
          */
         @Override
-        public CharPointer copy() {
-            return new CharPointer().move(getPoint());
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public CharPointer reset() {
+        public void reset() {
             this.point = 0;
-            return this;
+        }
+    }
+
+    private class CharPointer extends CharConstPointer implements ICharPointer {
+
+        private CharPointer() {
+            super();
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void set(int index, char value) {
+            int i = index + getPoint();
+            if (i >= 0 && i < CharArray.this.getCapacity()) {
+                values[i] = value;
+            } else {
+                throw new ArrayIndexOutOfBoundsException(String.format(
+                        "Expected parameters {%d <= index < %d}", -getPoint(),
+                        getCapacity() - getPoint()));
+            }
         }
     }
 

@@ -38,6 +38,7 @@ package cn.edu.gxust.jiweihuang.java.pointer.array;
 
 import cn.edu.gxust.jiweihuang.java.pointer.IFunctionPointer;
 import cn.edu.gxust.jiweihuang.java.pointer.primitive.IStringConstPointer;
+import cn.edu.gxust.jiweihuang.java.pointer.primitive.IStringPointer;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -216,18 +217,17 @@ public class StringArray {
      *
      * @return 一个指向该数据区域的指针。
      */
-    public IStringConstPointer createPointer() {
+    public IStringPointer createPointer() {
         return new StringPointer();
     }
 
     /**
      * 创建一个指向该数组的指针，并使指针指向 {@code offset}。
      *
-     * @param offset 指针指向的移动量。
      * @return 一个指向数组的指针。
      */
-    public IStringConstPointer createPointer(int offset) {
-        return createPointer().move(offset);
+    public IStringConstPointer createConstPointer() {
+        return new StringConstPointer();
     }
 
     /**
@@ -242,7 +242,7 @@ public class StringArray {
         Objects.requireNonNull(values, "Expected the parameter {values != null}.");
         int len = values.length;
         StringArray array = new StringArray(len);
-        IStringConstPointer pointer = array.createPointer();
+        IStringPointer pointer = array.createPointer();
         for (int i = 0; i < len; i++) {
             pointer.set(i, values[i]);
         }
@@ -255,7 +255,7 @@ public class StringArray {
      * 因为是私有类，所以此类的外部无法访问，
      * 因为是内部类，故其拥有对其外部类数据的引用。
      */
-    private class StringPointer implements IStringConstPointer {
+    private class StringConstPointer implements IStringConstPointer {
 
         /**
          * 指针的指向。
@@ -267,7 +267,7 @@ public class StringArray {
          * 该构造器将指针的指向设置为0，
          * 构造器是私有的，意味着该类不能被外部初始化。
          */
-        private StringPointer() {
+        private StringConstPointer() {
             this.point = 0;
         }
 
@@ -286,20 +286,11 @@ public class StringArray {
             }
         }
 
-        /**
-         * {@inheritDoc}
-         */
         @Override
-        public void set(int index, String value) {
-            int i = index + getPoint();
-            if (i >= 0 && i < getCapacity()) {
-                values[i] = value;
-            } else {
-                throw new ArrayIndexOutOfBoundsException(String.format(
-                        "Expected parameters {%d <= index < %d}.", -getPoint(),
-                        getCapacity() - getPoint()));
-            }
+        public StringArray getBase() {
+            return StringArray.this;
         }
+
 
         /**
          * {@inheritDoc}
@@ -321,26 +312,37 @@ public class StringArray {
          * {@inheritDoc}
          */
         @Override
-        public StringPointer move(int offset) {
+        public void move(int offset) {
             this.point = this.point + offset;
-            return this;
         }
 
         /**
          * {@inheritDoc}
          */
         @Override
-        public StringPointer copy() {
-            return new StringPointer().move(getPoint());
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public StringPointer reset() {
+        public void reset() {
             this.point = 0;
-            return this;
+        }
+    }
+
+    private final class StringPointer extends StringConstPointer implements IStringPointer {
+        private StringPointer() {
+            super();
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void set(int index, String value) {
+            int i = index + getPoint();
+            if (i >= 0 && i < getCapacity()) {
+                values[i] = value;
+            } else {
+                throw new ArrayIndexOutOfBoundsException(String.format(
+                        "Expected parameters {%d <= index < %d}.", -getPoint(),
+                        getCapacity() - getPoint()));
+            }
         }
     }
 

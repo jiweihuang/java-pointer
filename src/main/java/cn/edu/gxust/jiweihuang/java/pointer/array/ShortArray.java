@@ -38,6 +38,7 @@ package cn.edu.gxust.jiweihuang.java.pointer.array;
 
 import cn.edu.gxust.jiweihuang.java.pointer.IFunctionPointer;
 import cn.edu.gxust.jiweihuang.java.pointer.primitive.IShortConstPointer;
+import cn.edu.gxust.jiweihuang.java.pointer.primitive.IShortPointer;
 
 import java.io.Serializable;
 import java.util.Arrays;
@@ -219,18 +220,17 @@ public class ShortArray implements Serializable {
      *
      * @return 一个指向该数据区域的指针。
      */
-    public IShortConstPointer createPointer() {
+    public IShortPointer createPointer() {
         return new ShortPointer();
     }
 
     /**
      * 创建一个指向该数组的指针，并使指针指向 {@code offset}。
      *
-     * @param offset 指针指向的移动量。
      * @return 一个指向数组的指针。
      */
-    public IShortConstPointer createPointer(int offset) {
-        return createPointer().move(offset);
+    public IShortConstPointer createConstPointer() {
+        return new ShortConstPointer();
     }
 
     /**
@@ -245,7 +245,7 @@ public class ShortArray implements Serializable {
         Objects.requireNonNull(values, "Expected the parameter {values != null}.");
         int len = values.length;
         ShortArray data = new ShortArray(len);
-        IShortConstPointer pointer = data.createPointer();
+        IShortPointer pointer = data.createPointer();
         for (int i = 0; i < len; i++) {
             pointer.set(i, values[i]);
         }
@@ -258,7 +258,7 @@ public class ShortArray implements Serializable {
      * 因为是私有类，所以此类的外部无法访问该类，
      * 因为是内部类，故其拥有对其外部类数据的引用。
      */
-    private class ShortPointer implements IShortConstPointer {
+    private class ShortConstPointer implements IShortConstPointer {
 
         /**
          * 指针的指向。
@@ -270,7 +270,7 @@ public class ShortArray implements Serializable {
          * 该构造器将指针的指向设置为0，
          * 构造器是私有的，意味着该类不能被外部初始化。
          */
-        private ShortPointer() {
+        private ShortConstPointer() {
             this.point = 0;
         }
 
@@ -289,20 +289,11 @@ public class ShortArray implements Serializable {
             }
         }
 
-        /**
-         * {@inheritDoc}
-         */
         @Override
-        public void set(int index, short value) {
-            int i = index + getPoint();
-            if (i >= 0 && i < getCapacity()) {
-                values[i] = value;
-            } else {
-                throw new ArrayIndexOutOfBoundsException(String.format(
-                        "Expected parameters {%d <= index < %d}", -getPoint(),
-                        getCapacity() - getPoint()));
-            }
+        public ShortArray getBase() {
+            return ShortArray.this;
         }
+
 
         /**
          * {@inheritDoc}
@@ -324,26 +315,38 @@ public class ShortArray implements Serializable {
          * {@inheritDoc}
          */
         @Override
-        public ShortPointer move(int offset) {
+        public void move(int offset) {
             this.point = this.point + offset;
-            return this;
         }
+
 
         /**
          * {@inheritDoc}
          */
         @Override
-        public ShortPointer copy() {
-            return new ShortPointer().move(getPoint());
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public ShortPointer reset() {
+        public void reset() {
             this.point = 0;
-            return this;
+        }
+    }
+
+    private final class ShortPointer extends ShortConstPointer implements IShortPointer {
+        private ShortPointer() {
+            super();
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void set(int index, short value) {
+            int i = index + getPoint();
+            if (i >= 0 && i < getCapacity()) {
+                values[i] = value;
+            } else {
+                throw new ArrayIndexOutOfBoundsException(String.format(
+                        "Expected parameters {%d <= index < %d}", -getPoint(),
+                        getCapacity() - getPoint()));
+            }
         }
     }
 

@@ -36,8 +36,9 @@
  */
 package cn.edu.gxust.jiweihuang.java.pointer.array;
 
-import cn.edu.gxust.jiweihuang.java.pointer.primitive.IDoublePointer;
 import cn.edu.gxust.jiweihuang.java.pointer.IFunctionPointer;
+import cn.edu.gxust.jiweihuang.java.pointer.primitive.IDoubleConstPointer;
+import cn.edu.gxust.jiweihuang.java.pointer.primitive.IDoublePointer;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -53,7 +54,7 @@ import java.util.Objects;
  * @author JiweiHuang
  * @since 20191205
  */
-public class DoubleArray{
+public class DoubleArray {
 
     /**
      * 数组的容量。
@@ -189,6 +190,7 @@ public class DoubleArray{
     public DoubleArray copy(int from, int to) {
         return of(Arrays.copyOfRange(this.values, from, to));
     }
+
     /**
      * 通过拷贝创建一个新的数组对象。
      *
@@ -207,6 +209,7 @@ public class DoubleArray{
     public DoubleArray copy() {
         return copy(0, getCapacity());
     }
+
     /**
      * 创建一个指向该数组的指针。
      *
@@ -219,12 +222,12 @@ public class DoubleArray{
     /**
      * 创建一个指向该数组的指针，并使指针指向 {@code offset}。
      *
-     * @param offset 指针指向的移动量。
      * @return 一个指向数组的指针。
      */
-    public IDoublePointer createPointer(int offset) {
-        return createPointer().move(offset);
+    public IDoubleConstPointer createConstPointer() {
+        return new DoubleConstPointer();
     }
+
     /**
      * 通过指定值组的方式创建数组对象，该方法可能并不高效，因为先创建了数组对象，
      * 接着创建了该数组对象的指针，最后利用该指针初始化了数组对象内元素的值，
@@ -250,7 +253,7 @@ public class DoubleArray{
      * 因为是私有类，所以此类的外部无法访问该类，
      * 因为是内部类，故其拥有对其外部类数据的引用。
      */
-    private class DoublePointer implements IDoublePointer {
+    private class DoubleConstPointer implements IDoubleConstPointer {
 
         /**
          * 指针的指向。
@@ -262,7 +265,7 @@ public class DoubleArray{
          * 该构造器将指针的指向设置为0，
          * 构造器是私有的，意味着该类不能被外部初始化。
          */
-        private DoublePointer() {
+        private DoubleConstPointer() {
             this.point = 0;
         }
 
@@ -290,21 +293,6 @@ public class DoubleArray{
          * {@inheritDoc}
          */
         @Override
-        public void set(int index, double value) {
-            int i = index + getPoint();
-            if (i >= 0 && i < getCapacity()) {
-                values[i] = value;
-            } else {
-                throw new ArrayIndexOutOfBoundsException(String.format(
-                        "Expected parameters {%d <= index < %d}", -getPoint(),
-                        getCapacity() - getPoint()));
-            }
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
         public int getPoint() {
             return point;
         }
@@ -321,16 +309,8 @@ public class DoubleArray{
          * {@inheritDoc}
          */
         @Override
-        public DoublePointer move(int offset) {
+        public void move(int offset) {
             this.point = this.point + offset;
-            return this;
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        public DoublePointer copy() {
-            return new DoublePointer().move(getPoint());
         }
 
         /**
@@ -339,6 +319,23 @@ public class DoubleArray{
         @Override
         public void reset() {
             this.point = 0;
+        }
+    }
+
+    private final class DoublePointer extends DoubleConstPointer implements IDoublePointer {
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void set(int index, double value) {
+            int i = index + getPoint();
+            if (i >= 0 && i < getCapacity()) {
+                values[i] = value;
+            } else {
+                throw new ArrayIndexOutOfBoundsException(String.format(
+                        "Expected parameters {%d <= index < %d}", -getPoint(),
+                        getCapacity() - getPoint()));
+            }
         }
     }
 
