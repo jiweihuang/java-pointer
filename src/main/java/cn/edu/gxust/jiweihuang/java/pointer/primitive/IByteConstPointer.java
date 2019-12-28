@@ -40,28 +40,22 @@ import cn.edu.gxust.jiweihuang.java.pointer.IArrayPointer;
 import cn.edu.gxust.jiweihuang.java.pointer.array.ByteArray;
 
 /**
- * 接口{@code IBytePointer}用于表征一个指向{@code byte}型数组的指针。<p>
- * 注意：方法 {@code move}、{@code copy}和{@code reset}的差异：<p>
- * (1)方法{@code move}是移动指针的指向，假如一个指针当前的指向索引为2，
- * 向右移动1个索引，则其新指向为3.<p>
- * (2)方法 {@code copy}是拷贝指针，即通过拷贝创建了一个新的指针，
- * 拷贝的指针的指向与原指针的指向相同，
- * 但之后该指针的指向移动将与原指针无关。<p>
- * (3)方法 {@code reset}是只是重置指针，并不创建新指针，
- * 重置是指将指针的指向设置为0。<p>
- * 上述三种方法可以组合起来使用，以达到创建、修改和重置等目的。
+ * 接口{@code IByteConstPointer}用于表征一个指向{@code byte}型数组的指针，
+ * 属于常量指针，即该类型的指针不可改变所指向数组的值。<p>
  * <p>
  * Development status：Finished     # Developing, Finished  <p>
  * Javadoc status: Finished         # Missing, Developing, Finished  <p>
  * Test status: None                # None, Missing, Developing, Finished  <p>
- * Last revision date: 2019-12-25 <p>
+ * Last revision date: 2019-12-28 <p>
  *
  * @author JiweiHuang
  * @since 20191205
  */
 public interface IByteConstPointer extends IArrayPointer {
     /**
-     * 获取指定索引处的数据。
+     * 获取指定索引处的数据。<p>
+     * 注意：这里的索引并不是数组的索引，
+     * {@code getPoint + index}才是数组的索引。
      *
      * @param index 指定的索引。
      * @return 指定索引处的数据。
@@ -69,7 +63,7 @@ public interface IByteConstPointer extends IArrayPointer {
     byte get(int index);
 
     /**
-     * 获取指针当前指向处的数据。
+     * 获取指针当前指向处的数据。<p>
      * 注意：如果指针当前指向数组索引范围之外，则将抛出异常。
      *
      * @return 指针指向处的数据。
@@ -78,5 +72,10 @@ public interface IByteConstPointer extends IArrayPointer {
         return get(0);
     }
 
+    /**
+     * 获取指针关联的数组对象。
+     *
+     * @return 指针关联的数组对象。
+     */
     ByteArray getBase();
 }

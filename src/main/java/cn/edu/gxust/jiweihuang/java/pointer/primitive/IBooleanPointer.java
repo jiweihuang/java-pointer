@@ -57,7 +57,7 @@ public interface IBooleanPointer extends IBooleanConstPointer {
     void set(int index, boolean value);
 
     /**
-     * 设置指针当前指向处的数据。
+     * 设置指针当前指向处的数据。<p>
      * 注意：如果指针当前指向数组索引范围之外，则将抛出异常。
      *
      * @param value 需要设置的值。

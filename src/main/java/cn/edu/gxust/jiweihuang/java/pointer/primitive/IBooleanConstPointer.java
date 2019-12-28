@@ -46,14 +46,14 @@ import cn.edu.gxust.jiweihuang.java.pointer.array.BooleanArray;
  * Development status：Finished     # Developing, Finished  <p>
  * Javadoc status: Finished         # Missing, Developing, Finished  <p>
  * Test status: None                # None, Missing, Developing, Finished  <p>
- * Last revision date: 2019-12-25 <p>
+ * Last revision date: 2019-12-28 <p>
  *
  * @author JiweiHuang
  * @since 20191205
  */
 public interface IBooleanConstPointer extends IArrayPointer {
     /**
-     * 获取指定索引处的数据。
+     * 获取指定索引处的数据。<p>
      * 注意：这里的索引并不是数组的索引，
      * {@code getPoint + index}才是数组的索引。
      *

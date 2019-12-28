@@ -36,6 +36,17 @@
  */
 package cn.edu.gxust.jiweihuang.java.pointer.primitive;
 
+/**
+ * 接口{@code ICharPointer}用于表征一个指向{@code char}型数组的指针。
+ * <p>
+ * Development status：Finished     # Developing, Finished  <p>
+ * Javadoc status: Finished         # Missing, Developing, Finished  <p>
+ * Test status: None                # None, Missing, Developing, Finished  <p>
+ * Last revision date: 2019-12-28 <p>
+ *
+ * @author JiweiHuang
+ * @since 20191205
+ */
 public interface ICharPointer extends ICharConstPointer {
     /**
      * 设置指定索引处的数据。
@@ -46,7 +57,7 @@ public interface ICharPointer extends ICharConstPointer {
     void set(int index, char value);
 
     /**
-     * 设置指针当前指向处的数据。
+     * 设置指针当前指向处的数据。<p>
      * 注意：如果指针当前指向数组索引范围之外，则将抛出异常。
      *
      * @param value 需要设置的值。

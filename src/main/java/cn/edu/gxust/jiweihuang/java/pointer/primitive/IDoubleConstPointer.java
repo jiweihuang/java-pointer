@@ -39,10 +39,23 @@ package cn.edu.gxust.jiweihuang.java.pointer.primitive;
 import cn.edu.gxust.jiweihuang.java.pointer.IArrayPointer;
 import cn.edu.gxust.jiweihuang.java.pointer.array.DoubleArray;
 
-
+/**
+ * 接口{@code IDoubleConstPointer}用于表征一个指向{@code double}型数组的指针，
+ * 属于常量指针，即该类型的指针不可改变所指向数组的值。<p>
+ * <p>
+ * Development status：Finished     # Developing, Finished  <p>
+ * Javadoc status: Finished         # Missing, Developing, Finished  <p>
+ * Test status: None                # None, Missing, Developing, Finished  <p>
+ * Last revision date: 2019-12-28 <p>
+ *
+ * @author JiweiHuang
+ * @since 20191205
+ */
 public interface IDoubleConstPointer extends IArrayPointer {
     /**
-     * 获取指定索引处的数据。
+     * 获取指定索引处的数据。<p>
+     * 注意：这里的索引并不是数组的索引，
+     * {@code getPoint + index}才是数组的索引。
      *
      * @param index 指定的索引。
      * @return 指定索引处的数据。
@@ -50,7 +63,7 @@ public interface IDoubleConstPointer extends IArrayPointer {
     double get(int index);
 
     /**
-     * 获取指针当前指向处的数据。
+     * 获取指针当前指向处的数据。<p>
      * 注意：如果指针当前指向数组索引范围之外，则将抛出异常。
      *
      * @return 指针指向处的数据。
@@ -59,5 +72,10 @@ public interface IDoubleConstPointer extends IArrayPointer {
         return get(0);
     }
 
+    /**
+     * 获取指针关联的数组对象。
+     *
+     * @return 指针关联的数组对象。
+     */
     DoubleArray getBase();
 }
