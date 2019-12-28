@@ -40,6 +40,7 @@ import cn.edu.gxust.jiweihuang.java.pointer.primitive.IDoublePointer;
 import cn.edu.gxust.jiweihuang.java.pointer.IFunctionPointer;
 import cn.edu.gxust.jiweihuang.java.pointer.primitive.IIntConstPointer;
 import cn.edu.gxust.jiweihuang.java.pointer.IPointer;
+import cn.edu.gxust.jiweihuang.java.pointer.primitive.IIntPointer;
 
 import static java.lang.Math.*;
 
@@ -538,7 +539,7 @@ public class JavaMinpack {
     }
 
     public static void r1updt(int m, int n, IDoublePointer s, int ls, final IDoublePointer u,
-                              IDoublePointer v, IDoublePointer w, IIntConstPointer sing) {
+                              IDoublePointer v, IDoublePointer w, IIntPointer sing) {
 
         /* Initialized data */
         double p5 = .5;

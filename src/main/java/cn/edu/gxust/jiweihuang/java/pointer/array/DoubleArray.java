@@ -281,6 +281,11 @@ public class DoubleArray{
             }
         }
 
+        @Override
+        public DoubleArray getBase() {
+            return DoubleArray.this;
+        }
+
         /**
          * {@inheritDoc}
          */
@@ -324,7 +329,6 @@ public class DoubleArray{
         /**
          * {@inheritDoc}
          */
-        @Override
         public DoublePointer copy() {
             return new DoublePointer().move(getPoint());
         }
@@ -333,9 +337,8 @@ public class DoubleArray{
          * {@inheritDoc}
          */
         @Override
-        public DoublePointer reset() {
+        public void reset() {
             this.point = 0;
-            return this;
         }
     }
 

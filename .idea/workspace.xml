@@ -4,15 +4,53 @@
     <list default="true" id="8f2a6236-5f9b-4785-a868-1556f3908bef" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/IArrayPointer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/IArrayPointer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/IFunctionPointer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/IFunctionPointer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/IObjectPointer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/IObjectPointer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/array/DoubleArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/array/DoubleArray.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/cminpack/JavaMinpack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/cminpack/JavaMinpack.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/IBooleanConstPointer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/IBooleanConstPointer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/IByteConstPointer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/IByteConstPointer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/ICharConstPointer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/ICharConstPointer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/IBooleanPointer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/IBooleanPointer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/IDoubleConstPointer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/IDoubleConstPointer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/IFloatConstPointer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/IFloatConstPointer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/IIntConstPointer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/IIntConstPointer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/ILongConstPointer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/ILongConstPointer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/IShortConstPointer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/IShortConstPointer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/IStringConstPointer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/gxust/jiweihuang/java/pointer/primitive/IStringConstPointer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/gxust/jiweihuang/java/pointer/IArrayPointer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/gxust/jiweihuang/java/pointer/array/BooleanArray$BooleanPointer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/gxust/jiweihuang/java/pointer/array/BooleanArray$IBooleanArrayInitFunction.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/gxust/jiweihuang/java/pointer/array/BooleanArray.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/gxust/jiweihuang/java/pointer/array/ByteArray$BytePointer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/gxust/jiweihuang/java/pointer/array/ByteArray$IByteArrayInitFunction.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/gxust/jiweihuang/java/pointer/array/ByteArray.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/gxust/jiweihuang/java/pointer/array/CharArray$CharPointer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/gxust/jiweihuang/java/pointer/array/CharArray$ICharArrayInitFunction.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/gxust/jiweihuang/java/pointer/array/CharArray.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/gxust/jiweihuang/java/pointer/array/FloatArray$FloatPointer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/gxust/jiweihuang/java/pointer/array/FloatArray$IFloatArrayInitFunction.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/gxust/jiweihuang/java/pointer/array/FloatArray.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/gxust/jiweihuang/java/pointer/array/IntArray$IIntArrayInitFunction.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/gxust/jiweihuang/java/pointer/array/IntArray$IntPointer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/gxust/jiweihuang/java/pointer/array/IntArray.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/gxust/jiweihuang/java/pointer/array/LongArray$ILongArrayInitFunction.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/gxust/jiweihuang/java/pointer/array/LongArray$LongPointer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/gxust/jiweihuang/java/pointer/array/LongArray.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/gxust/jiweihuang/java/pointer/array/ShortArray$IShortArrayInitFunction.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/gxust/jiweihuang/java/pointer/array/ShortArray$ShortPointer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/gxust/jiweihuang/java/pointer/array/ShortArray.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/gxust/jiweihuang/java/pointer/array/StringArray$IStringArrayInitFunction.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/gxust/jiweihuang/java/pointer/array/StringArray$StringPointer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/gxust/jiweihuang/java/pointer/array/StringArray.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/gxust/jiweihuang/java/pointer/cminpack/JavaMinpack$IFunctionDerMNPointer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/gxust/jiweihuang/java/pointer/cminpack/JavaMinpack$IFunctionDerNNPointer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/gxust/jiweihuang/java/pointer/cminpack/JavaMinpack$IFunctionDerStrMNPointer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/gxust/jiweihuang/java/pointer/cminpack/JavaMinpack$IFunctionMNPointer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/gxust/jiweihuang/java/pointer/cminpack/JavaMinpack$IFunctionNNPointer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/gxust/jiweihuang/java/pointer/cminpack/JavaMinpack.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/gxust/jiweihuang/java/pointer/primitive/IBooleanPointer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/gxust/jiweihuang/java/pointer/primitive/IBytePointer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/gxust/jiweihuang/java/pointer/primitive/ICharPointer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/gxust/jiweihuang/java/pointer/primitive/IDoublePointer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/gxust/jiweihuang/java/pointer/primitive/IFloatPointer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/gxust/jiweihuang/java/pointer/primitive/IIntPointer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/gxust/jiweihuang/java/pointer/primitive/ILongPointer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/gxust/jiweihuang/java/pointer/primitive/IShortPointer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/gxust/jiweihuang/java/pointer/primitive/IStringPointer.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +128,15 @@
       <command value="mvn install" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.BooleanArrayTest">
+  <component name="RunManager" selected="JUnit.All in java-pointer">
+    <configuration name="All in java-pointer" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="java-pointer" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="BooleanArrayTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="java-pointer" />
       <extension name="coverage">
@@ -140,6 +186,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.All in java-pointer" />
         <item itemvalue="JUnit.BooleanArrayTest" />
         <item itemvalue="JUnit.BooleanArrayTest.reset" />
         <item itemvalue="JUnit.BooleanArrayTest.getCapacity" />
@@ -178,7 +225,7 @@
       <workItem from="1577406547212" duration="1869000" />
       <workItem from="1577450557283" duration="453000" />
       <workItem from="1577451098202" duration="5220000" />
-      <workItem from="1577506700301" duration="5749000" />
+      <workItem from="1577506700301" duration="7643000" />
     </task>
     <task id="LOCAL-00001" summary="Create Projects 2019-12-05">
       <created>1575636461895</created>
@@ -355,7 +402,14 @@
       <option name="project" value="LOCAL" />
       <updated>1577510978205</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="update projects 2019-12-25">
+      <created>1577512971290</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1577512971290</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -373,10 +427,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="261" y="0" key="#Project_Structure/0.0.1536.824@0.0.1536.824" timestamp="1577321975549" />
-    <state x="530" y="55" key="#com.intellij.ide.util.MemberChooser" timestamp="1577453653937">
+    <state x="530" y="55" key="#com.intellij.ide.util.MemberChooser" timestamp="1577513110574">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="530" y="55" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1577453653937" />
+    <state x="530" y="55" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1577513110574" />
     <state x="449" y="129" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1577341374807">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -389,10 +443,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="436" y="101" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1577325713923" />
-    <state x="0" y="0" key="CommitChangelistDialog2" timestamp="1577510976434">
+    <state x="0" y="0" key="CommitChangelistDialog2" timestamp="1577512969665">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="0" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1577510976434" />
+    <state x="0" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1577512969665" />
     <state x="499" y="85" key="FileChooserDialogImpl" timestamp="1577453272117">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -429,10 +483,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="154" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1577366430584" />
-    <state x="261" y="73" key="Vcs.Push.Dialog.v2" timestamp="1577510983543">
+    <state x="261" y="73" key="Vcs.Push.Dialog.v2" timestamp="1577512976857">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="261" y="73" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1577510983543" />
+    <state x="261" y="73" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1577512976856" />
     <state x="462" y="64" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1577407205738">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

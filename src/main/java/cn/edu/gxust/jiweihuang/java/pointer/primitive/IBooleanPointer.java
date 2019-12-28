@@ -36,6 +36,17 @@
  */
 package cn.edu.gxust.jiweihuang.java.pointer.primitive;
 
+/**
+ * 接口{@code IBooleanPointer}用于表征一个指向{@code boolean}型数组的指针。
+ * <p>
+ * Development status：Finished     # Developing, Finished  <p>
+ * Javadoc status: Finished         # Missing, Developing, Finished  <p>
+ * Test status: None                # None, Missing, Developing, Finished  <p>
+ * Last revision date: 2019-12-28 <p>
+ *
+ * @author JiweiHuang
+ * @since 20191205
+ */
 public interface IBooleanPointer extends IBooleanConstPointer {
     /**
      * 设置指定索引处的数据。

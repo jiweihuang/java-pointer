@@ -37,7 +37,8 @@
 package cn.edu.gxust.jiweihuang.java.pointer.primitive;
 
 import cn.edu.gxust.jiweihuang.java.pointer.IArrayPointer;
-import org.apache.commons.math3.util.DoubleArray;
+import cn.edu.gxust.jiweihuang.java.pointer.array.DoubleArray;
+
 
 public interface IDoubleConstPointer extends IArrayPointer {
     /**
