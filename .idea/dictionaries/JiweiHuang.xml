@@ -9,10 +9,13 @@
       <w>donghuan</w>
       <w>dpmpar</w>
       <w>enorm</w>
+      <w>epsfcn</w>
+      <w>epsmch</w>
       <w>fdjac</w>
       <w>fjac</w>
       <w>fjrow</w>
       <w>fvec</w>
+      <w>fvecp</w>
       <w>guangxi</w>
       <w>hybrd</w>
       <w>hybrj</w>
@@ -25,6 +28,7 @@
       <w>lmdif</w>
       <w>lmpar</w>
       <w>minpack</w>
+      <w>msum</w>
       <w>noninfringement</w>
       <w>nsing</w>
       <w>parl</w>

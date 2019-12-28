@@ -36,10 +36,11 @@
  */
 package cn.edu.gxust.jiweihuang.java.pointer.cminpack;
 
-import cn.edu.gxust.jiweihuang.java.pointer.primitive.IDoublePointer;
 import cn.edu.gxust.jiweihuang.java.pointer.IFunctionPointer;
-import cn.edu.gxust.jiweihuang.java.pointer.primitive.IIntConstPointer;
 import cn.edu.gxust.jiweihuang.java.pointer.IPointer;
+import cn.edu.gxust.jiweihuang.java.pointer.primitive.IDoubleConstPointer;
+import cn.edu.gxust.jiweihuang.java.pointer.primitive.IDoublePointer;
+import cn.edu.gxust.jiweihuang.java.pointer.primitive.IIntConstPointer;
 import cn.edu.gxust.jiweihuang.java.pointer.primitive.IIntPointer;
 
 import static java.lang.Math.*;
@@ -466,18 +467,14 @@ public class JavaMinpack {
      * @return 向量{@code x}或其子向量的欧几里得范数。
      */
     public static double enorm(IDoublePointer x) {
-        if (x.getPoint() <= 0) {
-            return enorm(x.getCapacity(), x, 0);
-        } else if (x.getPoint() < x.getCapacity()) {
-            return enorm(x.getCapacity() - x.getPoint(), x, 0);
-        } else {
-            throw new IllegalArgumentException();
-        }
+        return enorm(x.getCapacity() - x.getPoint(), x, 0);
     }
 
     //=========================================================================
-    public static void rwupdt(int n, IDoublePointer r, int ldr, final IDoublePointer w, IDoublePointer b,
-                              IDoublePointer alpha, IDoublePointer cos, IDoublePointer sin) {
+    public static void rwupdt(final int n, final IDoublePointer r, final int ldr,
+                              final IDoubleConstPointer w, final IDoublePointer b,
+                              final IDoublePointer alpha, final IDoublePointer cos,
+                              final IDoublePointer sin) {
 
         /* Initialized data */
         double p5 = .5;
@@ -538,8 +535,9 @@ public class JavaMinpack {
         /* last card of subroutine rwupdt. */
     }
 
-    public static void r1updt(int m, int n, IDoublePointer s, int ls, final IDoublePointer u,
-                              IDoublePointer v, IDoublePointer w, IIntPointer sing) {
+    public static void r1updt(final int m, final int n, final IDoublePointer s, final int ls,
+                              final IDoubleConstPointer u, final IDoublePointer v,
+                              final IDoublePointer w, final IIntPointer sing) {
 
         /* Initialized data */
         double p5 = .5;
@@ -695,8 +693,9 @@ public class JavaMinpack {
         /* last card of subroutine r1updt. */
     }
 
-    public static void r1mpyq(int m, int n, IDoublePointer a, int lda, final IDoublePointer v,
-                              final IDoublePointer w) {
+    public static void r1mpyq(final int m, final int n, final IDoublePointer a,
+                              final int lda, final IDoubleConstPointer v,
+                              final IDoubleConstPointer w) {
         /* System generated locals */
         int a_dim1, a_offset;
 
@@ -755,9 +754,10 @@ public class JavaMinpack {
         /* last card of subroutine r1mpyq. */
     }
 
-    public static void qrsolv(int n, IDoublePointer r, int ldr, final IIntPointer ipvt,
-                              final IDoublePointer diag, final IDoublePointer qtb,
-                              IDoublePointer x, IDoublePointer sdiag, IDoublePointer wa) {
+    public static void qrsolv(final int n, final IDoublePointer r, final int ldr,
+                              final IIntConstPointer ipvt, final IDoubleConstPointer diag,
+                              final IDoubleConstPointer qtb, final IDoublePointer x,
+                              final IDoublePointer sdiag, final IDoublePointer wa) {
 
         /* Initialized data */
         double p5 = .5;
@@ -877,9 +877,10 @@ public class JavaMinpack {
         /* last card of subroutine qrsolv. */
     }
 
-    public static void qrfac(int m, int n, IDoublePointer a, int lda, int pivot,
-                             IIntPointer ipvt, int lipvt, IDoublePointer rdiag,
-                             IDoublePointer acnorm, IDoublePointer wa) {
+    public static void qrfac(final int m, final int n, final IDoublePointer a,
+                             final int lda, final int pivot, final IIntPointer ipvt,
+                             final int lipvt, final IDoublePointer rdiag,
+                             final IDoublePointer acnorm, final IDoublePointer wa) {
         /* Initialized data */
         double p05 = .05;
 
@@ -902,7 +903,9 @@ public class JavaMinpack {
 
         /* compute the initial column norms and initialize several arrays. */
         for (j = 0; j < n; ++j) {
-            acnorm.set(j, enorm(m, a.copy(j * lda)));
+            IDoublePointer ap1 = a.getBase().createPointer();
+            ap1.move(j * lda);
+            acnorm.set(j, enorm(m, ap1));
             rdiag.set(j, acnorm.get(j));
             wa.set(j, rdiag.get(j));
             if (pivot != 0) {
@@ -938,8 +941,9 @@ public class JavaMinpack {
 
             /* compute the householder transformation to reduce the */
             /* j-th column of a to a multiple of the j-th unit vector. */
-
-            ajnorm = enorm(m - (j + 1) + 1, a.copy(j + j * lda));
+            IDoublePointer ap2 = a.getBase().createPointer();
+            ap2.move(j + j * lda);
+            ajnorm = enorm(m - (j + 1) + 1, ap2);
             if (ajnorm != 0.) {
                 if (a.get(j + j * lda) < 0.) {
                     ajnorm = -ajnorm;
@@ -971,7 +975,9 @@ public class JavaMinpack {
                             /* Computing 2nd power */
                             d1 = rdiag.get(k) / wa.get(k);
                             if (p05 * (d1 * d1) <= epsmch) {
-                                rdiag.set(k, enorm(m - (j + 1), a.copy(jp1 + k * lda)));
+                                IDoublePointer ap = a.getBase().createPointer();
+                                ap.move(jp1 + k * lda);
+                                rdiag.set(k, enorm(m - (j + 1), ap));
                                 wa.set(k, rdiag.get(k));
                             }
                         }
@@ -984,7 +990,8 @@ public class JavaMinpack {
     }
 
 
-    public static void qform(int m, int n, IDoublePointer q, int ldq, IDoublePointer wa) {
+    public static void qform(final int m, final int n, final IDoublePointer q,
+                             final int ldq, final IDoublePointer wa) {
         /* System generated locals */
         int q_dim1, q_offset;
 
@@ -1051,9 +1058,11 @@ public class JavaMinpack {
         /* last card of subroutine qform. */
     }
 
-    public static void chkder(int m, int n, final IDoublePointer x, IDoublePointer fvec,
-                              IDoublePointer fjac, int ldfjac, IDoublePointer xp,
-                              IDoublePointer fvecp, int mode, IDoublePointer err) {
+    public static void chkder(final int m, final int n, final IDoubleConstPointer x,
+                              final IDoublePointer fvec, final IDoublePointer fjac,
+                              final int ldfjac, final IDoublePointer xp,
+                              final IDoublePointer fvecp, final int mode,
+                              final IDoublePointer err) {
 
         double log10e = 0.43429448190325182765;
         double factor = 100.;
@@ -1114,8 +1123,9 @@ public class JavaMinpack {
         /*last card of subroutine chkder. */
     }
 
-    public static void covar(int n, IDoublePointer r, int ldr, final IIntConstPointer ipvt,
-                             double tol, IDoublePointer wa) {
+    public static void covar(final int n, final IDoublePointer r, final int ldr,
+                             final IIntConstPointer ipvt,
+                             final double tol, final IDoublePointer wa) {
         /* Local variables */
         int i, j, k, l, ii, jj;
         boolean sing;
@@ -1195,8 +1205,10 @@ public class JavaMinpack {
         /* last card of subroutine covar. */
     }
 
-    public static int covar1(int m, int n, double fsumsq, IDoublePointer r, int ldr,
-                             final IIntConstPointer ipvt, double tol, IDoublePointer wa) {
+    public static int covar1(final int m, final int n, final double fsumsq,
+                             final IDoublePointer r, final int ldr,
+                             final IIntConstPointer ipvt, final double tol,
+                             final IDoublePointer wa) {
 
         /* Local variables */
         int i, j, k, l, ii, jj;
@@ -1285,9 +1297,11 @@ public class JavaMinpack {
         return l + 1;
     }
 
-    public static void dogleg(int n, final IDoublePointer r, int lr, final IDoublePointer diag,
-                              final IDoublePointer qtb, double delta, IDoublePointer x,
-                              IDoublePointer wa1, IDoublePointer wa2) {
+    public static void dogleg(final int n, final IDoubleConstPointer r, final int lr,
+                              final IDoubleConstPointer diag,
+                              final IDoubleConstPointer qtb, final double delta,
+                              final IDoublePointer x, final IDoublePointer wa1,
+                              final IDoublePointer wa2) {
         /* System generated locals */
         double d1, d2, d3, d4;
 
@@ -1349,7 +1363,9 @@ public class JavaMinpack {
             wa1.set(j, 0.);
             wa2.set(j, diag.get(j) * x.get(j));
         }
-        qnorm = enorm(n, wa2.copy(1));
+        IDoublePointer wa2p = wa2.getBase().createPointer();
+        wa2p.move(1);
+        qnorm = enorm(n, wa2p);
         if (qnorm <= delta) {
             return;
         }
@@ -1370,7 +1386,9 @@ public class JavaMinpack {
         /*calculate the norm of the scaled gradient and test for */
         /*the special case in which the scaled gradient is zero. */
 
-        gnorm = enorm(n, wa1.copy(1));
+        IDoublePointer wa1p = wa1.getBase().createPointer();
+        wa1p.move(1);
+        gnorm = enorm(n, wa1p);
         sgnorm = 0.;
         alpha = delta / qnorm;
         if (gnorm != 0.) {
@@ -1390,7 +1408,9 @@ public class JavaMinpack {
                 }
                 wa2.set(j, sum);
             }
-            temp = enorm(n, wa2.copy().move(1));
+            IDoublePointer wa2p2 = wa2.getBase().createPointer();
+            wa2p.move(1);
+            temp = enorm(n, wa2p2);
             sgnorm = gnorm / temp / temp;
 
             /* test whether the scaled gradient direction is acceptable. */
@@ -1401,8 +1421,9 @@ public class JavaMinpack {
                 /* the scaled gradient direction is not acceptable. */
                 /* finally, calculate the point along the dogleg */
                 /* at which the quadratic is minimized. */
-
-                bnorm = enorm(n, qtb.copy().move(1));
+                IDoublePointer qtbp = qtb.getBase().createPointer();
+                qtbp.move(1);
+                bnorm = enorm(n, qtbp);
                 temp = bnorm / gnorm * (bnorm / qnorm) * (sgnorm / delta);
                 /* Computing 2nd power */
                 d1 = sgnorm / delta;
@@ -1433,9 +1454,11 @@ public class JavaMinpack {
     }
 
 
-    public static int fdjac1(INNonlinearEquations fcn, int n, IDoublePointer x, final IDoublePointer fvec,
-                             IDoublePointer fjac, int ldfjac, int ml, int mu, double epsfcn,
-                             IDoublePointer wa1, IDoublePointer wa2) {
+    public static int fdjac1(final INNonlinearEquations fcn, final int n, final IDoublePointer x,
+                             final IDoubleConstPointer fvec, final IDoublePointer fjac,
+                             final int ldfjac, final int ml, final int mu, final double epsfcn,
+                             final IDoublePointer wa1, final IDoublePointer wa2) {
+
         /* System generated locals */
         int fjac_dim1, fjac_offset;
 
@@ -1448,18 +1471,22 @@ public class JavaMinpack {
         int iflag = 0;
 
         /* Parameter adjustments */
-        wa2.move(-1);// --wa2;
-        wa1.move(-1);// --wa1;
-        fvec.move(-1);// --fvec;
-        x.move(-1);// --x;
+        // --wa2;
+        wa2.move(-1);
+        // --wa1;
+        wa1.move(-1);
+        // --fvec;
+        fvec.move(-1);
+        // --x;
+        x.move(-1);
         fjac_dim1 = ldfjac;
         fjac_offset = 1 + fjac_dim1;
-        fjac.move(-fjac_offset);// fjac -= fjac_offset;
+        // fjac -= fjac_offset;
+        fjac.move(-fjac_offset);
 
         /* Function Body */
 
         /*epsmch is the machine precision. */
-
         epsmch = DPMPAR1;
 
         eps = sqrt((max(epsfcn, epsmch)));
@@ -1467,7 +1494,6 @@ public class JavaMinpack {
         if (msum >= n) {
 
             /* computation of dense approximate jacobian. */
-
             for (j = 1; j <= n; ++j) {
                 temp = x.get(j);
                 h = eps * abs(temp);
@@ -1475,12 +1501,17 @@ public class JavaMinpack {
                     h = eps;
                 }
                 x.set(j, temp + h);
-            /* the last parameter of fcn_nn() is set to 2 to differentiate
-               calls made to compute the function from calls made to compute
-               the Jacobian (see fcn() in examples/hybdrv.c, and how njev
-               is used to compute the number of Jacobian evaluations) */
-                iflag = fcn.call(n, x.getBase().createPointer().move(1),
-                        wa1.getBase().createPointer().move(1), 2);
+
+                /* the last parameter of fcn_nn() is set to 2 to differentiate
+                 * calls made to compute the function from calls made to compute
+                 * the Jacobian (see fcn() in examples/hybdrv.c, and how njev
+                 * is used to compute the number of Jacobian evaluations)
+                 */
+                IDoublePointer xp = x.getBase().createPointer();
+                xp.move(1);
+                IDoublePointer wa1p = wa1.getBase().createPointer();
+                wa1p.move(1);
+                iflag = fcn.call(n, xp, wa1p, 2);
                 if (iflag < 0) {
                     return iflag;
                 }
@@ -1503,8 +1534,11 @@ public class JavaMinpack {
                 }
                 x.set(j, wa2.get(j) + h);
             }
-
-            iflag = fcn.call(n, x.copy(1), wa1.copy(1), 1);
+            IDoublePointer xp = x.getBase().createPointer();
+            xp.move(1);
+            IDoublePointer wa1p = wa1.getBase().createPointer();
+            wa1p.move(1);
+            iflag = fcn.call(n, xp, wa1p, 1);
             if (iflag < 0) {
                 return iflag;
             }
@@ -1526,9 +1560,10 @@ public class JavaMinpack {
         /* last card of subroutine fdjac1. */
     }
 
-    public static int fdjac2(IMNNonlinearLeastSquares fcn, int m, int n, IDoublePointer x,
-                             final IDoublePointer fvec, IDoublePointer fjac, int ldfjac,
-                             double epsfcn, IDoublePointer wa) {
+    public static int fdjac2(final IMNNonlinearLeastSquares fcn, final int m, final int n,
+                             final IDoublePointer x, final IDoubleConstPointer fvec,
+                             final IDoublePointer fjac, final int ldfjac,
+                             final double epsfcn, final IDoublePointer wa) {
         /* Local variables */
         double h;
         int i, j;
@@ -1585,8 +1620,8 @@ public class JavaMinpack {
      * 此方法中，参数 ipvt,diag,qtb三个指针都是常量指针，意味着这些指针指向的值是不可修改的。
      */
     public static void lmpar(final int n, IDoublePointer r, final int ldr,
-                             final IIntPointer ipvt, final IDoublePointer diag,
-                             final IDoublePointer qtb, final double delta,
+                             final IIntConstPointer ipvt, final IDoubleConstPointer diag,
+                             final IDoubleConstPointer qtb, final double delta,
                              final IDoublePointer par, final IDoublePointer x,
                              final IDoublePointer sdiag, final IDoublePointer wa1,
                              final IDoublePointer wa2) {
