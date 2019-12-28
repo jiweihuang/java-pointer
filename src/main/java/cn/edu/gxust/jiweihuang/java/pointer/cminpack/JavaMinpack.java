@@ -124,7 +124,11 @@ public class JavaMinpack {
          * @param p     用于提供其他额外需要的参数。
          * @return 如果为负值，则可中止“非线性方程组”的求解。
          */
-        int call(int n, IDoublePointer x, IDoublePointer fvec, int iflag, IPointer... p);
+        int call(final int n,
+                 final IDoublePointer x,
+                 final IDoublePointer fvec,
+                 final int iflag,
+                 final IPointer... p);
 
         /**
          * 获取“非线性方程组计算式”中方程的数量。<p>
@@ -165,8 +169,13 @@ public class JavaMinpack {
          * @param p      用于提供其他额外需要的参数。
          * @return 如果为负值，则可中止“非线性方程组”的求解。
          */
-        int call(int n, IDoublePointer x, IDoublePointer fvec, IDoublePointer fjac,
-                 int ldfjac, int iflag, IPointer... p);
+        int call(final int n,
+                 final IDoublePointer x,
+                 final IDoublePointer fvec,
+                 final IDoublePointer fjac,
+                 final int ldfjac,
+                 final int iflag,
+                 final IPointer... p);
 
         /**
          * 获取“非线性方程组计算式”中方程的数量。<p>
@@ -203,8 +212,12 @@ public class JavaMinpack {
          * @param p     用于提供其他额外需要的参数。
          * @return 如果为负值，则可中止“非线性最小二乘问题”的求解。
          */
-        int call(int m, int n, IDoublePointer x, IDoublePointer fvec,
-                 int iflag, IPointer... p);
+        int call(final int m,
+                 final int n,
+                 final IDoublePointer x,
+                 final IDoublePointer fvec,
+                 final int iflag,
+                 final IPointer... p);
     }
 
     /**
@@ -233,8 +246,14 @@ public class JavaMinpack {
          * @param p      用于提供其他额外需要的参数。
          * @return 如果为负值，则可中止“非线性最小二乘问题”的求解。
          */
-        int call(int m, int n, IDoublePointer x, IDoublePointer fvec, IDoublePointer fjac,
-                 int ldfjac, int iflag, IPointer... p);
+        int call(final int m,
+                 final int n,
+                 final IDoublePointer x,
+                 final IDoublePointer fvec,
+                 final IDoublePointer fjac,
+                 final int ldfjac,
+                 final int iflag,
+                 final IPointer... p);
     }
 
     /**
@@ -261,8 +280,13 @@ public class JavaMinpack {
          * @param p     用于提供其他额外需要的参数。
          * @return 如果为负值，则可中止“非线性最小二乘问题”的求解。
          */
-        int call(int m, int n, IDoublePointer x, IDoublePointer fvec,
-                 IDoublePointer fjrow, int iflag, IPointer... p);
+        int call(final int m,
+                 final int n,
+                 final IDoublePointer x,
+                 final IDoublePointer fvec,
+                 final IDoublePointer fjrow,
+                 final int iflag,
+                 final IPointer... p);
     }
     //=========================================================================
 
