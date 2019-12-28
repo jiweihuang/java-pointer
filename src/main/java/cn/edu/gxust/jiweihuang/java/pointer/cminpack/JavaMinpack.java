@@ -488,13 +488,18 @@ public class JavaMinpack {
         double tan, temp, rowj, cotan;
 
         /* Parameter adjustments */
-        sin.move(-1); // --sin;
-        cos.move(-1); // --cos;
-        b.move(-1); // --b;
-        w.move(-1); // --w;
+        // --sin;
+        sin.move(-1);
+        // --cos;
+        cos.move(-1);
+        // --b;
+        b.move(-1);
+        // --w;
+        w.move(-1);
         r_dim1 = ldr;
         r_offset = 1 + r_dim1;
-        r.move(-r_offset); //r -= r_offset;
+        //r -= r_offset;
+        r.move(-r_offset);
 
         /* Function Body */
         for (j = 1; j <= n; ++j) {
@@ -550,10 +555,14 @@ public class JavaMinpack {
         double cos, sin, tau, temp, giant, cotan;
 
         /* Parameter adjustments */
-        w.move(-1); //--w;
-        u.move(-1); //--u;
-        v.move(-1); //--v;
-        s.move(-1); //--s;
+        //--w;
+        w.move(-1);
+        //--u;
+        u.move(-1);
+        //--v;
+        v.move(-1);
+        //--s;
+        s.move(-1);
 
         //(void)ls;
 
@@ -704,8 +713,10 @@ public class JavaMinpack {
         double cos, sin, temp;
 
         /* Parameter adjustments */
-        w.move(-1);// --w;
-        v.move(-1);// --v;
+        // --w;
+        w.move(-1);
+        // --v;
+        v.move(-1);
         a_dim1 = lda;
         a_offset = 1 + a_dim1;
         a.move(-a_offset);
@@ -1312,12 +1323,18 @@ public class JavaMinpack {
         double sgnorm;
 
         /* Parameter adjustments */
-        wa2.move(-1);  //--wa2;
-        wa1.move(-1);  //--wa1;
-        x.move(-1);    //--x;
-        qtb.move(-1);  //--qtb;
-        diag.move(-1); //--diag;
-        r.move(-1);    //--r;
+        //--wa2;
+        wa2.move(-1);
+        //--wa1;
+        wa1.move(-1);
+        //--x;
+        x.move(-1);
+        //--qtb;
+        qtb.move(-1);
+        //--diag;
+        diag.move(-1);
+        //--r;
+        r.move(-1);
         // (void) lr;
 
         /* Function Body */
@@ -1326,7 +1343,6 @@ public class JavaMinpack {
         epsmch = DPMPAR1;
 
         /* first, calculate the gauss-newton direction. */
-
         jj = n * (n + 1) / 2 + 1;
         for (k = 1; k <= n; ++k) {
             j = n - k + 1;
@@ -1815,4 +1831,6 @@ public class JavaMinpack {
 
         /* last card of subroutine lmpar. */
     }
+
+
 }
