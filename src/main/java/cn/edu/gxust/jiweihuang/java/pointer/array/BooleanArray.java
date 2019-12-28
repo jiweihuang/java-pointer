@@ -346,13 +346,6 @@ public class BooleanArray {
             }
         }
 
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public BooleanArray getBase() {
-            return BooleanArray.this;
-        }
     }
 
     /**

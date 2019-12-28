@@ -47,7 +47,7 @@ package cn.edu.gxust.jiweihuang.java.pointer.primitive;
  * @author JiweiHuang
  * @since 20191205
  */
-public interface IBytePointer extends IBooleanConstPointer {
+public interface IBytePointer extends IByteConstPointer {
     /**
      * 设置指定索引处的数据。
      *

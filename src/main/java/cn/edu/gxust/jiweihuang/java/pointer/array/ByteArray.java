@@ -36,8 +36,9 @@
  */
 package cn.edu.gxust.jiweihuang.java.pointer.array;
 
-import cn.edu.gxust.jiweihuang.java.pointer.primitive.IByteConstPointer;
 import cn.edu.gxust.jiweihuang.java.pointer.IFunctionPointer;
+import cn.edu.gxust.jiweihuang.java.pointer.primitive.IByteConstPointer;
+import cn.edu.gxust.jiweihuang.java.pointer.primitive.IBytePointer;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -215,18 +216,12 @@ public class ByteArray {
      *
      * @return 一个指向该数据区域的指针。
      */
-    public IByteConstPointer createPointer() {
+    public IBytePointer createPointer() {
         return new BytePointer();
     }
 
-    /**
-     * 创建一个指向该数组的指针，并使指针指向 {@code offset}。
-     *
-     * @param offset 指针指向的移动量。
-     * @return 一个指向数组的指针。
-     */
-    public IByteConstPointer createPointer(int offset) {
-        return createPointer().move(offset);
+    public IByteConstPointer createConstPointer() {
+        return new ByteConstPointer();
     }
 
     /**
@@ -241,7 +236,7 @@ public class ByteArray {
         Objects.requireNonNull(values, "Expected the parameter {values != null}.");
         int len = values.length;
         ByteArray data = new ByteArray(len);
-        IByteConstPointer pointer = data.createPointer();
+        IBytePointer pointer = data.createPointer();
         for (int i = 0; i < len; i++) {
             pointer.set(i, values[i]);
         }
@@ -254,7 +249,7 @@ public class ByteArray {
      * 因为是私有类，所以此类的外部无法访问该类，
      * 因为是内部类，故其拥有对其外部类数据的引用。
      */
-    private class BytePointer implements IByteConstPointer {
+    private class ByteConstPointer implements IByteConstPointer {
         /**
          * 指针的指向。
          */
@@ -265,7 +260,7 @@ public class ByteArray {
          * 该构造器将指针的指向设置为0，
          * 构造器是私有的，意味着该类不能被外部初始化。
          */
-        private BytePointer() {
+        private ByteConstPointer() {
             this.point = 0;
         }
 
@@ -288,15 +283,8 @@ public class ByteArray {
          * {@inheritDoc}
          */
         @Override
-        public void set(int index, byte value) {
-            int i = index + getPoint();
-            if (i >= 0 && i < getCapacity()) {
-                values[i] = value;
-            } else {
-                throw new ArrayIndexOutOfBoundsException(String.format(
-                        "Expected parameters {%d <= index < %d}", -getPoint(),
-                        getCapacity() - getPoint()));
-            }
+        public ByteArray getBase() {
+            return ByteArray.this;
         }
 
         /**
@@ -319,26 +307,37 @@ public class ByteArray {
          * {@inheritDoc}
          */
         @Override
-        public BytePointer move(int offset) {
+        public void move(int offset) {
             this.point = this.point + offset;
-            return this;
         }
 
         /**
          * {@inheritDoc}
          */
         @Override
-        public BytePointer copy() {
-            return new BytePointer().move(getPoint());
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public BytePointer reset() {
+        public void reset() {
             this.point = 0;
-            return this;
+        }
+    }
+
+    private class BytePointer extends ByteConstPointer implements IBytePointer {
+        private BytePointer() {
+            super();
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void set(int index, byte value) {
+            int i = index + getPoint();
+            if (i >= 0 && i < getCapacity()) {
+                values[i] = value;
+            } else {
+                throw new ArrayIndexOutOfBoundsException(String.format(
+                        "Expected parameters {%d <= index < %d}", -getPoint(),
+                        getCapacity() - getPoint()));
+            }
         }
     }
 
@@ -357,7 +356,7 @@ public class ByteArray {
         if (getCapacity() != that.getCapacity()) {
             return false;
         }
-        IByteConstPointer thatPointer = that.createPointer();
+        IByteConstPointer thatPointer = that.createConstPointer();
         for (int i = 0; i < getCapacity(); i++) {
             if (values[i] != thatPointer.get(i)) {
                 return false;
