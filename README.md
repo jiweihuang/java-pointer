@@ -5,6 +5,8 @@ The pointer of c/cpp be mimed by java language.
 ## 放弃原因：
 1.最初的需求是用Java重写cminpack，而cminpack是用c语言写的，代码中存在大量的指针操作。
 所以，试图用Java构建模拟c语言指针的库。
+
+
 2.经过反复的思考，查询，终于构建了一个模拟C语言指针的库，
 似乎也满足了模拟C语言指针的需要。但是采用该库实现cminpack时发现，
 C语言的数组上任意元素的地址可产生一个指针，而本项目实现中，指针是一个对象，
