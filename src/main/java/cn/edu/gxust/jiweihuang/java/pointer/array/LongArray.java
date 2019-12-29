@@ -276,12 +276,12 @@ public class LongArray {
         @Override
         public long get(int index) {
             int i = index + getPoint();
-            if (i >= 0 && i < getCapacity()) {
+            if (i >= 0 && i < this.getCapacity()) {
                 return values[i];
             } else {
                 throw new ArrayIndexOutOfBoundsException(String.format(
                         "Expected parameters {%d <= index < %d}", -getPoint(),
-                        getCapacity() - getPoint()));
+                        this.getCapacity() - getPoint()));
             }
         }
 
@@ -336,12 +336,12 @@ public class LongArray {
         @Override
         public void set(int index, long value) {
             int i = index + getPoint();
-            if (i >= 0 && i < getCapacity()) {
+            if (i >= 0 && i < this.getCapacity()) {
                 values[i] = value;
             } else {
                 throw new ArrayIndexOutOfBoundsException(String.format(
                         "Expected parameters {%d <= index < %d}", -getPoint(),
-                        getCapacity() - getPoint()));
+                        this.getCapacity() - getPoint()));
             }
         }
     }

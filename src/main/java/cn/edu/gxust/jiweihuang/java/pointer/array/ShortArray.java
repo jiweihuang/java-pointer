@@ -280,12 +280,12 @@ public class ShortArray implements Serializable {
         @Override
         public short get(int index) {
             int i = index + getPoint();
-            if (i >= 0 && i < getCapacity()) {
+            if (i >= 0 && i < this.getCapacity()) {
                 return values[i];
             } else {
                 throw new ArrayIndexOutOfBoundsException(String.format(
                         "Expected parameters {%d <= index < %d}", -getPoint(),
-                        getCapacity() - getPoint()));
+                        this.getCapacity() - getPoint()));
             }
         }
 

@@ -336,13 +336,13 @@ public class BooleanArray {
          */
         @Override
         public void set(int index, boolean value) {
-            int i = index + getPoint();
-            if (i >= 0 && i < getCapacity()) {
+            int i = index + this.getPoint();
+            if (i >= 0 && i < this.getCapacity()) {
                 values[i] = value;
             } else {
                 throw new ArrayIndexOutOfBoundsException(String.format(
                         "Expected parameters {%d <= index < %d}.", -getPoint(),
-                        getCapacity() - getPoint()));
+                        this.getCapacity() - getPoint()));
             }
         }
 
