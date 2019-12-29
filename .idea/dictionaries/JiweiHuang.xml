@@ -18,6 +18,7 @@
       <w>epsmch</w>
       <w>fdjac</w>
       <w>fjac</w>
+      <w>fjacp</w>
       <w>fjrow</w>
       <w>fnorm</w>
       <w>ftol</w>
@@ -31,6 +32,7 @@
       <w>iflag</w>
       <w>ipvt</w>
       <w>jacobian</w>
+      <w>jeval</w>
       <w>jiwei</w>
       <w>ldfjac</w>
       <w>levenberg</w>
@@ -44,11 +46,14 @@
       <w>minpack</w>
       <w>mpyq</w>
       <w>msum</w>
+      <w>ncfail</w>
+      <w>ncsuc</w>
       <w>nfev</w>
       <w>njev</w>
       <w>noninfringement</w>
       <w>nprint</w>
       <w>nsing</w>
+      <w>nslow</w>
       <w>parl</w>
       <w>paru</w>
       <w>pnorm</w>

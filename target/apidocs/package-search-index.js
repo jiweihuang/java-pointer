@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"cn.edu.gxust.jiweihuang.java.pointer","h":"","u":""},{"l":"cn.edu.gxust.jiweihuang.java.pointer.array","h":"","u":""},{"l":"cn.edu.gxust.jiweihuang.java.pointer.cminpack","h":"","u":""},{"l":"cn.edu.gxust.jiweihuang.java.pointer.primitive","h":"","u":""},{"l":"所有程序包","h":"","u":"allpackages-index.html"}]
