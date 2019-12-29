@@ -65,4 +65,5 @@ public interface IDoublePointer extends IDoubleConstPointer {
     default void set(double value) {
         set(0, value);
     }
+
 }
