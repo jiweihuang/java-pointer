@@ -73,7 +73,7 @@ public class JavaMinpack {
      * (3) 属性{@code getPointer()}用于表征“非线性问题计算式”中所需的额外参数或数据。<p>
      * 就类{@code JavaMinpack}中所能求解的“非线性问题”，可分为两类：<p>
      * （1）对于“非线性方程组”，要求{@code getN() == getM()}，即“N个方程组N元非线性方程组”。<p>
-     * （2）对于“非线性最小二乘问题”，要求{@code getN() <= getM()},即变量的数量小于方程的数量。<p>
+     * （2）对于“非线性最小二乘问题”，要求{@code getN() <= getM()},即变量的数量小于方程的数量。
      */
     public interface INonlinearFunctions extends IFunctionPointer {
         /**
@@ -110,7 +110,7 @@ public class JavaMinpack {
      * 定义了“N个方程组N元非线性方程组”的计算式。
      * <p>
      * 此接口被{@code fdjac1}，{@code hybrd}和{@code hybrd1}等函数作为参数使用，
-     * 用于求解非线性方程组，其中，“非线性方程组”计算式的雅可比矩阵采用“向前差分法”近似求解。<p>
+     * 用于求解非线性方程组，其中，“非线性方程组”计算式的雅可比矩阵采用“向前差分法”近似求解。
      */
     public interface INNonlinearEquations extends INonlinearFunctions {
         /**
@@ -152,7 +152,7 @@ public class JavaMinpack {
      * 此接口所包装的计算式还包含了“雅可比矩阵的计算式”。
      * <p>
      * 该接口被{@code hybrj}和{@code hybrj1}等函数作为参数使用，
-     * 用于求解非线性方程组，其中，“非线性方程组”计算式的雅可比矩阵由用户提供。<p>
+     * 用于求解非线性方程组，其中，“非线性方程组”计算式的雅可比矩阵由用户提供。
      */
     public interface INNonlinearEquationsJacobi extends INonlinearFunctions {
         /**
@@ -198,7 +198,7 @@ public class JavaMinpack {
      * 定义了“非线性最小二乘问题”的计算式。
      * <p>
      * 此接口被{@code fdjac2}，{@code lmdif}和{@code lmdif1}等函数作为参数使用，
-     * 用于求解“非线性最小二乘问题”，雅可比矩阵采用“向前差分法”近似计算而得。<p>
+     * 用于求解“非线性最小二乘问题”，雅可比矩阵采用“向前差分法”近似计算而得。
      */
     public interface IMNNonlinearLeastSquares extends INonlinearFunctions {
         /**
@@ -228,7 +228,7 @@ public class JavaMinpack {
      * 定义了“非线性最小二乘问题”的计算式。
      * <p>
      * 此接口被{@code lmder}和{@code lmder1}等函数作为参数使用，
-     * 用于求解非线性最小二乘问题，但需要提供计算式的雅可比矩阵。<p>
+     * 用于求解非线性最小二乘问题，但需要提供计算式的雅可比矩阵。
      */
     public interface IMNNonlinearLeastSquaresJacobi extends INonlinearFunctions {
         /**
@@ -263,7 +263,7 @@ public class JavaMinpack {
      * 包装了一种“用户提供函数（user-supplied function）”，
      * 定义了“非线性最小二乘问题”计算式。<p>
      * 此接口被{@code lmstr}和{@code lmstr1}等函数作为参数使用，
-     * 用于求解非线性最小二乘问题，但一次只计算一行雅可比矩阵，所以比较节约内存。<p>
+     * 用于求解非线性最小二乘问题，但一次只计算一行雅可比矩阵，所以比较节约内存。
      */
     public interface IMNNonlinearLeastSquaresConserving extends INonlinearFunctions {
         /**
