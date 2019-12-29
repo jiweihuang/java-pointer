@@ -411,7 +411,7 @@ public class JavaMinpack {
      * @return 向量{@code x}或其子向量的欧几里得范数。
      */
     public static double enorm(final int n,
-                               final IDoublePointer x,
+                               final IDoubleConstPointer x,
                                final int startIndex) {
         double s1 = 0.;
         double s2 = 0.;
@@ -481,7 +481,7 @@ public class JavaMinpack {
      * @return 向量{@code x}或其子向量的欧几里得范数。
      */
     public static double enorm(final int n,
-                               final IDoublePointer x) {
+                               final IDoubleConstPointer x) {
         return enorm(n, x, 0);
     }
 
@@ -493,11 +493,11 @@ public class JavaMinpack {
      * @param x 一个数组，输入型变量，其长度应{@code >= n}。
      * @return 向量{@code x}或其子向量的欧几里得范数。
      */
-    public static double enorm(final IDoublePointer x) {
+    public static double enorm(final IDoubleConstPointer x) {
         return enorm(x.getCapacity() - x.getPoint(), x, 0);
     }
 
-    //=========================================================================
+    //======================== rwupdt.c =====================================
     public static void rwupdt(final int n,
                               final IDoublePointer r,
                               final int ldr,
@@ -521,14 +521,19 @@ public class JavaMinpack {
         /* Parameter adjustments */
         // --sin;
         sin.move(-1);
+
         // --cos;
         cos.move(-1);
+
         // --b;
         b.move(-1);
+
         // --w;
         w.move(-1);
+
         r_dim1 = ldr;
         r_offset = 1 + r_dim1;
+
         //r -= r_offset;
         r.move(-r_offset);
 
@@ -570,7 +575,7 @@ public class JavaMinpack {
         }
         /* last card of subroutine rwupdt. */
     }
-
+    //======================== r1updt.c =====================================
     public static void r1updt(final int m,
                               final int n,
                               final IDoublePointer s,
@@ -737,7 +742,7 @@ public class JavaMinpack {
 
         /* last card of subroutine r1updt. */
     }
-
+    //======================== r1mpyq.c =====================================
     public static void r1mpyq(final int m,
                               final int n,
                               final IDoublePointer a,
@@ -803,7 +808,7 @@ public class JavaMinpack {
         }
         /* last card of subroutine r1mpyq. */
     }
-
+    //======================== qrsolv.c =====================================
     public static void qrsolv(final int n,
                               final IDoublePointer r,
                               final int ldr,
@@ -931,7 +936,7 @@ public class JavaMinpack {
         }
         /* last card of subroutine qrsolv. */
     }
-
+    //======================== qrfac.c =====================================
     public static void qrfac(final int m,
                              final int n,
                              final IDoublePointer a,
@@ -1050,7 +1055,7 @@ public class JavaMinpack {
         /* last card of subroutine qrfac. */
     }
 
-
+    //======================== qform.c =====================================
     public static void qform(final int m,
                              final int n,
                              final IDoublePointer q,
@@ -1121,7 +1126,7 @@ public class JavaMinpack {
         }
         /* last card of subroutine qform. */
     }
-
+    //======================== chkder.c =====================================
     public static void chkder(final int m, final int n,
                               final IDoubleConstPointer x,
                               final IDoublePointer fvec,
@@ -1190,7 +1195,7 @@ public class JavaMinpack {
         }
         /*last card of subroutine chkder. */
     }
-
+    //======================== covar.c =====================================
     public static void covar(final int n,
                              final IDoublePointer r,
                              final int ldr,
@@ -1275,7 +1280,7 @@ public class JavaMinpack {
         }
         /* last card of subroutine covar. */
     }
-
+    //======================== covar1.c =====================================
     public static int covar1(final int m,
                              final int n,
                              final double fsumsq,
@@ -1371,7 +1376,7 @@ public class JavaMinpack {
         }
         return l + 1;
     }
-
+    //======================== dogleg.c =====================================
     public static void dogleg(final int n,
                               final IDoubleConstPointer r,
                               final int lr,
@@ -1537,7 +1542,7 @@ public class JavaMinpack {
         /* last card of subroutine dogleg. */
     }
 
-
+    //======================== fdjac1.c =====================================
     public static int fdjac1(final INNonlinearEquations fcn,
                              final int n,
                              final IDoublePointer x,
@@ -1650,7 +1655,7 @@ public class JavaMinpack {
         return 0;
         /* last card of subroutine fdjac1. */
     }
-
+    //======================== fdjac2.c =====================================
     public static int fdjac2(final IMNNonlinearLeastSquares fcn,
                              final int m,
                              final int n,
@@ -1693,7 +1698,7 @@ public class JavaMinpack {
         return 0;
         /* last card of subroutine fdjac2. */
     }
-
+    //======================== lmpar.c =====================================
     /**
      * 常量指针：指针指向的内容是常量，不能通过这个指针改变变量的值，
      * 当然，如果有其他非指针常量的指针也指向该变量，则其他指针可改变该变量的值。<p>
