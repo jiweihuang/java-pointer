@@ -41,7 +41,7 @@ import cn.edu.gxust.jiweihuang.java.pointer.array.StringArray;
 
 /**
  * 接口{@code IStringConstPointer}用于表征一个指向{@code String}型数组的指针，
- * 属于常量指针，即该类型的指针不可改变所指向数组的值。<p>
+ * 属于常量指针，即该类型的指针不可改变所指向数组的值。
  * <p>
  * Development status：Finished     # Developing, Finished  <p>
  * Javadoc status: Finished         # Missing, Developing, Finished  <p>
