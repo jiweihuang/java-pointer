@@ -276,12 +276,12 @@ public class BooleanArray {
         @Override
         public boolean get(int index) {
             int i = index + getPoint();
-            if (i >= 0 && i < getCapacity()) {
+            if (i >= 0 && i < capacity) {
                 return values[i];
             } else {
                 throw new ArrayIndexOutOfBoundsException(String.format(
                         "Expected parameters {%d <= index < %d}.", -getPoint(),
-                        getCapacity() - getPoint()));
+                        capacity - getPoint()));
             }
         }
 
@@ -306,7 +306,7 @@ public class BooleanArray {
          */
         @Override
         public int getCapacity() {
-            return BooleanArray.this.getCapacity();
+            return capacity;
         }
 
         /**
@@ -336,13 +336,13 @@ public class BooleanArray {
          */
         @Override
         public void set(int index, boolean value) {
-            int i = index + this.getPoint();
-            if (i >= 0 && i < this.getCapacity()) {
+            int i = index + getPoint();
+            if (i >= 0 && i < capacity) {
                 values[i] = value;
             } else {
                 throw new ArrayIndexOutOfBoundsException(String.format(
                         "Expected parameters {%d <= index < %d}.", -getPoint(),
-                        this.getCapacity() - getPoint()));
+                        capacity - getPoint()));
             }
         }
 

@@ -268,12 +268,12 @@ public class CharArray {
         @Override
         public char get(int index) {
             int i = index + getPoint();
-            if (i >= 0 && i < this.getCapacity()) {
+            if (i >= 0 && i < capacity) {
                 return values[i];
             } else {
                 throw new ArrayIndexOutOfBoundsException(String.format(
                         "Expected parameters {%d <= index < %d}", -getPoint(),
-                        this.getCapacity() - getPoint()));
+                        capacity - getPoint()));
             }
         }
 
@@ -296,7 +296,7 @@ public class CharArray {
          */
         @Override
         public int getCapacity() {
-            return CharArray.this.getCapacity();
+            return capacity;
         }
 
         /**
@@ -328,12 +328,12 @@ public class CharArray {
         @Override
         public void set(int index, char value) {
             int i = index + getPoint();
-            if (i >= 0 && i < CharArray.this.getCapacity()) {
+            if (i >= 0 && i < capacity) {
                 values[i] = value;
             } else {
                 throw new ArrayIndexOutOfBoundsException(String.format(
                         "Expected parameters {%d <= index < %d}", -getPoint(),
-                        getCapacity() - getPoint()));
+                        capacity - getPoint()));
             }
         }
     }

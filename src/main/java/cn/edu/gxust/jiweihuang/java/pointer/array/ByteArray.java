@@ -270,12 +270,12 @@ public class ByteArray {
         @Override
         public byte get(int index) {
             int i = index + getPoint();
-            if (i >= 0 && i < this.getCapacity()) {
+            if (i >= 0 && i < capacity) {
                 return values[i];
             } else {
                 throw new ArrayIndexOutOfBoundsException(String.format(
                         "Expected parameters {%d <= index < %d}", -getPoint(),
-                        this.getCapacity() - getPoint()));
+                        capacity - getPoint()));
             }
         }
 
@@ -300,7 +300,7 @@ public class ByteArray {
          */
         @Override
         public int getCapacity() {
-            return ByteArray.this.getCapacity();
+            return capacity;
         }
 
         /**
@@ -331,12 +331,12 @@ public class ByteArray {
         @Override
         public void set(int index, byte value) {
             int i = index + getPoint();
-            if (i >= 0 && i < getCapacity()) {
+            if (i >= 0 && i < capacity) {
                 values[i] = value;
             } else {
                 throw new ArrayIndexOutOfBoundsException(String.format(
                         "Expected parameters {%d <= index < %d}", -getPoint(),
-                        getCapacity() - getPoint()));
+                        capacity - getPoint()));
             }
         }
     }
