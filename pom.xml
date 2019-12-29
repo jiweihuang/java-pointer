@@ -6,7 +6,7 @@
 
     <groupId>cn.edu.gxust.jiweihuang</groupId>
     <artifactId>java-pointer</artifactId>
-    <version>0.1.0-20191225</version>
+    <version>0.1.0-20191229</version>
 
     <repositories>
         <repository>
