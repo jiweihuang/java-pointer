@@ -38,6 +38,8 @@ package cn.edu.gxust.jiweihuang.java.pointer.cminpack;
 
 import cn.edu.gxust.jiweihuang.java.pointer.IFunctionPointer;
 import cn.edu.gxust.jiweihuang.java.pointer.IPointer;
+import cn.edu.gxust.jiweihuang.java.pointer.array.DoubleArray;
+import cn.edu.gxust.jiweihuang.java.pointer.array.IntArray;
 import cn.edu.gxust.jiweihuang.java.pointer.primitive.IDoubleConstPointer;
 import cn.edu.gxust.jiweihuang.java.pointer.primitive.IDoublePointer;
 import cn.edu.gxust.jiweihuang.java.pointer.primitive.IIntConstPointer;
@@ -2115,7 +2117,372 @@ public class JavaMinpack {
                             final IDoublePointer wa2,
                             final IDoublePointer wa3,
                             final IDoublePointer wa4) {
-        return 0;
+
+        /* Initialized data */
+        double p1 = .1;
+        double p5 = .5;
+        double p25 = .25;
+        double p75 = .75;
+        double p0001 = 1e-4;
+
+        /* System generated locals */
+        double d1, d2;
+
+        /* Local variables */
+        int i, j, l;
+        double par, sum;
+        int sing;
+        int iter;
+        double temp, temp1, temp2;
+        int iflag;
+        double delta = 0.;
+        double ratio;
+        double fnorm, gnorm, pnorm, xnorm = 0.,
+                fnorm1, actred, dirder, epsmch, prered;
+        int info;
+
+        /* epsmch is the machine precision. */
+        epsmch = DPMPAR1;
+
+        info = 0;
+
+        nfev.set(0);
+        njev.set(0);
+
+        /* check the input parameters for errors. */
+        if (n <= 0 || m < n || ldfjac < n || ftol < 0. || xtol < 0. ||
+                gtol < 0. || maxfev <= 0 || factor <= 0.) {
+            // goto TERMINATE;
+            if (nprint > 0) {
+                fcn.call(m, n, x, fvec, wa3, 0);
+            }
+            return info;
+        }
+
+        if (mode == 2) {
+            for (j = 0; j < n; ++j) {
+                if (diag.get(j) <= 0.) {
+                    // goto TERMINATE;
+                    if (nprint > 0) {
+                        fcn.call(m, n, x, fvec, wa3, 0);
+                    }
+                    return info;
+                }
+            }
+        }
+
+        /* evaluate the function at the starting point */
+        /* and calculate its norm. */
+        iflag = fcn.call(m, n, x, fvec, wa3, 1);
+        nfev.set(1);
+
+        if (iflag < 0) {
+            // goto TERMINATE;
+            if (nprint > 0) {
+                fcn.call(m, n, x, fvec, wa3, 0);
+            }
+            return info;
+        }
+
+        fnorm = enorm(m, fvec);
+
+        /* initialize levenberg-marquardt parameter and iteration counter. */
+
+        par = 0.;
+        iter = 1;
+
+        /* beginning of the outer loop. */
+        for (; ; ) {
+            /* if requested, call fcn to enable printing of iterates. */
+            if (nprint > 0) {
+                iflag = 0;
+                if ((iter - 1) % nprint == 0) {
+                    iflag = fcn.call(m, n, x, fvec, wa3, 0);
+                }
+                if (iflag < 0) {
+                    // goto TERMINATE;
+                    fcn.call(m, n, x, fvec, wa3, 0);
+                    return info;
+                }
+            }
+
+            /* compute the qr factorization of the jacobian matrix */
+            /* calculated one row at a time, while simultaneously */
+            /* forming (q transpose)*fvec and storing the first */
+            /* n components in qtf. */
+            for (j = 0; j < n; ++j) {
+                qtf.set(j, 0.);
+                for (i = 0; i < n; ++i) {
+                    fjac.set(i + j * ldfjac, 0.);
+                }
+            }
+            iflag = 2;
+            for (i = 0; i < m; ++i) {
+                if (fcn.call(m, n, x, fvec, wa3, iflag) < 0) {
+                    // goto TERMINATE;
+                    if (iflag < 0) {
+                        info = iflag;
+                    }
+                    if (nprint > 0) {
+                        fcn.call(m, n, x, fvec, wa3, 0);
+                    }
+                    return info;
+                }
+                temp = fvec.get(i);
+                rwupdt(n, fjac, ldfjac, wa3, qtf, new DoubleArray(1, temp).createPointer(), wa1, wa2);
+                ++iflag;
+            }
+            njev.set(njev.get() + 1);
+
+            /* if the jacobian is rank deficient, call qrfac to */
+            /* reorder its columns and update the components of qtf. */
+            sing = FALSE;
+            for (j = 0; j < n; ++j) {
+                if (fjac.get(j + j * ldfjac) == 0.) {
+                    sing = TRUE;
+                }
+                ipvt.set(j, j + 1);
+                IDoublePointer fjacp = fjac.getBase().createPointer();
+                fjacp.move(j * ldfjac);
+                wa2.set(j, enorm(j + 1, fjacp));
+            }
+            if (sing == TRUE) {
+                qrfac(n, n, fjac, ldfjac, TRUE, ipvt, n,
+                        wa1, wa2, wa3);
+                for (j = 0; j < n; ++j) {
+                    if (fjac.get(j + j * ldfjac) != 0.) {
+                        sum = 0.;
+                        for (i = j; i < n; ++i) {
+                            sum += fjac.get(i + j * ldfjac) * qtf.get(i);
+                        }
+                        temp = -sum / fjac.get(j + j * ldfjac);
+                        for (i = j; i < n; ++i) {
+                            qtf.set(qtf.get(i) + fjac.get(i + j * ldfjac) * temp);
+                        }
+                    }
+                    fjac.set(j + j * ldfjac, wa1.get(j));
+                }
+            }
+
+            /* on the first iteration and if mode is 1, scale according */
+            /* to the norms of the columns of the initial jacobian. */
+            if (iter == 1) {
+                if (mode != 2) {
+                    for (j = 0; j < n; ++j) {
+                        diag.set(j, wa2.get(j));
+                        if (wa2.get(j) == 0.) {
+                            diag.set(j, 1.);
+                        }
+                    }
+                }
+
+                /* on the first iteration, calculate the norm of the scaled x */
+                /* and initialize the step bound delta. */
+                for (j = 0; j < n; ++j) {
+                    wa3.set(j, diag.get(j) * x.get(j));
+                }
+                xnorm = enorm(n, wa3);
+                delta = factor * xnorm;
+                if (delta == 0.) {
+                    delta = factor;
+                }
+            }
+
+            /* compute the norm of the scaled gradient. */
+            gnorm = 0.;
+            if (fnorm != 0.) {
+                for (j = 0; j < n; ++j) {
+                    l = ipvt.get(j) - 1;
+                    if (wa2.get(l) != 0.) {
+                        sum = 0.;
+                        for (i = 0; i <= j; ++i) {
+                            sum += fjac.get(i + j * ldfjac) * (qtf.get(i) / fnorm);
+                        }
+                        /* Computing MAX */
+                        d1 = abs(sum / wa2.get(l));
+                        gnorm = max(gnorm, d1);
+                    }
+                }
+            }
+
+            /* test for convergence of the gradient norm. */
+            if (gnorm <= gtol) {
+                info = 4;
+            }
+
+            if (info != 0) {
+                // goto TERMINATE;
+                if (iflag < 0) {
+                    info = iflag;
+                }
+                if (nprint > 0) {
+                    fcn.call(m, n, x, fvec, wa3, 0);
+                }
+                return info;
+            }
+
+            /* rescale if necessary. */
+            if (mode != 2) {
+                for (j = 0; j < n; ++j) {
+                    /* Computing MAX */
+                    d1 = diag.get(j);
+                    d2 = wa2.get(j);
+                    diag.set(j, max(d1, d2));
+                }
+            }
+
+            /* beginning of the inner loop. */
+            do {
+
+                /* determine the levenberg-marquardt parameter. */
+                lmpar(n, fjac, ldfjac, ipvt, diag, qtf, delta,
+                        new DoubleArray(1, par).createPointer(),
+                        wa1, wa2, wa3, wa4);
+
+                /* store the direction p and x + p. calculate the norm of p. */
+                for (j = 0; j < n; ++j) {
+                    wa1.set(j, -wa1.get(j));
+                    wa2.set(j, x.get(j) + wa1.get(j));
+                    wa3.set(j, diag.get(j) * wa1.get(j));
+                }
+                pnorm = enorm(n, wa3);
+
+                /* on the first iteration, adjust the initial step bound. */
+                if (iter == 1) {
+                    delta = min(delta, pnorm);
+                }
+
+                /* evaluate the function at x + p and calculate its norm. */
+
+                iflag = fcn.call(m, n, wa2, wa4, wa3, 1);
+                nfev.set(nfev.get() + 1);
+                if (iflag < 0) {
+                    // goto TERMINATE;
+                    if (nprint > 0) {
+                        fcn.call(m, n, x, fvec, wa3, 0);
+                    }
+                    return info;
+                }
+                fnorm1 = enorm(m, wa4);
+
+                /* compute the scaled actual reduction. */
+                actred = -1.;
+                if (p1 * fnorm1 < fnorm) {
+                    /* Computing 2nd power */
+                    d1 = fnorm1 / fnorm;
+                    actred = 1. - d1 * d1;
+                }
+
+                /* compute the scaled predicted reduction and */
+                /* the scaled directional derivative. */
+
+                for (j = 0; j < n; ++j) {
+                    wa3.set(j, 0.);
+                    l = ipvt.get(j) - 1;
+                    temp = wa1.get(l);
+                    for (i = 0; i <= j; ++i) {
+                        wa3.set(i, wa3.get(i) + fjac.get(i + j * ldfjac) * temp);
+                    }
+                }
+                temp1 = enorm(n, wa3) / fnorm;
+                temp2 = (sqrt(par) * pnorm) / fnorm;
+                prered = temp1 * temp1 + temp2 * temp2 / p5;
+                dirder = -(temp1 * temp1 + temp2 * temp2);
+
+                /* compute the ratio of the actual to the predicted */
+                /* reduction. */
+                ratio = 0.;
+                if (prered != 0.) {
+                    ratio = actred / prered;
+                }
+
+                /* update the step bound. */
+                if (ratio <= p25) {
+                    if (actred >= 0.) {
+                        temp = p5;
+                    } else {
+                        temp = p5 * dirder / (dirder + p5 * actred);
+                    }
+                    if (p1 * fnorm1 >= fnorm || temp < p1) {
+                        temp = p1;
+                    }
+                    /* Computing MIN */
+                    d1 = pnorm / p1;
+                    delta = temp * min(delta, d1);
+                    par /= temp;
+                } else {
+                    if (par == 0. || ratio >= p75) {
+                        delta = pnorm / p5;
+                        par = p5 * par;
+                    }
+                }
+
+                /* test for successful iteration. */
+
+                if (ratio >= p0001) {
+
+                    /* successful iteration. update x, fvec, and their norms. */
+
+                    for (j = 0; j < n; ++j) {
+                        x.set(j, wa2.get(j));
+                        wa2.set(j, diag.get(j) * x.get(j));
+                    }
+                    for (i = 0; i < m; ++i) {
+                        fvec.set(i, wa4.get(i));
+                    }
+                    xnorm = enorm(n, wa2);
+                    fnorm = fnorm1;
+                    ++iter;
+                }
+
+                /* tests for convergence. */
+                if (abs(actred) <= ftol && prered <= ftol && p5 * ratio <= 1.) {
+                    info = 1;
+                }
+                if (delta <= xtol * xnorm) {
+                    info = 2;
+                }
+                if (abs(actred) <= ftol && prered <= ftol && p5 * ratio <= 1. && info == 2) {
+                    info = 3;
+                }
+                if (info != 0) {
+                    // goto TERMINATE;
+                    if (nprint > 0) {
+                        fcn.call(m, n, x, fvec, wa3, 0);
+                    }
+                    return info;
+                }
+
+                /* tests for termination and stringent tolerances. */
+
+                if (nfev.get() >= maxfev){
+                    info = 5;
+                }
+                if (abs(actred) <= epsmch && prered <= epsmch && p5 * ratio <= 1.) {
+                    info = 6;
+                }
+                if (delta <= epsmch * xnorm) {
+                    info = 7;
+                }
+                if (gnorm <= epsmch) {
+                    info = 8;
+                }
+                if (info != 0) {
+                    // goto TERMINATE;
+                    if (nprint > 0) {
+                        fcn.call(m, n, x, fvec, wa3, 0);
+                    }
+                    return info;
+                }
+                /* end of the inner loop. repeat if iteration unsuccessful. */
+            } while (ratio < p0001);
+
+            /* end of the outer loop. */
+        }
+
+        /* TERMINATE: termination, either normal or user imposed. */
+
+        /* last card of subroutine lmstr. */
     }
 
     //======================== lmstr1.c =====================================
@@ -2130,7 +2497,51 @@ public class JavaMinpack {
                              final IIntPointer ipvt,
                              final IDoublePointer wa,
                              final int lwa) {
-        return 0;
+
+        /* Initialized data */
+        final double factor = 100.;
+
+        /* Local variables */
+        int mode = 1;
+
+        IIntPointer nfev = new IntArray(1).createPointer();
+        IIntPointer njev = new IntArray(1).createPointer();
+
+        double ftol = tol;
+        double gtol = 0.;
+        double xtol = tol;
+        int maxfev = (n + 1) * 100;
+        int nprint = 0;
+
+        /* check the input parameters for errors. */
+        if (n <= 0 || m < n || ldfjac < n || tol < 0. || lwa < n * 5 + m) {
+            return 0;
+        }
+
+        IDoublePointer qtf = wa.getBase().createPointer();
+        qtf.move(n);
+        IDoublePointer wa1 = wa.getBase().createPointer();
+        wa1.move((n << 1));
+        IDoublePointer wa2 = wa.getBase().createPointer();
+        wa2.move(n * 3);
+        IDoublePointer wa3 = wa.getBase().createPointer();
+        wa3.move((n << 2));
+        IDoublePointer wa4 = wa.getBase().createPointer();
+        wa4.move(n * 5);
+
+        /* call lmstr. */
+        int info = lmstr(fcn, m, n, x, fvec, fjac, ldfjac,
+                ftol, xtol, gtol, maxfev, wa, mode, factor,
+                nprint, nfev, njev, ipvt, qtf, wa1, wa2,
+                wa3, wa4);
+
+        if (info == 8) {
+            info = 4;
+        }
+
+        return info;
+
+        /*last card of subroutine lmstr1. */
     }
     //======================== over =====================================
 }

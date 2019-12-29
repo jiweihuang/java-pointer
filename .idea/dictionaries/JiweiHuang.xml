@@ -1,6 +1,7 @@
 <component name="ProjectDictionaryState">
   <dictionary name="JiweiHuang">
     <words>
+      <w>actred</w>
       <w>agiant</w>
       <w>aliyun</w>
       <w>aliyunmaven</w>
@@ -9,6 +10,7 @@
       <w>cminpack</w>
       <w>cmpfit</w>
       <w>covar</w>
+      <w>dirder</w>
       <w>donghuan</w>
       <w>dpmpar</w>
       <w>enorm</w>
@@ -17,9 +19,11 @@
       <w>fdjac</w>
       <w>fjac</w>
       <w>fjrow</w>
+      <w>fnorm</w>
       <w>ftol</w>
       <w>fvec</w>
       <w>fvecp</w>
+      <w>gnorm</w>
       <w>gtol</w>
       <w>guangxi</w>
       <w>hybrd</w>
@@ -29,11 +33,13 @@
       <w>jacobian</w>
       <w>jiwei</w>
       <w>ldfjac</w>
+      <w>levenberg</w>
       <w>liuzhou</w>
       <w>lmder</w>
       <w>lmdif</w>
       <w>lmpar</w>
       <w>lmstr</w>
+      <w>marquardt</w>
       <w>maxfev</w>
       <w>minpack</w>
       <w>mpyq</w>
@@ -45,12 +51,15 @@
       <w>nsing</w>
       <w>parl</w>
       <w>paru</w>
+      <w>pnorm</w>
+      <w>prered</w>
       <w>qform</w>
       <w>qrfac</w>
       <w>qrsolv</w>
       <w>rwupdt</w>
       <w>sdiag</w>
       <w>updt</w>
+      <w>xnorm</w>
       <w>xtol</w>
     </words>
   </dictionary>
