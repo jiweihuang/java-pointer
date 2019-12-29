@@ -575,6 +575,7 @@ public class JavaMinpack {
         }
         /* last card of subroutine rwupdt. */
     }
+
     //======================== r1updt.c =====================================
     public static void r1updt(final int m,
                               final int n,
@@ -742,6 +743,7 @@ public class JavaMinpack {
 
         /* last card of subroutine r1updt. */
     }
+
     //======================== r1mpyq.c =====================================
     public static void r1mpyq(final int m,
                               final int n,
@@ -808,6 +810,7 @@ public class JavaMinpack {
         }
         /* last card of subroutine r1mpyq. */
     }
+
     //======================== qrsolv.c =====================================
     public static void qrsolv(final int n,
                               final IDoublePointer r,
@@ -936,6 +939,7 @@ public class JavaMinpack {
         }
         /* last card of subroutine qrsolv. */
     }
+
     //======================== qrfac.c =====================================
     public static void qrfac(final int m,
                              final int n,
@@ -1126,6 +1130,7 @@ public class JavaMinpack {
         }
         /* last card of subroutine qform. */
     }
+
     //======================== chkder.c =====================================
     public static void chkder(final int m, final int n,
                               final IDoubleConstPointer x,
@@ -1195,6 +1200,7 @@ public class JavaMinpack {
         }
         /*last card of subroutine chkder. */
     }
+
     //======================== covar.c =====================================
     public static void covar(final int n,
                              final IDoublePointer r,
@@ -1280,6 +1286,7 @@ public class JavaMinpack {
         }
         /* last card of subroutine covar. */
     }
+
     //======================== covar1.c =====================================
     public static int covar1(final int m,
                              final int n,
@@ -1376,6 +1383,7 @@ public class JavaMinpack {
         }
         return l + 1;
     }
+
     //======================== dogleg.c =====================================
     public static void dogleg(final int n,
                               final IDoubleConstPointer r,
@@ -1655,6 +1663,7 @@ public class JavaMinpack {
         return 0;
         /* last card of subroutine fdjac1. */
     }
+
     //======================== fdjac2.c =====================================
     public static int fdjac2(final IMNNonlinearLeastSquares fcn,
                              final int m,
@@ -1699,6 +1708,7 @@ public class JavaMinpack {
         /* last card of subroutine fdjac2. */
     }
     //======================== lmpar.c =====================================
+
     /**
      * 常量指针：指针指向的内容是常量，不能通过这个指针改变变量的值，
      * 当然，如果有其他非指针常量的指针也指向该变量，则其他指针可改变该变量的值。<p>
@@ -1923,6 +1933,7 @@ public class JavaMinpack {
         /* last card of subroutine lmpar. */
     }
 
+    //======================== hybrd.c =====================================
     public static int hybrd(final INNonlinearEquations fcn,
                             final int n,
                             final IDoublePointer x,
@@ -1949,6 +1960,7 @@ public class JavaMinpack {
         return 0;
     }
 
+    //======================== hybrd1.c =====================================
     public static int hybrd1(final INNonlinearEquations fcn,
                              final int n,
                              final IDoublePointer x,
@@ -1959,6 +1971,7 @@ public class JavaMinpack {
         return 0;
     }
 
+    //======================== hybrj.c =====================================
     public static int hybrj(final INNonlinearEquationsJacobi fcn,
                             final int n,
                             final IDoublePointer x,
@@ -1983,6 +1996,7 @@ public class JavaMinpack {
         return 0;
     }
 
+    //======================== hybrj1.c =====================================
     public static int hybrj1(final INNonlinearEquationsJacobi fcn,
                              final int n,
                              final IDoublePointer x,
@@ -1995,6 +2009,7 @@ public class JavaMinpack {
         return 0;
     }
 
+    //======================== lmder.c =====================================
     public static int lmder(final IMNNonlinearLeastSquares fcn,
                             final int m,
                             final int n,
@@ -2021,6 +2036,7 @@ public class JavaMinpack {
         return 0;
     }
 
+    //======================== lmder1.c =====================================
     public static int lmder1(final IMNNonlinearLeastSquares fcn,
                              final int m,
                              final int n,
@@ -2035,6 +2051,7 @@ public class JavaMinpack {
         return 0;
     }
 
+    //======================== lmdif.c =====================================
     public static int lmdif(final IMNNonlinearLeastSquaresJacobi fcn,
                             final int m,
                             final int n,
@@ -2061,6 +2078,7 @@ public class JavaMinpack {
         return 0;
     }
 
+    //======================== lmdif1.c =====================================
     public static int lmdif1(final IMNNonlinearLeastSquaresJacobi fcn,
                              final int m,
                              final int n,
@@ -2073,6 +2091,7 @@ public class JavaMinpack {
         return 0;
     }
 
+    //======================== lmstr.c =====================================
     public static int lmstr(final IMNNonlinearLeastSquaresConserving fcn,
                             final int m,
                             final int n,
@@ -2099,6 +2118,7 @@ public class JavaMinpack {
         return 0;
     }
 
+    //======================== lmstr1.c =====================================
     public static int lmstr1(final IMNNonlinearLeastSquaresConserving fcn,
                              final int m,
                              final int n,
@@ -2112,4 +2132,5 @@ public class JavaMinpack {
                              final int lwa) {
         return 0;
     }
+    //======================== over =====================================
 }
