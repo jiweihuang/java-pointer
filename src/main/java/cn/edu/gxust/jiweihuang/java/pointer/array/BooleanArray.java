@@ -293,6 +293,11 @@ public class BooleanArray {
             return BooleanArray.this;
         }
 
+        @Override
+        public IBooleanConstPointer copy() {
+            return null;
+        }
+
         /**
          * {@inheritDoc}
          */
@@ -307,6 +312,11 @@ public class BooleanArray {
         @Override
         public int getCapacity() {
             return capacity;
+        }
+
+        @Override
+        public int getLength() {
+            return 0;
         }
 
         /**
@@ -346,6 +356,10 @@ public class BooleanArray {
             }
         }
 
+        @Override
+        public IBooleanPointer copy() {
+            return new BooleanPointer();
+        }
     }
 
     /**

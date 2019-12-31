@@ -78,4 +78,5 @@ public interface IBooleanConstPointer extends IArrayPointer {
      * @return 指针关联的数组对象。
      */
     BooleanArray getBase();
+
 }

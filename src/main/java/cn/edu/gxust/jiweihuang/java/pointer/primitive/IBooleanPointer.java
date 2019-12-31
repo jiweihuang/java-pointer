@@ -66,4 +66,5 @@ public interface IBooleanPointer extends IBooleanConstPointer {
     default void set(boolean value) {
         set(0, value);
     }
+
 }
