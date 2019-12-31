@@ -92,13 +92,6 @@ public interface IArrayPointer extends IPointer {
     int getCapacity();
 
     /**
-     * 获取指针可访问数组数据的个数。
-     *
-     * @return 指针可访问数组数据的个数。
-     */
-    int getLength();
-
-    /**
      * 检查指针是否指向数组索引范围之外，
      * 如果“是”返回 {@code true}，否则返回 {@code false}。
      *

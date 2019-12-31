@@ -216,15 +216,41 @@ public class BooleanArray {
     }
 
     /**
-     * 创建一个指向该数组的指针。
-     * 指针的初始指向为0。
+     * 创建一个指向该数组的常量指针。
+     * 指针的长度为{@code getCapacity()}。
      *
-     * @return 一个指向该数据区域的指针。
+     * @param point 指针的指向。
+     * @return 一个指向该数组的常量指针。
+     */
+    public IBooleanConstPointer createConstPointer(int point) {
+        return new BooleanConstPointer(point);
+    }
+
+    /**
+     * 创建一个指向该数组的常量指针。
+     * 指针的初始指向为0，长度为{@code getCapacity()}。
+     *
+     * @return 一个指向该数组的常量指针。
      */
     public IBooleanConstPointer createConstPointer() {
         return new BooleanConstPointer();
     }
 
+    /**
+     * 创建一个指向该数组的指针。
+     *
+     * @param point  指针的指向。
+     * @return 一个指向该数组的指针。
+     */
+    public IBooleanPointer createPointer(int point) {
+        return new BooleanPointer(point);
+    }
+
+    /**
+     * 创建一个指向该数组的指针。
+     *
+     * @return 一个指向该数组的指针。
+     */
     public IBooleanPointer createPointer() {
         return new BooleanPointer();
     }
@@ -266,8 +292,20 @@ public class BooleanArray {
          * 该构造器将指针的指向设置为0，
          * 构造器是私有的，意味着该类不能被外部实例化。
          */
+        private BooleanConstPointer(int point) {
+            this.point = point;
+        }
+
         private BooleanConstPointer() {
             this.point = 0;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public int getPoint() {
+            return point;
         }
 
         /**
@@ -293,18 +331,6 @@ public class BooleanArray {
             return BooleanArray.this;
         }
 
-        @Override
-        public IBooleanConstPointer copy() {
-            return null;
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public int getPoint() {
-            return point;
-        }
 
         /**
          * {@inheritDoc}
@@ -312,11 +338,6 @@ public class BooleanArray {
         @Override
         public int getCapacity() {
             return capacity;
-        }
-
-        @Override
-        public int getLength() {
-            return 0;
         }
 
         /**
@@ -340,7 +361,9 @@ public class BooleanArray {
         private BooleanPointer() {
             super();
         }
-
+        private BooleanPointer(int point) {
+            super(point);
+        }
         /**
          * {@inheritDoc}
          */
@@ -356,10 +379,6 @@ public class BooleanArray {
             }
         }
 
-        @Override
-        public IBooleanPointer copy() {
-            return new BooleanPointer();
-        }
     }
 
     /**
