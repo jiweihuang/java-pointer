@@ -44,7 +44,7 @@ package cn.edu.gxust.jiweihuang.java.pointer;
  * Development status：Finished     # Developing, Finished  <p>
  * Javadoc status: Finished         # Missing, Developing, Finished  <p>
  * Test status: None                # None, Missing, Developing, Finished  <p>
- * Last revision date: 2019-12-28 <p>
+ * Last revision date: 2019-12-31 <p>
  *
  * @author JiweiHuang
  * @since 20191205

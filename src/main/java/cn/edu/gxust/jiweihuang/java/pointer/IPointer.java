@@ -40,14 +40,14 @@ package cn.edu.gxust.jiweihuang.java.pointer;
  * 接口{@code IPointer}是一个标记接口(marker interface)，
  * 用于表征c/cpp语言中的 '指针'。<p>
  * 此接口有三个子接口，分别是：<p>
- * （1）用于表征数组指针的{@code IArrayPointer}；<p>
- * （2）用于表征函数指针的{@code IFunctionPointer}；<p>
- * （3）用于表征对象指针的{@code IObjectPointer}。
+ * （1）用于表征“数组指针”的{@code IArrayPointer}；<p>
+ * （2）用于表征“函数指针”的{@code IFunctionPointer}，也是一个空接口；<p>
+ * （3）用于表征“对象指针”的{@code IObjectPointer}，也是一个空接口。
  * <p>
  * Development status：Finished     # Developing, Finished  <p>
  * Javadoc status: Finished         # Missing, Developing, Finished  <p>
  * Test status: None                # None, Missing, Developing, Finished  <p>
- * Last revision date: 2019-12-25 <p>
+ * Last revision date: 2019-12-31 <p>
  *
  * @author JiweiHuang
  * @since 20191205

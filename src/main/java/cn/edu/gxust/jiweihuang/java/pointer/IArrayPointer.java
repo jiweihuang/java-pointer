@@ -40,9 +40,9 @@ package cn.edu.gxust.jiweihuang.java.pointer;
  * 接口 {@code IArrayPointer}用于表征“指向一个一维数组的指针”。<p>
  * 注意：方法 {@code move}和{@code reset}的差异：<p>
  * (1)方法{@code move}是移动指针的指向，假如一个指针当前的指向索引为2，
- * 向右移动1个索引，则其新指向为3.<p>
+ * 向右移动1个索引，则其新指向为3，正值为向右移动，负值为向左移动.<p>
  * (2)方法 {@code reset}是重置指针指向，即将指针指向的索引重置为0。<p>
- * 上述两种方法可以组合起来使用，修改指针的作用。
+ * 上述两种方法可以组合起来使用，以起到修改指针的作用。
  * <p>
  * 在c/cpp语言中，指针分为常量指针和指针常量两个概念：
  * 常量指针：指针指向的内容是常量，不能通过这个指针改变变量的值，
@@ -63,10 +63,13 @@ package cn.edu.gxust.jiweihuang.java.pointer;
  * <p>
  * 还有上述常量指针和指针常量的结合：const int* const p
  * <p>
+ * 对于本系统，指针常量可以通关final关键字实现，而常量指针则使用相应类型的
+ * ConstPointer实现。
+ * <p>
  * Development status：Finished     # Developing, Finished  <p>
  * Javadoc status: Finished         # Missing, Developing, Finished  <p>
  * Test status: None                # None, Missing, Developing, Finished  <p>
- * Last revision date: 2019-12-25 <p>
+ * Last revision date: 2019-12-31 <p>
  *
  * @author JiweiHuang
  * @since 20191205
@@ -87,6 +90,13 @@ public interface IArrayPointer extends IPointer {
      * @return 指针所指向数组能容纳数据的数量。
      */
     int getCapacity();
+
+    /**
+     * 获取指针可访问数组数据的个数。
+     *
+     * @return 指针可访问数组数据的个数。
+     */
+    int getLength();
 
     /**
      * 检查指针是否指向数组索引范围之外，

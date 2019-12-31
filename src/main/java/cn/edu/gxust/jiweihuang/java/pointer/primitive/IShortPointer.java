@@ -49,7 +49,8 @@ package cn.edu.gxust.jiweihuang.java.pointer.primitive;
  */
 public interface IShortPointer extends IShortConstPointer {
     /**
-     * 设置指定索引处的数据。
+     * 设置指定索引处的数据，
+     * 相当于{@code arr[getPoint()+index] = value}。
      *
      * @param index 指定的索引
      * @param value 需要设置的值。
