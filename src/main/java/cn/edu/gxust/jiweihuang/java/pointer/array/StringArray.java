@@ -326,6 +326,7 @@ public class StringArray {
     }
 
     private final class StringPointer extends StringConstPointer implements IStringPointer {
+
         private StringPointer() {
             super();
         }
