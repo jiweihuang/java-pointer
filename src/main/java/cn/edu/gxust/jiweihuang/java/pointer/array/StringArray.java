@@ -242,6 +242,7 @@ public class StringArray {
         Objects.requireNonNull(values, "Expected the parameter {values != null}.");
         int len = values.length;
         StringArray array = new StringArray(len);
+
         IStringPointer pointer = array.createPointer();
         for (int i = 0; i < len; i++) {
             pointer.set(i, values[i]);
