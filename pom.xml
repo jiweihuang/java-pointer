@@ -33,7 +33,7 @@
         <findbugs.version>3.0.1</findbugs.version>
         <jsr305.version>3.0.2</jsr305.version>
 
-        <guava.version>28.2-jre</guava.version>
+        <guava.version>29.0-jre</guava.version>
 
         <commons-lang3.version>3.9</commons-lang3.version>
         <commons-csv.version>1.7</commons-csv.version>
