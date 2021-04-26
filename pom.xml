@@ -38,7 +38,7 @@
         <commons-lang3.version>3.9</commons-lang3.version>
         <commons-csv.version>1.7</commons-csv.version>
         <commons-collections4.version>4.4</commons-collections4.version>
-        <commons-io.version>2.6</commons-io.version>
+        <commons-io.version>2.7</commons-io.version>
         <commons-cli.version>1.4</commons-cli.version>
 
         <commons-math3.version>3.6.1</commons-math3.version>
